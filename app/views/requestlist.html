@@ -1,0 +1,63 @@
+		<a><strong><i class="glyphicon glyphicon-dashboard"></i> My Dashboard</strong></a>
+		<hr>
+		<div class="panel panel-default">
+	        <div class="panel-heading">
+	            <h2>Solicitudes de visitas <small>Historial</small></h2>  
+	        </div>
+
+	        <div class="panel-body">
+	            <center>
+	                <nav>
+	                    <ul class="pagination">
+	                        <li>
+	                            <a ng-click="previousPage()" href="" aria-label="Previous">
+	                                <span aria-hidden="true">&laquo;</span>
+	                            </a>
+	                        </li>
+	                        <li ng-class="{'active': selectedPage == $index}" ng-repeat="i in [].constructor(pages) track by $index"><a ng-click="pageSelected($index)" href="">{{$index + 1}}</a></li>
+	                        <li>
+	                            <a ng-click="nextPage()" href="" aria-label="Next">
+	                                <span aria-hidden="true">&raquo;</span>
+	                            </a>
+	                        </li>
+	                    </ul>
+	                </nav>
+	            </center>
+
+	            <div class="row">
+		            <form class="form-horizontal">
+						   <div class="form-group">
+							   <label class="col-sm-1 control-label">Filtro:</label>
+							   <div class="col-sm-2">
+									<select ng-init="selectedFilter = filters[0].statusId" ng-model="selectedFilter" ng-options="filter.statusId as filter.filter for filter in filters" ng-change="selectChanged()"></select>
+							   </div>
+						</div>
+					</form>
+				</div>
+
+	            <div class="table-responsive">
+	                <table class="table table-hover table-condensed">
+
+	                    <tr>
+	                        <th><center>Código carta aval</center></th>
+	                        <th><center>Fecha solicitud</center></th>
+	                        <th><center>Estatus</center></th>
+	                        <th><center>Acción</center></th>
+	                    </tr>
+
+	                    
+	                    <tr ng-repeat="request in requests">
+	                        <td><center>{{request.guaranteeLetter.code}}</center></td>
+	                        <td><center>{{date(request.startDate)}}</center></td>
+	                        <td><center>{{request.status.status}}</center></td>
+	                        <td>
+	                        	<center>
+	                        		<button ng-click="detail(request)" type="button" class="btn btn-warning btn-xs">Ver</button>
+	                        	</center>
+	                        </td>
+	                    </tr>
+	                   
+	                </table>
+	            </div>
+	        </div>
+	    </div>

@@ -1,0 +1,90 @@
+<!-- Left column -->
+            <a><strong><i class="glyphicon glyphicon-wrench"></i> Opciones</strong></a>
+
+            <hr>
+
+            <ul class="nav nav-stacked">
+                <li class="nav-header"> <a href="" data-toggle="collapse" data-target="#userMenu">Solicitudes de visita <i class="glyphicon glyphicon-chevron-down"></i></a>
+                    <div ng-if="user.userProfile == 'analista'">
+                        <ul class="nav nav-stacked collapse in" id="userMenu">
+                            <li><a href=""><i class="glyphicon glyphicon-envelope"></i> Por asiganarse <span class="badge badge-info">{{porAsignarse}}</span></a></li>
+                            <li><a href=""><i class="glyphicon glyphicon-envelope"></i> Asignadas <span class="badge badge-info">{{asignadas}}</span></a></li>
+                            <li><a href=""><i class="glyphicon glyphicon-envelope"></i> Atendidas <span class="badge badge-info">{{atendidas}}</span></a></li>
+                            <li><a href=""><i class="glyphicon glyphicon-envelope"></i> Completadas <span class="badge badge-info">{{completadas}}</span></a></li>
+                        </ul>
+                    </div>
+                    <div ng-if="user.userProfile == 'coordinador'">
+                        <ul class="nav nav-stacked collapse in" id="userMenu">
+                            <li><a href=""><i class="glyphicon glyphicon-envelope"></i> Por asignarse <span class="badge badge-info">{{porAsignarse}}</span></a></li>
+                            <li><a href=""><i class="glyphicon glyphicon-envelope"></i> Atendidas <span class="badge badge-info">{{atendidas}}</span></a></li>
+                            <li><a href=""><i class="glyphicon glyphicon-envelope"></i> Completadas <span class="badge badge-info">{{completadas}}</span></a></li>
+                        </ul>
+                    </div>
+                    <div ng-if="user.userProfile == 'visitador'">
+                        <ul class="nav nav-stacked collapse in" id="userMenu">
+                            <li><a href=""><i class="glyphicon glyphicon-envelope"></i> Por atender <span class="badge badge-info">{{asignadas}}</span></a></li>
+                            <li><a href=""><i class="glyphicon glyphicon-envelope"></i> Atendidas <span class="badge badge-info">{{atendidas}}</span></a></li>
+                            <li><a href=""><i class="glyphicon glyphicon-envelope"></i> Completadas <span class="badge badge-info">{{completadas}}</span></a></li>
+                        </ul>
+                    </div>
+                </li>
+                <!--<li class="nav-header"> <a href="" data-toggle="collapse" data-target="#menu2"> Reports <i class="glyphicon glyphicon-chevron-right"></i></a>
+
+                    <ul class="nav nav-stacked collapse" id="menu2">
+                        <li><a href="">Information &amp; Stats</a>
+                        </li>
+                        <li><a href="">Views</a>
+                        </li>
+                        <li><a href="">Requests</a>
+                        </li>
+                        <li><a href="">Timetable</a>
+                        </li>
+                        <li><a href="">Alerts</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-header">
+                    <a href="" data-toggle="collapse" data-target="#menu3"> Social Media <i class="glyphicon glyphicon-chevron-right"></i></a>
+                    <ul class="nav nav-stacked collapse" id="menu3">
+                        <li><a href=""><i class="glyphicon glyphicon-circle"></i> Facebook</a></li>
+                        <li><a href=""><i class="glyphicon glyphicon-circle"></i> Twitter</a></li>
+                    </ul>
+                </li>-->
+            </ul>
+
+            <!--<hr>
+
+            <a href=""><strong><i class="glyphicon glyphicon-link"></i> Resources</strong></a>
+
+            <hr>
+
+            <ul class="nav nav-pills nav-stacked">
+                <li class="nav-header"></li>
+                <li><a href=""><i class="glyphicon glyphicon-list"></i> Layouts &amp; Templates</a></li>
+                <li><a href=""><i class="glyphicon glyphicon-briefcase"></i> Toolbox</a></li>
+                <li><a href=""><i class="glyphicon glyphicon-link"></i> Widgets</a></li>
+                <li><a href=""><i class="glyphicon glyphicon-list-alt"></i> Reports</a></li>
+                <li><a href=""><i class="glyphicon glyphicon-book"></i> Pages</a></li>
+                <li><a href=""><i class="glyphicon glyphicon-star"></i> Social Media</a></li>
+            </ul>
+
+            <hr>
+            <ul class="nav nav-stacked">
+                <li class="active"><a href="" title="The Bootstrap Playground" target="ext">Playground</a></li>
+                <li><a href="">Bootstrap 3</a></li>
+                <li><a href="" title="Bootstrap 3 Panel">Panels</a></li>
+                <li><a href="" title="Bootstrap 3 Icons">Glyphicons</a></li>
+                <li><a href="">Layout</a></li>
+            </ul>
+
+            <hr>
+
+            <a href=""><strong><i class="glyphicon glyphicon-list"></i> More Templates</strong></a>
+
+            <hr>
+
+            <ul class="nav nav-stacked">
+                <li class="active"><a rel="nofollow" href="" target="ext">Premium Themes</a></li>
+                <li><a rel="nofollow" href="">Wrap Bootstrap</a></li>
+                <li><a rel="nofollow" href="">BootstrapZero</a></li>
+            </ul>-->

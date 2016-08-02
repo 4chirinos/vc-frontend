@@ -1,0 +1,169 @@
+<a><strong><i class="glyphicon glyphicon-dashboard"></i> Detalles de la carta aval: # {{guaranteeLetter.code}}</strong></a>
+
+<hr>
+
+<div class="container-fluid">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Datos de carta aval</h3>
+    </div>
+    <br>
+    <div class="container-fluid">
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-1 control-label">Estatus:</label>
+          <div class="col-sm-1">
+            <p class="form-control-static">{{guaranteeLetter.status.status}}</p>
+          </div>
+          <label class="col-sm-2 control-label">Visita asociada #:</label>
+          <div class="col-sm-2">
+            <div ng-if="guaranteeLetter.request.id">
+              <p class="form-control-static">{{guaranteeLetter.request.id}}</p>
+            </div>
+            <div ng-if="!guaranteeLetter.request.id">
+              <p class="form-control-static">No posee</p>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div ng-if="guaranteeLetter.request.id">
+              <button type="button" class="btn btn-info btn-md">Ver visita</button>
+            </div>
+            <div ng-if="!guaranteeLetter.request.id">
+              <button ng-click="postRequest()" type="button" class="btn btn-warning btn-md">Solicitar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Póliza asociada #: {{guaranteeLetter.policy.id}}</h3>
+    </div>
+    <br>
+    <div class="container-fluid">
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Cobertura desde:</label>
+          <div class="col-sm-2">
+            <p class="form-control-static">{{date(guaranteeLetter.policy.startDate)}}</p>
+          </div>
+          <label class="col-sm-2 control-label">hasta:</label>
+          <div class="col-sm-2">
+            <p class="form-control-static">{{date(guaranteeLetter.policy.endDate)}}</p>
+          </div>
+          <label class="col-sm-2 control-label">Prima</label>
+          <div class="col-sm-2">
+            <p class="form-control-static">Bs. {{guaranteeLetter.policy.cost}}</p>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">Datos del tomador</div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label class="col-sm-1 control-label">Nombre:</label>
+              <div class="col-sm-3">
+                <p class="form-control-static">{{guaranteeLetter.policy.holder.firstName}} {{guaranteeLetter.policy.holder.lastName}}</p>
+              </div>
+              <label class="col-sm-1 control-label">Cédula:</label>
+              <div class="col-sm-2">
+                <p class="form-control-static">{{guaranteeLetter.policy.holder.identityCard}}</p>
+              </div>
+              <label class="col-sm-1 control-label">Género:</label>
+              <div class="col-sm-2">
+                <p class="form-control-static">{{gender(guaranteeLetter.policy.holder.gender)}}</p>
+              </div>
+              <label class="col-sm-1 control-label">Edad:</label>
+              <div class="col-sm-1">
+                <p class="form-control-static">{{age(guaranteeLetter.policy.holder.birthDate)}}</p>
+              </div>
+              <label class="col-sm-1 control-label">Teléfono:</label>
+              <div class="col-sm-2">
+                <p class="form-control-static">{{guaranteeLetter.policy.holder.phoneNumber}}</p>
+              </div>
+              <label class="col-sm-3 control-label">Correo electrónico:</label>
+              <div class="col-sm-6">
+                <p class="form-control-static">{{guaranteeLetter.policy.holder.email}}</p>
+              </div>
+              <label class="col-sm-1 control-label">Dirección:</label>
+              <div class="col-sm-11">
+                <p class="form-control-static">{{guaranteeLetter.policy.holder.address}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">Datos del asegurado</div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label class="col-sm-1 control-label">Nombre:</label>
+              <div class="col-sm-3">
+                <p class="form-control-static">{{guaranteeLetter.policy.owner.firstName}} {{guaranteeLetter.policy.holder.lastName}}</p>
+              </div>
+              <label class="col-sm-1 control-label">Cédula:</label>
+              <div class="col-sm-2">
+                <p class="form-control-static">{{guaranteeLetter.policy.owner.identityCard}}</p>
+              </div>
+              <label class="col-sm-1 control-label">Género:</label>
+              <div class="col-sm-2">
+                <p class="form-control-static">{{gender(guaranteeLetter.policy.owner.gender)}}</p>
+              </div>
+              <label class="col-sm-1 control-label">Edad:</label>
+              <div class="col-sm-1">
+                <p class="form-control-static">{{age(guaranteeLetter.policy.owner.birthDate)}}</p>
+              </div>
+              <label class="col-sm-1 control-label">Teléfono:</label>
+              <div class="col-sm-2">
+                <p class="form-control-static">{{guaranteeLetter.policy.owner.phoneNumber}}</p>
+              </div>
+              <label class="col-sm-3 control-label">Correo electrónico:</label>
+              <div class="col-sm-6">
+                <p class="form-control-static">{{guaranteeLetter.policy.owner.email}}</p>
+              </div>
+              <label class="col-sm-1 control-label">Dirección:</label>
+              <div class="col-sm-11">
+                <p class="form-control-static">{{guaranteeLetter.policy.holder.address}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">Datos del beneficiario</div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label class="col-sm-1 control-label">Nombre:</label>
+              <div class="col-sm-3">
+                <p class="form-control-static">{{guaranteeLetter.beneficiary.firstName}} {{guaranteeLetter.beneficiary.lastName}}</p>
+              </div>
+              <label class="col-sm-1 control-label">Cédula:</label>
+              <div class="col-sm-2">
+                <p class="form-control-static">{{guaranteeLetter.beneficiary.identityCard}}</p>
+              </div>
+              <label class="col-sm-1 control-label">Género:</label>
+              <div class="col-sm-2">
+                <p class="form-control-static">{{gender(guaranteeLetter.beneficiary.gender)}}</p>
+              </div>
+              <label class="col-sm-1 control-label">Edad:</label>
+              <div class="col-sm-1">
+                <p class="form-control-static">{{age(guaranteeLetter.beneficiary.birthDate)}}</p>
+              </div>
+              <label class="col-sm-1 control-label">Teléfono:</label>
+              <div class="col-sm-2">
+                <p class="form-control-static">{{guaranteeLetter.beneficiary.phoneNumber}}</p>
+              </div>
+              <label class="col-sm-3 control-label">Correo electrónico:</label>
+              <div class="col-sm-6">
+                <p class="form-control-static">{{guaranteeLetter.beneficiary.email}}</p>
+              </div>
+              <label class="col-sm-1 control-label">Dirección:</label>
+              <div class="col-sm-11">
+                <p class="form-control-static">{{guaranteeLetter.beneficiary.address}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

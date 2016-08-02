@@ -1,0 +1,148 @@
+<a><strong><i class="glyphicon glyphicon-dashboard"></i> Detalles de la solicitud: # {{request.id}}</strong></a>
+<hr>
+
+    <div class="panel-body">
+
+      <div ng-if="user.userProfile == 'coordinador'">
+        <div ng-if="request.statusId == 2">
+          <div class="alert alert-danger" role="alert">
+            <center>Solicitud de visita no asignada. <a ng-click="assign()" href="" class="alert-link"><strong>Asignar</strong></a></center>
+          </div>     
+        </div>
+        <div ng-if="request.statusId == 3">
+          <div class="alert alert-info" role="alert">
+            <center>Solicitud de visita asignada.</center>
+          </div>      
+        </div> 
+      </div>
+
+      <div ng-if="user.userProfile == 'analista'">
+        <div ng-if="request.statusId == 2">
+          <div class="alert alert-danger" role="alert">
+            <center>Solicitud de visita no asignada.</center>
+          </div>     
+        </div>
+        <div ng-if="request.statusId == 3">
+          <div class="alert alert-info" role="alert">
+            <center>Solicitud de visita asignada.</center>
+          </div>    
+        </div> 
+      </div>
+
+      <div ng-if="user.userProfile == 'visitador'">
+        <div ng-if="request.statusId == 3">
+          <div class="alert alert-danger" role="alert">
+            <center>
+              Solicitud de visita pendiente. 
+              <a ng-click="download()" href="" class="alert-link"><strong>Descargar información</strong></a><br>
+                <a ng-click="load()" href="" class="alert-link"><strong>Cargar información</strong></a>
+              </center>
+          </div>      
+        </div> 
+      </div>      
+      
+      <div class="container-fluid">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Datos de la institución prestadora de servicio:</h3>
+          </div>
+          <div class="panel-body">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Nombre:</label>
+                <div class="col-sm-10">
+                  <p class="form-control-static">{{request.guaranteeLetter.budget.affiliated.name}}</p>
+                </div>
+                <label class="col-sm-2 control-label">Dirección:</label>
+                <div class="col-sm-10">
+                  <p class="form-control-static">{{request.guaranteeLetter.budget.affiliated.address}}</p>
+                </div>
+                <label class="col-sm-2 control-label">Teléfono:</label>
+                <div class="col-sm-4">
+                  <p class="form-control-static">{{request.guaranteeLetter.budget.affiliated.phoneNumber}}</p>
+                </div>
+                <label class="col-sm-2 control-label">RIF:</label>
+                <div class="col-sm-4">
+                  <p class="form-control-static">{{request.guaranteeLetter.budget.affiliated.rif}}</p>
+                </div>
+                <div ng-if="request.guaranteeLetter.budget.affiliated.portal">
+                  <label class="col-sm-2 control-label">Portal:</label>
+                  <div class="col-sm-4">
+                    <p class="form-control-static">{{request.guaranteeLetter.budget.affiliated.portal}}</p>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <div ng-if="user.userProfile == 'visitador'">
+        <div class="container-fluid">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Datos del tomador:</h3>
+            </div>
+            <div class="panel-body">
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Nombre:</label>
+                  <div class="col-sm-4">
+                    <p class="form-control-static">{{request.guaranteeLetter.holderFirstName}} {{request.guaranteeLetter.holderLastName}}</p>
+                  </div>
+                  <label class="col-sm-2 control-label">Cédula:</label>
+                  <div class="col-sm-2">
+                    <p class="form-control-static">{{request.guaranteeLetter.holderIdentityCard}}</p>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-fluid">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Datos del asegurado:</h3>
+            </div>
+            <div class="panel-body">
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Nombre:</label>
+                  <div class="col-sm-4">
+                    <p class="form-control-static">{{request.guaranteeLetter.ownerFirstName}} {{request.guaranteeLetter.ownerLastName}}</p>
+                  </div>
+                  <label class="col-sm-2 control-label">Cédula:</label>
+                  <div class="col-sm-2">
+                    <p class="form-control-static">{{request.guaranteeLetter.ownerIdentityCard}}</p>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-fluid">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Datos del beneficiario:</h3>
+            </div>
+            <div class="panel-body">
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Nombre:</label>
+                  <div class="col-sm-4">
+                    <p class="form-control-static">{{request.guaranteeLetter.budget.patientFirstName}} {{request.guaranteeLetter.budget.patientLastName}}</p>
+                  </div>
+                  <label class="col-sm-2 control-label">Cédula:</label>
+                  <div class="col-sm-2">
+                    <p class="form-control-static">{{request.guaranteeLetter.budget.patientIdentityCard}}</p>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
