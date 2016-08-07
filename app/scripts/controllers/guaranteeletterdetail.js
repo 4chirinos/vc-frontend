@@ -8,7 +8,7 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('GuaranteeletterdetailCtrl', function ($scope, $stateParams, toastr, request, session) {
+  	.controller('GuaranteeletterdetailCtrl', function ($rootScope, $scope, $state, $stateParams, toastr, request, session) {
     	
     	$scope.guaranteeLetter = $stateParams.guaranteeletter;
 	    $scope.user = session.getCurrentUser();
@@ -20,7 +20,6 @@ angular.module('frontend2App')
 	    };
 
 	    $scope.gender = function(gender) {
-	    	console.log('nojoda');
 	    	if(gender == 'M') return 'Masculino';
 	    	return 'Femenino';
 	    };
@@ -34,12 +33,26 @@ angular.module('frontend2App')
 
 	      	var aux1 = today.getMonth() + 1 - mm, aux2 = today.getDay() - dd;
 
-	      	console.log('aux1:' + aux1);
-	      	console.log('aux2:' + aux2);
-
 	      	if(aux1 > 0 || (aux1 == 0 && aux2 >= 0)) age++;
 
 	      	return age;
+	    };
+
+	    $scope.detail = function() {
+	    	request.getById($scope.guaranteeLetter.request.id)
+	    	.then(function(response) {
+	    		$state.go(
+		        	'main.home.requestdetail', {
+		        	request: response.data
+		      	});
+	    	}, 
+	    	function(response) {
+	    		if(response.status == 500) {
+			        toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+			    } else if(response.status == 404) {
+			    	toastr.error('No se encontró visita clínica asociada.', 'Error');
+			    }
+	    	});
 	    };
 
 	    $scope.postRequest = function() {
@@ -60,6 +73,7 @@ angular.module('frontend2App')
 	    			endDate: response.data.endDate,
 	    			status: response.data.status
 	    		};
+	    		$rootScope.statusGroups = response.data.statusGroups;
 	    	}, function(response) {
 	    		if(response.status == 500) {
 			        toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');

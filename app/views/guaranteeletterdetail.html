@@ -26,7 +26,7 @@
           </div>
           <div class="col-sm-2">
             <div ng-if="guaranteeLetter.request.id">
-              <button type="button" class="btn btn-info btn-md">Ver visita</button>
+              <button ng-click="detail()" type="button" class="btn btn-info btn-md">Ver visita</button>
             </div>
             <div ng-if="!guaranteeLetter.request.id">
               <button ng-click="postRequest()" type="button" class="btn btn-warning btn-md">Solicitar</button>

@@ -7,7 +7,7 @@
  * # sidebar
  */
 angular.module('frontend2App')
-	.directive('sidebar', function () {
+	.directive('sidebar', function ($rootScope) {
   		return {
       		templateUrl:'views/sidebar.html',
       		restrict: 'E',
@@ -15,17 +15,21 @@ angular.module('frontend2App')
       		controller: function($scope, $rootScope, $state, session) {
 
             $scope.user = session.getCurrentUser();
-            var statusGroups = $rootScope.statusGroups;
 
-            for(var i = 0; i < statusGroups.length; i++) {
-              if(statusGroups[i].status == 'por asignar') $scope.porAsignarse = statusGroups[i].cantidad;
-              else if(statusGroups[i].status == 'asignada') $scope.asignadas = statusGroups[i].cantidad;
-              else if(statusGroups[i].status == 'atendidas') $scope.atendidas = statusGroups[i].cantidad;
-              else if(statusGroups[i].status == 'en revision') $scope.enRevision = statusGroups[i].cantidad;
-              else $scope.completadas = statusGroups[i].cantidad;
-            }
+            $rootScope.$watch('statusGroups', function () {
+              if($rootScope.statusGroups) {
+                $scope.porAsignarse = $scope.asignadas = $scope.atendidas = $scope.enRevision = $scope.completadas = '';
+                for(var i = 0; i < $rootScope.statusGroups.length; i++) {
+                  if($rootScope.statusGroups[i].status == 'por asignar') $scope.porAsignarse = $rootScope.statusGroups[i].cantidad;
+                  else if($rootScope.statusGroups[i].status == 'asignada') $scope.asignadas = $rootScope.statusGroups[i].cantidad;
+                  else if($rootScope.statusGroups[i].status == 'atendidas') $scope.atendidas = $rootScope.statusGroups[i].cantidad;
+                  else if($rootScope.statusGroups[i].status == 'en revision') $scope.enRevision = $rootScope.statusGroups[i].cantidad;
+                  else $scope.completadas = $rootScope.statusGroups[i].cantidad;
+                }
+              }
+            })
 
-	      	}
+          }
     	};
 
   	});

@@ -8,7 +8,7 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-	.controller('RequestlistCtrl', function ($scope, $rootScope, $state, toastr, session, request, response) {
+	.controller('RequestlistCtrl', function ($scope, $rootScope, helpers, $state, toastr, session, request, response) {
 	    
 	    var pageSize = 10;
 	    $scope.selectedPage = 0;
@@ -33,6 +33,7 @@ angular.module('frontend2App')
     	} else if($scope.user.userProfile == 'coordinador') {
     		$scope.filters = [
     			{filter: 'Todas', statusId: ''},
+    			{filter: 'Sin asignar', statusId: '2'},
     			{filter: 'Asignada', statusId: '3'},
     			{filter: 'Atendida', statusId: '4'},
     			{filter: 'Finalizada', statusId: '6'},
@@ -55,6 +56,7 @@ angular.module('frontend2App')
 	  		request.getRequest(page, pageSize, $scope.selectedFilter).then(function(response) {
 	    		$scope.requests = response.data.requests;
 	    		$scope.pages = response.data.pageCount;
+	    		$rootScope.statusGroups = response.data.statusGroups;
 		  	}, function(response) {
 		  		if(response.status == 500) {
 		        	toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');

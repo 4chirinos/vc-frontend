@@ -60,12 +60,42 @@ angular
 	    		}
 	    	})
 	    	.state('main.home.requestdetail', {
-	    		url: '/solicitud/detalles',
+	    		url: '/solicitud/:id',
 	    		templateUrl: 'views/requestdetail.html',
 	    		controller: 'RequestdetailCtrl',
-	    		params: {
-	    			request: null
+	    		resolve: {
+	    			response: function($stateParams, request) {
+	    				return request.getById($stateParams.id)
+	    				.then(function(response) {
+	    					return response;
+	    				}, function(response) {
+	    					return response;
+	    				});
+	    			}
 	    		}
+	    	})
+	    	.state('main.home.loaddata', {
+	    		url: '/cargardatos/:id',
+	    		templateUrl: 'views/loaddata.html',
+	    		abstract: true,
+	    		resolve: {
+	    			budget: function($stateParams) {
+	    				return 'budget' + $stateParams.id;
+	    			},
+	    			survey: function($stateParams) {
+	    				return 'survey' + $stateParams.id;
+	    			}
+	    		}
+	    	})
+	    	.state('main.home.loaddata.budget', {
+	    		url: '/presupuesto',
+	    		templateUrl: 'views/budget.html',
+	    		controller: 'BudgetCtrl'
+	    	})
+	    	.state('main.home.loaddata.survey', {
+	    		url: '/encuesta',
+	    		templateUrl: 'views/survey.html',
+	    		controller: 'SurveyCtrl'
 	    	})
 	    	.state('main.home.guaranteeletterdetail', {
 	    		url: '/cartaaval/detalles',
@@ -75,7 +105,6 @@ angular
 	    			guaranteeletter: null
 	    		}
 	    	});
-      
 
   	})
 	.config(function (localStorageServiceProvider) {

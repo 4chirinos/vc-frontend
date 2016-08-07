@@ -26,6 +26,10 @@ angular.module('frontend2App')
       return vcrestangular.all('request/' + obj.id).patch(obj, {}, {token: localStorageService.get('token')});
     };
 
+    request.getById = function(id) {
+      return vcrestangular.all('request').get(id, {}, {token: localStorageService.get('token')});
+    };
+
     return request;
 
   });

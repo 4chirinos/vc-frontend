@@ -52,7 +52,7 @@
 	                        <td><center>{{request.status.status}}</center></td>
 	                        <td>
 	                        	<center>
-	                        		<button ng-click="detail(request)" type="button" class="btn btn-warning btn-xs">Ver</button>
+	                        		<a ui-sref="main.home.requestdetail({id: request.id})">Ver</a>
 	                        	</center>
 	                        </td>
 	                    </tr>
