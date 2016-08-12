@@ -1,1 +1,33 @@
-<p>This is the budget view.</p>
+		<div class="panel panel-default">
+	        <div class="panel-heading">
+	            <h2>Presupuesto</h2>  
+	        </div>
+
+	            <div class="table-responsive">
+	                <table class="table table-hover table-condensed">
+
+	                    <tr>
+	                        <th><center>Descripción</center></th>
+	                        <th><center>Concepto</center></th>
+	                        <th><center>Costo Bs</center></th>
+	                        <th><center>Cantidad</center></th>
+	                        <th><center>Acción</center></th>
+	                    </tr>
+
+	                    
+	                    <tr ng-repeat="item in budget.item">
+	                        <td><center>{{item.description}}</center></td>
+	                        <td><center>{{item.concept}}</center></td>
+	                        <td><center>{{item.cost}}</center></td>
+	                        <td><center>{{item.quantity}}</center></td>
+	                        <td>
+	                        	<center>
+	                        		<button ng-click="edit(item, $index)" type="button" class="btn btn-warning btn-xs">Editar</button>
+	                        	</center>
+	                        </td>
+	                    </tr>
+	                   
+	                </table>
+	            </div>
+	        </div>
+	    </div>

@@ -1,5 +1,14 @@
-<a><strong><i class="glyphicon glyphicon-dashboard"></i> Detalles de la solicitud: # {{request.id}}</strong></a>
+<div ng-if="request">
+  <a><strong><i class="glyphicon glyphicon-dashboard"></i> Detalles de la solicitud: # {{request.id}}</strong></a>
+</div>
+
+<div ng-if="!request">
+  <a><strong><i class="glyphicon glyphicon-dashboard"></i> No se encontró visita asociada al código.</strong></a>
+</div>
+
 <hr>
+
+<div ng-if="request">
 
     <div class="panel-body">
 
@@ -205,3 +214,4 @@
       </div>
 
     </div>
+</div>

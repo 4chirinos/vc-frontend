@@ -8,9 +8,9 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('SurveyCtrl', function (budget, survey) {
+  	.controller('SurveyCtrl', function (budgetData, surveyData) {
     	
   		console.log('survey');
-  		console.log(budget + ' ' + survey);
+  		console.log(budgetData + ' ' + surveyData);
   		
   	});

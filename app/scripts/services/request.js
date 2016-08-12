@@ -13,7 +13,7 @@ angular.module('frontend2App')
     var request = {};
 
     request.getRequest = function(page, pageSize, statusId) {
-      return vcrestangular.all('request').get('me',
+      return vcrestangular.all('me').get('request',
         {page: page, pageSize: pageSize, statusId: statusId},
         {token: localStorageService.get('token')});
     };

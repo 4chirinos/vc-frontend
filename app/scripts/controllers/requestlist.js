@@ -95,10 +95,10 @@ angular.module('frontend2App')
 	    	}
 	    };
 
-	    $scope.detail = function(request) {
+	    $scope.detail = function(id) {
 	    	$state.go(
 	        	'main.home.requestdetail', {
-	        	request: request
+	        	id: id
 	      	});
 	    };    
 

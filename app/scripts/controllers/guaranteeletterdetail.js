@@ -8,10 +8,16 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('GuaranteeletterdetailCtrl', function ($rootScope, $scope, $state, $stateParams, toastr, request, session) {
-    	
-    	$scope.guaranteeLetter = $stateParams.guaranteeletter;
+  	.controller('GuaranteeletterdetailCtrl', function ($rootScope, $scope, $state, $stateParams, toastr, request, session, response) {
+        
 	    $scope.user = session.getCurrentUser();
+
+	    if(response.data.length == 1) {
+    		$scope.guaranteeLetter = response.data[0];
+    	} else {
+    		$scope.guaranteeLetter = null;
+    		toastr.error('No se encontró carta aval asociada al código.', 'Error');
+    	}
 
 	    $scope.date = function(date) {
 	      	date = date.split('T')[0].split('-');
@@ -38,21 +44,12 @@ angular.module('frontend2App')
 	      	return age;
 	    };
 
-	    $scope.detail = function() {
-	    	request.getById($scope.guaranteeLetter.request.id)
-	    	.then(function(response) {
-	    		$state.go(
-		        	'main.home.requestdetail', {
-		        	request: response.data
-		      	});
-	    	}, 
-	    	function(response) {
-	    		if(response.status == 500) {
-			        toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
-			    } else if(response.status == 404) {
-			    	toastr.error('No se encontró visita clínica asociada.', 'Error');
-			    }
-	    	});
+	    $scope.detail = function(id) {
+	    	$state.go(
+		        'main.home.requestdetail', {
+		    		id: id
+		    	}    
+		    );
 	    };
 
 	    $scope.postRequest = function() {

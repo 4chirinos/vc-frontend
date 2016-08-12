@@ -1,4 +1,4 @@
-		<a><strong><i class="glyphicon glyphicon-dashboard"></i> My Dashboard</strong></a>
+		<a><strong><i class="glyphicon glyphicon-dashboard"></i> Visitas</strong></a>
 		<hr>
 		<div class="panel panel-default">
 	        <div class="panel-heading">
@@ -39,6 +39,7 @@
 	                <table class="table table-hover table-condensed">
 
 	                    <tr>
+	                    	<th><center>Código de visita</center></th>
 	                        <th><center>Código carta aval</center></th>
 	                        <th><center>Fecha solicitud</center></th>
 	                        <th><center>Estatus</center></th>
@@ -47,12 +48,13 @@
 
 	                    
 	                    <tr ng-repeat="request in requests">
+	                    	<td><center>{{request.id}}</center></td>
 	                        <td><center>{{request.guaranteeLetter.code}}</center></td>
 	                        <td><center>{{date(request.startDate)}}</center></td>
 	                        <td><center>{{request.status.status}}</center></td>
 	                        <td>
 	                        	<center>
-	                        		<a ui-sref="main.home.requestdetail({id: request.id})">Ver</a>
+	                        		<button ng-click="detail(request.id)" type="button" class="btn btn-info btn-xs">Ver</button>
 	                        	</center>
 	                        </td>
 	                    </tr>

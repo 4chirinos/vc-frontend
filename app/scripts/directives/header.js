@@ -7,7 +7,7 @@
  * # header
  */
 angular.module('frontend2App')
-  	.directive('header', function ($state, toastr, guaranteeletter) {
+  	.directive('header', function ($state, toastr, guaranteeletter, session) {
   		return {
       		templateUrl:'views/header.html',
       		restrict: 'E',
@@ -17,12 +17,33 @@ angular.module('frontend2App')
       		link: function(scope, elem, attr, ctrl) {
 
       			scope.search = function() {
+
+      				var user = session.getCurrentUser();
+
+      				if(user.userProfile == 'analista') {
+
+      					$state.go(
+				            'main.home.guaranteeletterdetail', {
+				              	code: scope.code
+				            }
+				        );
+
+      				} else {
+
+      					$state.go(
+				            'main.home.requestdetail', {
+				              	id: scope.code
+				            }
+				        );
+
+      				}
+
       				
-		          	guaranteeletter.getGuaranteeLetter({code: scope.code}).then(function(response) {
+		          	/*guaranteeletter.getGuaranteeLetter({code: scope.code}).then(function(response) {
 		          		if(response.data.length == 1) {
 			            	$state.go(
 			              		'main.home.guaranteeletterdetail', {
-			                		guaranteeletter: response.data[0]
+			              			code: scope.code
 			              		}
 			            	);
 			            } else {
@@ -33,7 +54,7 @@ angular.module('frontend2App')
 		            	if(err.status = 500) {
 		              		toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
 		            	}
-		          	});
+		          	});*/
 
 		        };
 

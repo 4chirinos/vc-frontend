@@ -13,7 +13,13 @@ angular.module('frontend2App')
     	var pageSize = 10;
 
     	$scope.user = session.getCurrentUser();
-    	$scope.request = response.data;
+
+    	if(response.status != 400 && response.status != 404 && response.status != 500) {
+    		$scope.request = response.data;
+    	} else {
+    		$scope.request = null;
+    		toastr.error('No se encontró visita asociada al código.', 'Error');
+    	}
 
     	$scope.download = function() {
   			window.open('http://localhost:3000/api/v1/budget/' + $scope.request.guaranteeLetter.budget.id);
@@ -22,8 +28,7 @@ angular.module('frontend2App')
   		$scope.load = function() {
   			$state.go(
 		        'main.home.loaddata.budget', {
-		        	id: $scope.request.guaranteeLetter.budget.id,
-		        	id2: $scope.request.guaranteeLetter.budget.id
+		        	id: $scope.request.id
 		        }
 		    );
   		};

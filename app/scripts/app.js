@@ -75,15 +75,21 @@ angular
 	    		}
 	    	})
 	    	.state('main.home.loaddata', {
-	    		url: '/cargardatos/:id',
+	    		url: '/solicitud/:id/cargardatos',
 	    		templateUrl: 'views/loaddata.html',
 	    		abstract: true,
 	    		resolve: {
-	    			budget: function($stateParams) {
-	    				return 'budget' + $stateParams.id;
+	    			budgetData: function($stateParams, budget) {
+	    				return budget.getByRequestId($stateParams.id)
+	    				.then(function(response) {
+	    					return response;
+	    				}, function(response) {
+	    					return response;
+	    				});
 	    			},
-	    			survey: function($stateParams) {
-	    				return 'survey' + $stateParams.id;
+	    			surveyData: function($stateParams) {
+	    				console.log('survey:' + $stateParams.formId);
+	    				return;
 	    			}
 	    		}
 	    	})
@@ -98,11 +104,17 @@ angular
 	    		controller: 'SurveyCtrl'
 	    	})
 	    	.state('main.home.guaranteeletterdetail', {
-	    		url: '/cartaaval/detalles',
+	    		url: '/cartaaval/:code/detalles',
 	    		templateUrl: 'views/guaranteeletterdetail.html',
 	    		controller: 'GuaranteeletterdetailCtrl',
-	    		params: {
-	    			guaranteeletter: null
+	    		resolve: {
+	    			response: function($stateParams, guaranteeletter) {
+	    				return guaranteeletter.getGuaranteeLetter({code: $stateParams.code}).then(function(response) {
+	    					return response;
+			          	}, function(response) {
+			            	return response;
+			          	});
+	    			}
 	    		}
 	    	});
 
