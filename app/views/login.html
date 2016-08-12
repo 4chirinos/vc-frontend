@@ -1,5 +1,5 @@
 <center>
-  <form class="form-inline">
+  <form name="form" class="form-inline" ng-submit="submit(form.$valid)">
     <div class="form-group">
       <label class="sr-only" for="exampleInputEmail3">Cédula</label>
       <input type="text" class="form-control" placeholder="Cédula" ng-model="login.identityCard" required>

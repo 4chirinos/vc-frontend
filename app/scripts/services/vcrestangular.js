@@ -14,7 +14,8 @@ angular.module('frontend2App')
     if (window.location.hostname == "localhost") {
       newBaseUrl = "http://localhost:3000/api/v1";
     } else {
-      var deployedAt = window.location.href.substring(0, window.location.href);
+      //var deployedAt = window.location.href.substring(0, window.location.href);
+      var deployedAt = 'https://pacific-inlet-56422.herokuapp.com';
       newBaseUrl = deployedAt + "/api/v1";
     }
     

@@ -12,36 +12,40 @@ angular.module('frontend2App')
 
 	  	$scope.login = {};
 
-	  	$scope.submit = function() {
+	  	$scope.submit = function(valid) {
 
-	  		var data = {
-	  			identityCard: $scope.login.identityCard,
-	  			password: $scope.login.password
-	  		};
+	  		if(valid) {
 
-	  		session.login(data).then(function(response) {
+		  		var data = {
+		  			identityCard: $scope.login.identityCard,
+		  			password: $scope.login.password
+		  		};
 
-	  			session.setToken(response.data.token);
+		  		session.login(data).then(function(response) {
 
-		        session.setCurrentUser(response.data);
-		        
-		        $state.go('main.home.requestlist');
+		  			session.setToken(response.data.token);
 
-		        $scope.login = {};
+			        session.setCurrentUser(response.data);
+			        
+			        $state.go('main.home.requestlist');
 
-	  		}, function(response) {
+			        $scope.login = {};
 
-		        $log.log(response.status);
+		  		}, function(response) {
 
-		        $scope.login = {};
+			        $log.log(response.status);
 
-		        if(response.status == 404) {
-		          toastr.warning('Cédula y/o contraseña errónea', 'Error');
-		        } else if(response.status == 500) {
-		          toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
-		        }
-			
-			});
+			        $scope.login = {};
+
+			        if(response.status == 404) {
+			          toastr.warning('Cédula y/o contraseña errónea', 'Error');
+			        } else if(response.status == 500) {
+			          toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+			        }
+				
+				});
+
+		  	}
 
 	  	};
 
