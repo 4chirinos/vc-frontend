@@ -1,4 +1,4 @@
-		<a><strong><i class="glyphicon glyphicon-dashboard"></i> Visitas</strong></a>
+		<a><strong><i class="glyphicon glyphicon-dashboard"></i> Solicitudes</strong></a>
 		<hr>
 		<div class="panel panel-default">
 	        <div class="panel-heading">
@@ -51,14 +51,15 @@
 	                    	<td><center>{{request.id}}</center></td>
 	                        <td><center>{{request.guaranteeLetter.code}}</center></td>
 	                        <td><center>{{date(request.startDate)}}</center></td>
-	                        <td><center>{{request.status.status}}</center></td>
+	                        <!--<td><center>status({{request.status.status}})</center></td>-->
+	                        <td><center><p style="width: 100px" class="img-rounded" ng-class="status(request.status.status)">{{request.status.status}}</p></center></td>
 	                        <td>
 	                        	<center>
 	                        		<button ng-click="detail(request.id)" type="button" class="btn btn-info btn-xs">Ver</button>
 	                        	</center>
 	                        </td>
 	                    </tr>
-	                   
+	              
 	                </table>
 	            </div>
 	        </div>

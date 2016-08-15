@@ -16,13 +16,14 @@ angular.module('frontend2App')
 
     	if(response.status != 400 && response.status != 404 && response.status != 500) {
     		$scope.request = response.data;
+    		$rootScope.statusGroups = response.data.statusGroups;
     	} else {
     		$scope.request = null;
     		toastr.error('No se encontró visita asociada al código.', 'Error');
     	}
 
     	$scope.download = function() {
-  			window.open('http://localhost:3000/api/v1/budget/' + $scope.request.guaranteeLetter.budget.id);
+  			window.open('http://localhost:3000/api/v1/document/budget/' + $scope.request.guaranteeLetter.budget.id);
   		};
 
   		$scope.load = function() {

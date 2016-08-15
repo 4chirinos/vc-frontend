@@ -79,9 +79,10 @@ angular
 	    		templateUrl: 'views/loaddata.html',
 	    		abstract: true,
 	    		resolve: {
-	    			budgetData: function($stateParams, budget) {
+	    			budgetData: function($rootScope, $stateParams, budget) {
 	    				return budget.getByRequestId($stateParams.id)
 	    				.then(function(response) {
+	    					$rootScope.statusGroups = response.data.statusGroups;
 	    					return response;
 	    				}, function(response) {
 	    					return response;

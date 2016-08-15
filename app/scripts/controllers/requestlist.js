@@ -64,6 +64,31 @@ angular.module('frontend2App')
 		  	});
 	  	};
 
+	  	$scope.status = function(status) {
+
+	  		if($scope.user.userProfile == 'analista') {
+	  			if(status == 'finalizada') return 'text-success bg-success';
+	  			if(status == 'por asignar') return 'text-danger bg-danger';
+	  			if(status == 'atendida') return 'text-info bg-info';
+	  			if(status == 'asignada') return 'text-primary bg-primary';
+	  		}
+
+	  		if($scope.user.userProfile == 'coordinador') {
+	  			if(status == 'finalizada') return 'text-success bg-success';
+	  			if(status == 'por asignar') return 'text-danger bg-danger';
+	  			if(status == 'atendida') return 'text-info bg-info';
+	  			if(status == 'asignada') return 'text-primary bg-primary';
+	  		}
+
+	  		if($scope.user.userProfile == 'visitador') {
+	  			if(status == 'finalizada') return 'text-success bg-success';
+	  			if(status == 'atendida') return 'text-primary bg-primary';
+	  			if(status == 'asignada') return 'text-danger bg-danger';
+
+	  		}
+
+	  	};
+
 	  	$scope.date = function(date) {
 	      	date = date.split('T')[0].split('-');
 	      	var yyyy = date[0], mm = date[1], dd = date[2];

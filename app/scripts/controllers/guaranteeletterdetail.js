@@ -12,12 +12,21 @@ angular.module('frontend2App')
         
 	    $scope.user = session.getCurrentUser();
 
-	    if(response.data.length == 1) {
-    		$scope.guaranteeLetter = response.data[0];
+	    $rootScope.statusGroups = response.data.statusGroups;
+
+	    if(response.data.guaranteeLetter.length == 1) {
+    		$scope.guaranteeLetter = response.data.guaranteeLetter[0];
     	} else {
     		$scope.guaranteeLetter = null;
     		toastr.error('No se encontró carta aval asociada al código.', 'Error');
     	}
+
+    	$scope.status = function(status) {
+
+	  		if(status == 'activada')
+	  			return 'text-success bg-success'
+
+	  	};
 
 	    $scope.date = function(date) {
 	      	date = date.split('T')[0].split('-');

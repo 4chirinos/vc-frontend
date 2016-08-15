@@ -8,7 +8,7 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('AssignvisitormodalCtrl', function ($scope, $uibModalInstance, data, user) {
+  	.controller('AssignvisitormodalCtrl', function ($rootScope, $scope, $uibModalInstance, data, user) {
 
   		var pageSize = 10;
 
@@ -20,7 +20,7 @@ angular.module('frontend2App')
 	  		user.getVisitors(page, pageSize).then(function(response) {
 	    		$scope.visitors = response.data.users;
 	    		$scope.pages = response.data.pageCount;
-	    		console.log(response.data.users[0].id);
+	    		$rootScope.statusGroups = response.data.statusGroups;
 		  	}, function(response) {
 		  		if(response.status == 500) {
 	          		toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
