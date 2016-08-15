@@ -39,7 +39,7 @@
   },
   "scripts": {
     "test": "karma start test/karma.conf.js",
-    "postinstall": "grunt build"
+    "postinstall": "bower install && grunt build"
   },
   "dependencies": {
     "express": "^4.14.0",
