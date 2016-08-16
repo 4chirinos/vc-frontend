@@ -49,9 +49,12 @@ angular
 	    		url: '/solicitud',
 	    		templateUrl: 'views/requestlist.html',
 	    		controller: 'RequestlistCtrl',
+	    		params: {
+	    			filter: ''
+	    		},
 	    		resolve: {
-	    			response: function(request) {
-	    				return request.getRequest(1, 10).then(function(response) {
+	    			response: function($stateParams, request) {
+	    				return request.getRequest(1, 10, $stateParams.filter).then(function(response) {
 				    		return response;
 					  	}, function(response) {
 					  		return response;

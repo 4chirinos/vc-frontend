@@ -29,6 +29,10 @@ angular.module('frontend2App')
               }
             })
 
+            $scope.changeFilter = function(filter) {
+              $state.go('main.home.requestlist', {filter: filter}, {reload: true}); //second parameter is for $stateParams
+            };
+
           }
     	};
 

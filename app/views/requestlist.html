@@ -1,8 +1,8 @@
 		<a><strong><i class="glyphicon glyphicon-dashboard"></i> Solicitudes</strong></a>
 		<hr>
-		<div class="panel panel-default">
+		<div class="panel panel-primary">
 	        <div class="panel-heading">
-	            <h2>Solicitudes de visitas <small>Historial</small></h2>  
+	            <h2>Solicitudes de visitas</h2>  
 	        </div>
 
 	        <div class="panel-body">
@@ -29,7 +29,7 @@
 						   <div class="form-group">
 							   <label class="col-sm-1 control-label">Filtro:</label>
 							   <div class="col-sm-2">
-									<select ng-init="selectedFilter = filters[0].statusId" ng-model="selectedFilter" ng-options="filter.statusId as filter.filter for filter in filters" ng-change="selectChanged()"></select>
+									<select ng-model="selectedFilter" ng-options="filter.statusId as filter.filter for filter in filters" ng-change="selectChanged()"></select>
 							   </div>
 						</div>
 					</form>
@@ -51,11 +51,12 @@
 	                    	<td><center>{{request.id}}</center></td>
 	                        <td><center>{{request.guaranteeLetter.code}}</center></td>
 	                        <td><center>{{date(request.startDate)}}</center></td>
+	                        <td><center><span class="label" ng-class="status(request.status.status)">{{request.status.status}}</span></center></td>
 	                        <!--<td><center>status({{request.status.status}})</center></td>-->
-	                        <td><center><p style="width: 100px" class="img-rounded" ng-class="status(request.status.status)">{{request.status.status}}</p></center></td>
+	                        <!--<td><center><p style="width: 100px" class="img-rounded" ng-class="status(request.status.status)">{{request.status.status}}</p></center></td>-->
 	                        <td>
 	                        	<center>
-	                        		<button ng-click="detail(request.id)" type="button" class="btn btn-info btn-xs">Ver</button>
+	                        		<button ng-click="detail(request.id)" type="button" class="btn btn-primary btn-xs">Ver</button>
 	                        	</center>
 	                        </td>
 	                    </tr>

@@ -11,7 +11,9 @@ angular.module('frontend2App')
   	.controller('InitCtrl', function ($state, session) {
   		
   		if(session.getToken()) {
-	  		$state.go('main.home.requestlist');
+	  		$state.go('main.home.requestlist', {
+	  			filter: ''
+	  		});
 	  	} else {
 	  		$state.go('login');
 	  	}

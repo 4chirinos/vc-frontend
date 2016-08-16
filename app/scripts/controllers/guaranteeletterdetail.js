@@ -24,7 +24,9 @@ angular.module('frontend2App')
     	$scope.status = function(status) {
 
 	  		if(status == 'activada')
-	  			return 'text-success bg-success'
+	  			return 'label-success';
+	  		else
+	  			return 'label-default';
 
 	  	};
 
@@ -66,6 +68,8 @@ angular.module('frontend2App')
 	    	.then(function(response) {
 	    		if(response.data.created) {
 	    			toastr.warning('Otro analista acaba de solicitar esta visita.', 'Atención');
+	    		} else {
+	    			toastr.success('Solicitud de visita generada con éxito.', 'Listo');
 	    		}
 	    		$scope.guaranteeLetter.request = {
 	    			id: response.data.id,

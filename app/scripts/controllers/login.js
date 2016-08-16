@@ -27,9 +27,9 @@ angular.module('frontend2App')
 
 			        session.setCurrentUser(response.data);
 			        
-			        $state.go('main.home.requestlist');
-
-			        $scope.login = {};
+			        $state.go('main.home.requestlist', {
+			        	filter: ''
+			        });
 
 		  		}, function(response) {
 

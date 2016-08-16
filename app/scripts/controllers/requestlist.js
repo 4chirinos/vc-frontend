@@ -8,11 +8,13 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-	.controller('RequestlistCtrl', function ($scope, $rootScope, helpers, $state, toastr, session, request, response) {
-	    
+	.controller('RequestlistCtrl', function ($scope, $rootScope, $stateParams, helpers, $state, toastr, session, request, response) {
+
 	    var pageSize = 10;
 	    $scope.selectedPage = 0;
     	$scope.user = session.getCurrentUser();
+
+    	$scope.selectedFilter = $stateParams.filter;
 
     	if(response.status == 500) {
     		toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
@@ -28,7 +30,7 @@ angular.module('frontend2App')
     			{filter: 'Sin asignar', statusId: '2'},
     			{filter: 'Asignada', statusId: '3'},
     			{filter: 'Atendida', statusId: '4'},
-    			{filter: 'Finalizada', statusId: '6'},
+    			{filter: 'Completada', statusId: '6'},
     		];
     	} else if($scope.user.userProfile == 'coordinador') {
     		$scope.filters = [
@@ -36,16 +38,22 @@ angular.module('frontend2App')
     			{filter: 'Sin asignar', statusId: '2'},
     			{filter: 'Asignada', statusId: '3'},
     			{filter: 'Atendida', statusId: '4'},
-    			{filter: 'Finalizada', statusId: '6'},
+    			{filter: 'Completada', statusId: '6'},
     		];
     	} else {
     		$scope.filters = [
     			{filter: 'Todas', statusId: ''},
     			{filter: 'Sin atender', statusId: '3'},
     			{filter: 'Atendida', statusId: '4'},
-    			{filter: 'Finalizada', statusId: '6'},
+    			{filter: 'Completada', statusId: '6'},
     		];
     	}
+
+    	/*$rootScope.$watch('filter', function () {
+            if($rootScope.filter != null) {
+            	selectChanged();
+            }
+        })*/
 
     	$scope.selectChanged = function() {
     		getRequest(1);
@@ -67,23 +75,23 @@ angular.module('frontend2App')
 	  	$scope.status = function(status) {
 
 	  		if($scope.user.userProfile == 'analista') {
-	  			if(status == 'finalizada') return 'text-success bg-success';
-	  			if(status == 'por asignar') return 'text-danger bg-danger';
-	  			if(status == 'atendida') return 'text-info bg-info';
-	  			if(status == 'asignada') return 'text-primary bg-primary';
+	  			if(status == 'finalizada') return 'label-default';
+	  			if(status == 'por asignar') return 'label-danger';
+	  			if(status == 'atendida') return 'label-info';
+	  			if(status == 'asignada') return 'label-primary';
 	  		}
 
 	  		if($scope.user.userProfile == 'coordinador') {
-	  			if(status == 'finalizada') return 'text-success bg-success';
-	  			if(status == 'por asignar') return 'text-danger bg-danger';
-	  			if(status == 'atendida') return 'text-info bg-info';
-	  			if(status == 'asignada') return 'text-primary bg-primary';
+	  			if(status == 'finalizada') return 'label-success';
+	  			if(status == 'por asignar') return 'label-danger';
+	  			if(status == 'atendida') return 'label-info';
+	  			if(status == 'asignada') return 'label-primary';
 	  		}
 
 	  		if($scope.user.userProfile == 'visitador') {
-	  			if(status == 'finalizada') return 'text-success bg-success';
-	  			if(status == 'atendida') return 'text-primary bg-primary';
-	  			if(status == 'asignada') return 'text-danger bg-danger';
+	  			if(status == 'finalizada') return 'label-success';
+	  			if(status == 'atendida') return 'label-primary';
+	  			if(status == 'asignada') return 'label-danger';
 
 	  		}
 
