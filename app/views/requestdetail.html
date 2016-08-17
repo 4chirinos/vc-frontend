@@ -47,8 +47,8 @@
           </div>
           <center>
             <ul class="list-inline">
-              <li><button ng-click="download()" type="button" class="btn btn-info btn-xs">Ver presupuesto</button></li>
-              <li><button ng-click="download()" type="button" class="btn btn-info btn-xs">Ver carta aval</button></li>
+              <li><button ng-click="downloadBudget()" type="button" class="btn btn-info btn-xs">Ver presupuesto</button></li>
+              <li><button ng-click="downloadGuarantee()" type="button" class="btn btn-info btn-xs">Ver carta aval</button></li>
               <li><button ng-click="load()" type="button" class="btn btn-info btn-xs">Cargar información</button></li>
             </ul>
             </center>
@@ -91,7 +91,7 @@
       
       <div ng-if="user.userProfile == 'visitador'">
 
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">Datos del tomador:</h3>
           </div>
@@ -131,7 +131,7 @@
           </div>
         </div>
 
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">Datos del asegurado:</h3>
           </div>
@@ -171,7 +171,7 @@
           </div>
         </div>
 
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">Datos del beneficiario:</h3>
           </div>

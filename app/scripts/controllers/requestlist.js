@@ -27,25 +27,31 @@ angular.module('frontend2App')
     	if($scope.user.userProfile == 'analista') {
     		$scope.filters = [
     			{filter: 'Todas', statusId: ''},
-    			{filter: 'Sin asignar', statusId: '2'},
+    			{filter: 'Por asignar', statusId: '2'},
     			{filter: 'Asignada', statusId: '3'},
     			{filter: 'Atendida', statusId: '4'},
+    			{filter: 'En revisión', statusId: '5'},
     			{filter: 'Completada', statusId: '6'},
+    			{filter: 'Finalizada', statusId: '7'}
     		];
     	} else if($scope.user.userProfile == 'coordinador') {
     		$scope.filters = [
     			{filter: 'Todas', statusId: ''},
-    			{filter: 'Sin asignar', statusId: '2'},
+    			{filter: 'Por asignar', statusId: '2'},
     			{filter: 'Asignada', statusId: '3'},
     			{filter: 'Atendida', statusId: '4'},
+    			{filter: 'En revisión', statusId: '5'},
     			{filter: 'Completada', statusId: '6'},
+    			{filter: 'Finalizada', statusId: '7'}
     		];
     	} else {
     		$scope.filters = [
     			{filter: 'Todas', statusId: ''},
-    			{filter: 'Sin atender', statusId: '3'},
+    			{filter: 'Por atender', statusId: '3'},
     			{filter: 'Atendida', statusId: '4'},
+    			{filter: 'En revisión', statusId: '5'},
     			{filter: 'Completada', statusId: '6'},
+    			{filter: 'Finalizada', statusId: '7'}
     		];
     	}
 
@@ -54,6 +60,32 @@ angular.module('frontend2App')
             	selectChanged();
             }
         })*/
+
+        $scope.statusText = function(status) {
+        	if($scope.user.userProfile == 'analista') {
+	  			if(status == 'por asignar') return 'por asignar';
+	  			if(status == 'asignada') return 'asignada';
+	  			if(status == 'atendida') return 'atendida';
+	  			if(status == 'en revision') return 'en revision';
+	  			if(status == 'completada') return 'completada';
+	  			if(status == 'finalizada') return 'finalizada';
+	  		}
+	  		if($scope.user.userProfile == 'coordinador') {
+	  			if(status == 'por asignar') return 'por asignar';
+	  			if(status == 'asignada') return 'asignada';
+	  			if(status == 'atendida') return 'atendida';
+	  			if(status == 'en revision') return 'en revision';
+	  			if(status == 'completada') return 'completada';
+	  			if(status == 'finalizada') return 'finalizada';
+	  		}
+	  		if($scope.user.userProfile == 'visitador') {
+	  			if(status == 'asignada') return 'pendiente';
+	  			if(status == 'atendida') return 'atendida';
+	  			if(status == 'en revision') return 'en revision';
+	  			if(status == 'completada') return 'completada';
+	  			if(status == 'finalizada') return 'finalizada';
+	  		}
+        };
 
     	$scope.selectChanged = function() {
     		getRequest(1);
@@ -75,24 +107,29 @@ angular.module('frontend2App')
 	  	$scope.status = function(status) {
 
 	  		if($scope.user.userProfile == 'analista') {
-	  			if(status == 'finalizada') return 'label-default';
 	  			if(status == 'por asignar') return 'label-danger';
-	  			if(status == 'atendida') return 'label-info';
 	  			if(status == 'asignada') return 'label-primary';
+	  			if(status == 'atendida') return 'label-info';
+	  			if(status == 'en revision') return 'label-warning';
+	  			if(status == 'completada') return 'label-success';
+	  			if(status == 'finalizada') return 'label-default';
 	  		}
 
 	  		if($scope.user.userProfile == 'coordinador') {
-	  			if(status == 'finalizada') return 'label-success';
 	  			if(status == 'por asignar') return 'label-danger';
-	  			if(status == 'atendida') return 'label-info';
 	  			if(status == 'asignada') return 'label-primary';
+	  			if(status == 'atendida') return 'label-info';
+	  			if(status == 'en revision') return 'label-warning';
+	  			if(status == 'completada') return 'label-success';
+	  			if(status == 'finalizada') return 'label-default';
 	  		}
 
 	  		if($scope.user.userProfile == 'visitador') {
-	  			if(status == 'finalizada') return 'label-success';
-	  			if(status == 'atendida') return 'label-primary';
 	  			if(status == 'asignada') return 'label-danger';
-
+	  			if(status == 'atendida') return 'label-info';
+	  			if(status == 'en revision') return 'label-warning';
+	  			if(status == 'completada') return 'label-success';
+	  			if(status == 'finalizada') return 'label-default';
 	  		}
 
 	  	};

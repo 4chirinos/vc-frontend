@@ -51,7 +51,7 @@
 	                    	<td><center>{{request.id}}</center></td>
 	                        <td><center>{{request.guaranteeLetter.code}}</center></td>
 	                        <td><center>{{date(request.startDate)}}</center></td>
-	                        <td><center><span class="label" ng-class="status(request.status.status)">{{request.status.status}}</span></center></td>
+	                        <td><center><span class="label" ng-class="status(request.status.status)">{{statusText(request.status.status)}}</span></center></td>
 	                        <!--<td><center>status({{request.status.status}})</center></td>-->
 	                        <!--<td><center><p style="width: 100px" class="img-rounded" ng-class="status(request.status.status)">{{request.status.status}}</p></center></td>-->
 	                        <td>

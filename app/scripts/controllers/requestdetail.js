@@ -22,7 +22,11 @@ angular.module('frontend2App')
     		toastr.error('No se encontró visita asociada al código.', 'Error');
     	}
 
-    	$scope.download = function() {
+    	$scope.downloadBudget = function() {
+  			window.open('http://localhost:3000/api/v1/document/budget/' + $scope.request.guaranteeLetter.budget.id);
+  		};
+
+  		$scope.downloadGuarantee = function() {
   			window.open('http://localhost:3000/api/v1/document/budget/' + $scope.request.guaranteeLetter.budget.id);
   		};
 
