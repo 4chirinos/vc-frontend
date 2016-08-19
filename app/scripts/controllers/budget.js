@@ -12,10 +12,6 @@ angular.module('frontend2App')
 
     	$scope.budget = budgetData.data;
 
-    	$scope.fileChanged = function() {
-    		console.log('hi');
-    	};
-
     	$scope.edit = function(item, index) {
     		
     		var modalInstance = $uibModal.open({

@@ -18,7 +18,8 @@ angular
 	    'toastr',
 	    'angular-loading-bar',
 	    'ui.bootstrap',
-	    'LocalStorageModule'
+	    'LocalStorageModule',
+	    'file-model'
   	])
   	.config(function($stateProvider, $urlRouterProvider) {
 
@@ -106,6 +107,11 @@ angular
 	    		url: '/encuesta',
 	    		templateUrl: 'views/survey.html',
 	    		controller: 'SurveyCtrl'
+	    	})
+	    	.state('main.home.loaddata.attached', {
+	    		url: '/adjunto',
+	    		templateUrl: 'views/attached.html',
+	    		controller: 'AttachedCtrl'
 	    	})
 	    	.state('main.home.guaranteeletterdetail', {
 	    		url: '/cartaaval/:code/detalles',
