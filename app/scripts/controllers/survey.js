@@ -9,8 +9,5 @@
  */
 angular.module('frontend2App')
   	.controller('SurveyCtrl', function (budgetData, surveyData) {
-    	
-  		console.log('survey');
-  		console.log(budgetData + ' ' + surveyData);
   		
   	});
