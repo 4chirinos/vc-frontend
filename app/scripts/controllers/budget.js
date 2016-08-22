@@ -8,9 +8,11 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('BudgetCtrl', function ($rootScope, $scope, $uibModal, toastr, budgetData) {
+  	.controller('BudgetCtrl', function ($rootScope, $scope, $uibModal, toastr, budgetData, session) {
 
     	$scope.budget = budgetData.data;
+
+    	$scope.user = session.getCurrentUser();
 
     	$scope.edit = function(item, index) {
     		

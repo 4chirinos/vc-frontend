@@ -22,7 +22,7 @@ angular.module('frontend2App')
                 for(var i = 0; i < $rootScope.statusGroups.length; i++) {
                   if($rootScope.statusGroups[i].status == 'por asignar') $scope.porAsignarse = $rootScope.statusGroups[i].cantidad;
                   else if($rootScope.statusGroups[i].status == 'asignada') $scope.asignadas = $rootScope.statusGroups[i].cantidad;
-                  else if($rootScope.statusGroups[i].status == 'atendidas') $scope.atendidas = $rootScope.statusGroups[i].cantidad;
+                  else if($rootScope.statusGroups[i].status == 'atendida') $scope.atendidas = $rootScope.statusGroups[i].cantidad;
                   else if($rootScope.statusGroups[i].status == 'en revision') $scope.enRevision = $rootScope.statusGroups[i].cantidad;
                   else $scope.completadas = $rootScope.statusGroups[i].cantidad;
                 }

@@ -12,19 +12,6 @@
 
     <div class="panel-body">
 
-      <div ng-if="user.userProfile == 'coordinador'">
-        <div ng-if="request.statusId == 2">
-          <div class="alert alert-danger" role="alert">
-            <center>Solicitud de visita no asignada. <a ng-click="assign()" href="" class="alert-link"><strong>Asignar</strong></a></center>
-          </div>     
-        </div>
-        <div ng-if="request.statusId == 3">
-          <div class="alert alert-info" role="alert">
-            <center>Solicitud de visita asignada.</center>
-          </div>      
-        </div> 
-      </div>
-
       <div ng-if="user.userProfile == 'analista'">
         <div ng-if="request.statusId == 2">
           <div class="alert alert-danger" role="alert">
@@ -35,6 +22,24 @@
           <div class="alert alert-info" role="alert">
             <center>Solicitud de visita asignada.</center>
           </div>    
+        </div> 
+      </div>
+
+      <div ng-if="user.userProfile == 'coordinador'">
+        <div ng-if="request.statusId == 2">
+          <div class="alert alert-danger" role="alert">
+            <center>Solicitud de visita no asignada. <a ng-click="assign()" href="" class="alert-link"><strong>Asignar</strong></a></center>
+          </div>     
+        </div>
+        <div ng-if="request.statusId == 3">
+          <div class="alert alert-info" role="alert">
+            <center>Solicitud de visita asignada.</center>
+          </div>      
+        </div>
+        <div ng-if="request.statusId == 4">
+          <div class="alert alert-success" role="alert">
+            <center>Solicitud atendida. <a ng-click="load()" href="" class="alert-link"><strong>Ver información</strong></a></center>
+          </div>      
         </div> 
       </div>
 
@@ -53,6 +58,20 @@
             </ul>
             </center>
         </div> 
+        <div ng-if="request.statusId == 5">
+          <div class="alert alert-warning" role="alert">
+            <center>
+              Solicitud de visita en revisión.<br>
+              </center>
+          </div>
+          <center>
+            <ul class="list-inline">
+              <li><button ng-click="downloadBudget()" type="button" class="btn btn-info btn-xs">Ver presupuesto</button></li>
+              <li><button ng-click="downloadGuarantee()" type="button" class="btn btn-info btn-xs">Ver carta aval</button></li>
+              <li><button ng-click="load()" type="button" class="btn btn-info btn-xs">Cargar información</button></li>
+            </ul>
+            </center>
+        </div>
       </div>     
       
         <div class="panel panel-primary">

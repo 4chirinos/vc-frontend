@@ -18,60 +18,79 @@
 
         <div class="col-sm-6">
             <label class="text-success">Imágenes cargadas sobre la encuesta</label>
+            <ul class="list-group">
+                <li ng-repeat="file in surveyPaths track by $index" class="list-group-item">
+                    {{file}}
+                    <span class="pull-right">
+                        <button class="btn btn-xs btn-danger" ng-click="viewImage(file)">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </button>
+                    </span>
+                </li>
+            </ul>
         </div>
 
     </div>
 
-    <br><br><br>
+    <div ng-if="user.userProfile == 'visitador'">
 
-    <div class="row">
+        <br><br><br>
 
-        <div class="col-sm-6">
-        	<div class="form-group">
+        <div class="row">
 
-            	<button type="button" class="btn btn-primary btn-xs" ng-click="budgetUpload()"><span class="glyphicon glyphicon-plus-sign"></span> <strong>Cargar</strong></button> <label class="text-primary">imagen del presupuesto con cambios</label>
+            <div class="col-sm-6">
+            	<div class="form-group">
 
-                <ul class="list-group">
-                    <li ng-repeat="file in budgetFiles track by $index" class="list-group-item">
-                        {{file.name}}
-                        <span class="pull-right">
-                            <button class="btn btn-xs btn-danger" ng-click="removeBudget($index)">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </button>
-                        </span>
-                    </li>
-                </ul>
+                	<button type="button" class="btn btn-primary btn-xs" ng-click="budgetUpload()"><span class="glyphicon glyphicon-plus-sign"></span> <strong>Cargar</strong></button> <label class="text-primary">imagen del presupuesto con cambios</label>
 
-          	</div>
-        </div>
+                    <ul class="list-group">
+                        <li ng-repeat="file in budgetFiles track by $index" class="list-group-item">
+                            {{file.name}}
+                            <span class="pull-right">
+                                <button class="btn btn-xs btn-danger" ng-click="removeBudget($index)">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </span>
+                        </li>
+                    </ul>
 
-        <div class="col-sm-6">
-            <div class="form-group">
-
-                <button type="button" class="btn btn-success btn-xs" ng-click="surveyUpload()"><span class="glyphicon glyphicon-plus-sign"></span> <strong>Cargar</strong></button> <label class="text-success">imagen de la encuesta realizada</label>
-
-                <ul class="list-group">
-                    <li ng-repeat="file in surveyFiles track by $index" class="list-group-item">
-                        {{file.name}}
-                        <span class="pull-right">
-                            <button class="btn btn-xs btn-danger" ng-click="removeSurvey($index)">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </button>
-                        </span>
-                    </li>
-                </ul>
-
+              	</div>
             </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <center>
-            <button ng-disabled="loadable()" class="btn btn-md btn-info" ng-click="loadData()">
-                <span class="glyphicon glyphicon-open"></span> Subir imágenes
-            </button>
-            <p class="help-block">Las nuevas imágenes sustituirán las anteriores</p>
-        </center>
+        
+            
+            <div class="col-sm-6">
+                <div class="form-group">
+
+                    <button type="button" class="btn btn-success btn-xs" ng-click="surveyUpload()"><span class="glyphicon glyphicon-plus-sign"></span> <strong>Cargar</strong></button> <label class="text-success">imagen de la encuesta realizada</label>
+
+                    <ul class="list-group">
+                        <li ng-repeat="file in surveyFiles track by $index" class="list-group-item">
+                            {{file.name}}
+                            <span class="pull-right">
+                                <button class="btn btn-xs btn-danger" ng-click="removeSurvey($index)">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </span>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+        </div>
+
+        <br><br><br>
+
+        <div class="row">
+            <center>
+                <button ng-disabled="loadable()" class="btn btn-md btn-info" ng-click="loadData()">
+                    <span class="glyphicon glyphicon-open"></span> Subir imágenes
+                </button>
+                <p class="help-block">Las nuevas imágenes sustituirán las anteriores</p>
+            </center>
+        </div>
+
     </div>
 
 </div>

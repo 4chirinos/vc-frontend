@@ -81,6 +81,7 @@ angular
 	    	.state('main.home.loaddata', {
 	    		url: '/solicitud/:id/cargardatos',
 	    		templateUrl: 'views/loaddata.html',
+	    		controller: 'LoaddataCtrl',
 	    		abstract: true,
 	    		resolve: {
 	    			budgetData: function($rootScope, $stateParams, budget) {
@@ -92,9 +93,14 @@ angular
 	    					return response;
 	    				});
 	    			},
-	    			surveyData: function($stateParams) {
-	    				console.log('survey:' + $stateParams.formId);
-	    				return;
+	    			surveyData: function($stateParams, survey) {
+	    				return survey.getByRequestId($stateParams.id)
+	    				.then(function(response) {
+	    					return response;
+	    				}, function(response) {
+	    					console.log(response);
+	    					return response;
+	    				});
 	    			}
 	    		}
 	    	})
@@ -112,6 +118,11 @@ angular
 	    		url: '/adjunto',
 	    		templateUrl: 'views/attached.html',
 	    		controller: 'AttachedCtrl'
+	    	})
+	    	.state('main.home.loaddata.decision', {
+	    		url: '/accion',
+	    		templateUrl: 'views/decision.html',
+	    		controller: 'DecisionCtrl'
 	    	})
 	    	.state('main.home.guaranteeletterdetail', {
 	    		url: '/cartaaval/:code/detalles',

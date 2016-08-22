@@ -11,16 +11,16 @@
 	                        <th><center>Descripción</center></th>
 	                        <th><center>Cantidad</center></th>
 	                        <th><center>Costo Bs</center></th>
-	                        <th><center>Acción</center></th>
+	                        <th ng-if="user.userProfile == 'visitador'"><center>Acción</center></th>
 	                    </tr>
 
 	                    
 	                    <tr ng-repeat="item in budget.item">
 	                    	<td><center>{{item.concept}}</center></td>
-	                        <td>{{item.description}}</td>
+	                        <td><center>{{item.description}}</center></td>
 	                        <td><center>{{item.quantity}}</center></td>
 	                        <td><center>{{item.cost}}</center></td>
-	                        <td>
+	                        <td ng-if="user.userProfile == 'visitador'">
 	                        	<center>
 	                        		<button ng-click="edit(item, $index)" type="button" class="btn btn-warning btn-xs">Editar</button>
 	                        	</center>
