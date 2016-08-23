@@ -63,31 +63,24 @@ angular
 	    			}
 	    		}
 	    	})
-	    	.state('main.home.requestdetail', {
-	    		url: '/solicitud/:id',
-	    		templateUrl: 'views/requestdetail.html',
-	    		controller: 'RequestdetailCtrl',
-	    		resolve: {
-	    			response: function($stateParams, request) {
-	    				return request.getById($stateParams.id)
-	    				.then(function(response) {
-	    					return response;
-	    				}, function(response) {
-	    					return response;
-	    				});
-	    			}
-	    		}
-	    	})
 	    	.state('main.home.loaddata', {
 	    		url: '/solicitud/:id/cargardatos',
 	    		templateUrl: 'views/loaddata.html',
 	    		controller: 'LoaddataCtrl',
 	    		abstract: true,
 	    		resolve: {
-	    			budgetData: function($rootScope, $stateParams, budget) {
-	    				return budget.getByRequestId($stateParams.id)
+	    			response: function($rootScope, $stateParams, request) {
+	    				return request.getById($stateParams.id)
 	    				.then(function(response) {
 	    					$rootScope.statusGroups = response.data.statusGroups;
+	    					return response;
+	    				}, function(response) {
+	    					return response;
+	    				});
+	    			},
+	    			budgetData: function($stateParams, budget) {
+	    				return budget.getByRequestId($stateParams.id)
+	    				.then(function(response) {
 	    					return response;
 	    				}, function(response) {
 	    					return response;
@@ -98,11 +91,15 @@ angular
 	    				.then(function(response) {
 	    					return response;
 	    				}, function(response) {
-	    					console.log(response);
 	    					return response;
 	    				});
 	    			}
 	    		}
+	    	})
+	    	.state('main.home.loaddata.requestdetail', {
+	    		url: '/detalles',
+	    		templateUrl: 'views/requestdetail.html',
+	    		controller: 'RequestdetailCtrl'
 	    	})
 	    	.state('main.home.loaddata.budget', {
 	    		url: '/presupuesto',

@@ -31,7 +31,7 @@ angular.module('frontend2App')
       				} else {
 
       					$state.go(
-				            'main.home.requestdetail', {
+				            'main.home.loaddata.requestdetail', {
 				              	id: scope.code
 				            }
 				        );

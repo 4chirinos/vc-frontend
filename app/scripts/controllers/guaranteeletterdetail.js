@@ -16,10 +16,71 @@ angular.module('frontend2App')
 
 	    if(response.data.guaranteeLetter.length == 1) {
     		$scope.guaranteeLetter = response.data.guaranteeLetter[0];
+    		if(response.data.guaranteeLetter[0].request.length)
+    			$scope.history = response.data.guaranteeLetter[0].request;
+    		else
+    			$scope.history = null;
+
     	} else {
     		$scope.guaranteeLetter = null;
     		toastr.error('No se encontró carta aval asociada al código.', 'Error');
     	}
+
+    	$scope.statusText = function(status) {
+        	if($scope.user.userProfile == 'analista') {
+	  			if(status == 'por asignar') return 'por asignar';
+	  			if(status == 'asignada') return 'asignada';
+	  			if(status == 'atendida') return 'atendida';
+	  			if(status == 'en revision') return 'en revision';
+	  			if(status == 'completada') return 'completada';
+	  			if(status == 'finalizada') return 'finalizada';
+	  		}
+	  		if($scope.user.userProfile == 'coordinador') {
+	  			if(status == 'por asignar') return 'por asignar';
+	  			if(status == 'asignada') return 'asignada';
+	  			if(status == 'atendida') return 'atendida';
+	  			if(status == 'en revision') return 'en revision';
+	  			if(status == 'completada') return 'completada';
+	  			if(status == 'finalizada') return 'finalizada';
+	  		}
+	  		if($scope.user.userProfile == 'visitador') {
+	  			if(status == 'asignada') return 'pendiente';
+	  			if(status == 'atendida') return 'atendida';
+	  			if(status == 'en revision') return 'en revision';
+	  			if(status == 'completada') return 'completada';
+	  			if(status == 'finalizada') return 'finalizada';
+	  		}
+        };
+
+        $scope.status2 = function(status) {
+
+	  		if($scope.user.userProfile == 'analista') {
+	  			if(status == 'por asignar') return 'label-danger';
+	  			if(status == 'asignada') return 'label-primary';
+	  			if(status == 'atendida') return 'label-info';
+	  			if(status == 'en revision') return 'label-warning';
+	  			if(status == 'completada') return 'label-success';
+	  			if(status == 'finalizada') return 'label-default';
+	  		}
+
+	  		if($scope.user.userProfile == 'coordinador') {
+	  			if(status == 'por asignar') return 'label-danger';
+	  			if(status == 'asignada') return 'label-primary';
+	  			if(status == 'atendida') return 'label-info';
+	  			if(status == 'en revision') return 'label-warning';
+	  			if(status == 'completada') return 'label-success';
+	  			if(status == 'finalizada') return 'label-default';
+	  		}
+
+	  		if($scope.user.userProfile == 'visitador') {
+	  			if(status == 'asignada') return 'label-danger';
+	  			if(status == 'atendida') return 'label-info';
+	  			if(status == 'en revision') return 'label-warning';
+	  			if(status == 'completada') return 'label-success';
+	  			if(status == 'finalizada') return 'label-default';
+	  		}
+
+	  	};
 
     	$scope.status = function(status) {
 
@@ -57,14 +118,25 @@ angular.module('frontend2App')
 
 	    $scope.detail = function(id) {
 	    	$state.go(
-		        'main.home.requestdetail', {
+		        'main.home.loaddata.requestdetail', {
 		    		id: id
 		    	}    
 		    );
 	    };
 
+	    $scope.canRequest = function() {
+	    	if(!$scope.history)
+	    		return true;
+	    	else {
+	    		for(var i = 0; i < $scope.history.length; i++) {
+	    			if($scope.history[i].status.id != 6) return false;
+	    		}
+	    		return true;
+	    	}
+	    };
+
 	    $scope.postRequest = function() {
-	    	request.postRequest({guaranteeLetterId: $scope.guaranteeLetter.id, analystId: $scope.user.userId})
+	    	request.postRequest({guaranteeLetterId: $scope.guaranteeLetter.id})
 	    	.then(function(response) {
 	    		if(response.data.created) {
 	    			toastr.warning('Otro analista acaba de solicitar esta visita.', 'Atención');
@@ -83,6 +155,10 @@ angular.module('frontend2App')
 	    			endDate: response.data.endDate,
 	    			status: response.data.status
 	    		};
+	    		if(!$scope.history)
+	    			$scope.history = [$scope.guaranteeLetter.request];
+	    		else
+	    			$scope.history.push($scope.guaranteeLetter.request);
 	    		$rootScope.statusGroups = response.data.statusGroups;
 	    	}, function(response) {
 	    		if(response.status == 500) {

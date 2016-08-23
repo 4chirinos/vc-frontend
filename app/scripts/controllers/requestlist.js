@@ -167,9 +167,10 @@ angular.module('frontend2App')
 
 	    $scope.detail = function(id) {
 	    	$state.go(
-	        	'main.home.requestdetail', {
-	        	id: id
-	      	});
+		        'main.home.loaddata.requestdetail', {
+		    		id: id
+		    	}    
+		    );
 	    };    
 
 	  	//getRequest(1);
