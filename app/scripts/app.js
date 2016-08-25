@@ -77,22 +77,6 @@ angular
 	    				}, function(response) {
 	    					return response;
 	    				});
-	    			},
-	    			budgetData: function($stateParams, budget) {
-	    				return budget.getByRequestId($stateParams.id)
-	    				.then(function(response) {
-	    					return response;
-	    				}, function(response) {
-	    					return response;
-	    				});
-	    			},
-	    			surveyData: function($stateParams, survey) {
-	    				return survey.getByRequestId($stateParams.id)
-	    				.then(function(response) {
-	    					return response;
-	    				}, function(response) {
-	    					return response;
-	    				});
 	    			}
 	    		}
 	    	})
@@ -104,12 +88,32 @@ angular
 	    	.state('main.home.loaddata.budget', {
 	    		url: '/presupuesto',
 	    		templateUrl: 'views/budget.html',
-	    		controller: 'BudgetCtrl'
+	    		controller: 'BudgetCtrl',
+	    		resolve: {
+	    			budgetData: function($stateParams, budget) {
+	    				return budget.getByRequestId($stateParams.id)
+	    				.then(function(response) {
+	    					return response;
+	    				}, function(response) {
+	    					return response;
+	    				});
+	    			}
+	    		}
 	    	})
 	    	.state('main.home.loaddata.survey', {
 	    		url: '/encuesta',
 	    		templateUrl: 'views/survey.html',
-	    		controller: 'SurveyCtrl'
+	    		controller: 'SurveyCtrl',
+	    		resolve: {
+	    			surveyData: function($stateParams, survey) {
+	    				return survey.getByRequestId($stateParams.id)
+	    				.then(function(response) {
+	    					return response;
+	    				}, function(response) {
+	    					return response;
+	    				});
+	    			}
+	    		}
 	    	})
 	    	.state('main.home.loaddata.attached', {
 	    		url: '/adjunto',

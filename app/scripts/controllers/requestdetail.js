@@ -8,7 +8,7 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('RequestdetailCtrl', function ($rootScope, $scope, $stateParams, $uibModal, $state, toastr, session, user, request, budget, response) {
+  	.controller('RequestdetailCtrl', function ($rootScope, $scope, $stateParams, $uibModal, $state, toastr, session, user, request, budget, response, baseUrl) {
     	
     	var pageSize = 10;
 
@@ -16,11 +16,11 @@ angular.module('frontend2App')
     	$scope.request = response.data;
 
     	$scope.downloadBudget = function() {
-  			window.open('http://localhost:3000/api/v1/document/budget/' + $scope.request.guaranteeLetter.budget.id);
+  			window.open(baseUrl + '/document/budget/' + $scope.request.guaranteeLetter.budget.id);
   		};
 
   		$scope.downloadGuarantee = function() {
-  			window.open('http://localhost:3000/api/v1/document/budget/' + $scope.request.guaranteeLetter.budget.id);
+  			window.open(baseUrl + '/document/budget/' + $scope.request.guaranteeLetter.budget.id);
   		};
 
   		$scope.load = function() {

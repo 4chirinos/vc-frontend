@@ -8,18 +8,13 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-	.controller('AttachedCtrl', function ($scope, $stateParams, $rootScope, toastr, budgetData, surveyData, budget, survey, request) {
+	.controller('AttachedCtrl', function ($scope, $stateParams, $rootScope, toastr, response, request, baseUrl) {
 
     	$scope.budgetFiles = []; 
         $scope.surveyFiles = [];
 
-        var aux = budgetData.data.paths.split('$');
-        aux.length--;
-        $scope.budgetPaths = aux;
-
-        aux = surveyData.data.paths.split('$');
-        aux.length--;
-        $scope.surveyPaths = aux;
+        $scope.budgetPaths = response.data.budgetImage;
+        $scope.surveyPaths = response.data.formImage;
 
         $scope.loadable = function() {
             if($scope.budgetFiles.length >= 1 && $scope.surveyFiles.length >= 1)
@@ -28,27 +23,21 @@ angular.module('frontend2App')
         };
 
         $scope.loadData = function() {
-            budget.postDocument(budgetData.data.id, $scope.budgetFiles)
+            request.postBudgetImage(response.data.id, $scope.budgetFiles)
             .then(function(response1) {
 
-                budgetData.data.paths = response1.data.paths;
+                response.data.budgetImage = response1.data.path;
 
-                var aux1 = response1.data.paths.split('$');
-                aux1.length--;
-
-                survey.postDocument(surveyData.data.id, $scope.surveyFiles)
+                request.postFormImage(response.data.id, $scope.surveyFiles)
                 .then(function(response2) {
 
                     $scope.budgetFiles = []; 
                     $scope.surveyFiles = [];
 
-                    surveyData.data.paths = response2.data.paths;
+                    $scope.budgetPaths = response1.data.path;
+                    $scope.surveyPaths = response2.data.path;
 
-                    var aux2 = response2.data.paths.split('$');
-                    aux2.length--;
-
-                    $scope.budgetPaths = aux1;
-                    $scope.surveyPaths = aux2;
+                    response.data.formImage = response2.data.path;
 
                     toastr.success('Carga hecha con éxito.', 'Listo');
 
@@ -62,7 +51,7 @@ angular.module('frontend2App')
         };
 
         $scope.viewImage = function(file) {
-            window.open('http://localhost:3000/api/v1/image/' + file);
+            window.open(baseUrl + '/image/' + file);
         };
 
     	$scope.budgetLoaded = function(file) {
@@ -77,7 +66,6 @@ angular.module('frontend2App')
         };
 
         $scope.removeBudget = function(index) {
-            console.log(index);
             $scope.budgetFiles.splice(index, 1);
         };
 
@@ -99,7 +87,6 @@ angular.module('frontend2App')
         };
 
         $scope.removeSurvey = function(index) {
-            console.log(index);
             $scope.surveyFiles.splice(index, 1);
         };
 

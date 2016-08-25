@@ -6,9 +6,9 @@
             <label class="text-primary">Imágenes cargadas sobre el presupuesto</label>
             <ul class="list-group">
                 <li ng-repeat="file in budgetPaths track by $index" class="list-group-item">
-                    {{file}}
+                    {{file.path}}
                     <span class="pull-right">
-                        <button class="btn btn-xs btn-danger" ng-click="viewImage(file)">
+                        <button class="btn btn-xs btn-danger" ng-click="viewImage(file.path)">
                             <span class="glyphicon glyphicon-eye-open"></span>
                         </button>
                     </span>
@@ -20,9 +20,9 @@
             <label class="text-success">Imágenes cargadas sobre la encuesta</label>
             <ul class="list-group">
                 <li ng-repeat="file in surveyPaths track by $index" class="list-group-item">
-                    {{file}}
+                    {{file.path}}
                     <span class="pull-right">
-                        <button class="btn btn-xs btn-danger" ng-click="viewImage(file)">
+                        <button class="btn btn-xs btn-danger" ng-click="viewImage(file.path)">
                             <span class="glyphicon glyphicon-eye-open"></span>
                         </button>
                     </span>

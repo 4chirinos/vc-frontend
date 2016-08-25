@@ -30,6 +30,34 @@ angular.module('frontend2App')
       return vcrestangular.all('request').get(id, {}, {token: localStorageService.get('token')});
     };
 
+    request.postBudgetImage = function(id, files) {
+
+      var fd = new FormData();
+
+      for(var i = 0; i < files.length; i++) {
+        fd.append('file', files[i]);
+      }
+
+      return vcrestangular.one('request/' + id + '/budget/image')
+      .withHttpConfig({transformRequest: angular.identity})
+      .customPOST(fd, '', {}, {'Content-Type': undefined, token: localStorageService.get('token')})
+
+    };
+
+    request.postFormImage = function(id, files) {
+
+      var fd = new FormData();
+
+      for(var i = 0; i < files.length; i++) {
+        fd.append('file', files[i]);
+      }
+
+      return vcrestangular.one('request/' + id + '/form/image')
+      .withHttpConfig({transformRequest: angular.identity})
+      .customPOST(fd, '', {}, {'Content-Type': undefined, token: localStorageService.get('token')})
+
+    };
+
     return request;
 
   });
