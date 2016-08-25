@@ -8,4 +8,6 @@
  * Constant in the frontend2App.
  */
 angular.module('frontend2App')
-  .constant('baseUrl', 'http://localhost:3000/api/v1');
+  .constant('baseUrl', 'https://pacific-inlet-56422.herokuapp.com/api/v1');
+
+// 'http://localhost:3000/api/v1'
