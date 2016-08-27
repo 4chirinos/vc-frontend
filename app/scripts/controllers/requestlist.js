@@ -8,7 +8,7 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-	.controller('RequestlistCtrl', function ($scope, $rootScope, $stateParams, helpers, $state, toastr, session, request, response) {
+	.controller('RequestlistCtrl', function ($scope, $rootScope, $stateParams, $uibModal, $state, toastr, session, request, response) {
 
 	    var pageSize = 10;
 	    $scope.selectedPage = 0;
@@ -60,6 +60,23 @@ angular.module('frontend2App')
             	selectChanged();
             }
         })*/
+
+        $scope.filter = function() {
+        	
+        	var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'views/filtermodal.html',
+				controller: 'FiltermodalCtrl',
+				size: 'md'
+			});
+
+			modalInstance.result.then(function(cad) {
+			   	console.log(cad);
+			}, function() {
+				console.log('Modal dismissed at: ' + new Date());
+			});
+
+        };
 
         $scope.statusText = function(status) {
         	if($scope.user.userProfile == 'analista') {

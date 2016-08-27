@@ -9,6 +9,33 @@
 	            <h2>Información de gasto</h2>
 	        </div>
 	        <br>
+
+	        <div ng-if="historical.length">
+	        	<center><a href="" ng-click="toggleHistory()"><i class="glyphicon glyphicon-dashboard"></i> {{historyText}}</a></center>
+	        	<br>
+	        </div>
+
+	        <div ng-if="history" class="table-responsive container-fluid">
+	            <table class="table table-hover table-condensed">
+
+	                <tr>
+	                    <th><center>Descripción</center></th>
+	                    <th><center>Concepto</center></th>
+	                    <th><center>Costo</center></th>
+	                    <th><center>Cantidad</center></th>
+	                </tr>
+
+	                <tr ng-repeat="item in historical">
+	                    <td><center>{{item.concept}}</center></td>
+	                    <td><center>{{item.description}}</center></td>
+	                    <td><center>{{item.quantity}}</center></td>
+	                    <td><center>{{item.cost}}</center></td>
+	                </tr>
+	              
+	            </table>
+	        </div>
+
+	        <br>
 	        <form name="form" class="form-horizontal" ng-submit="edited(form.$valid)">
 			  <div class="form-group">
 			    <label for="inputEmail3" class="col-sm-2 control-label">Descripción:</label>

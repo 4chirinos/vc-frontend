@@ -12,6 +12,21 @@ angular.module('frontend2App')
     	
     	$scope.it = data;
 
+      $scope.history = false;
+      $scope.historyText = 'Ver historial de cambios';
+
+      $scope.historical = data.historical;
+
+      $scope.toggleHistory = function() {
+        if($scope.history) {
+          $scope.history = false;
+          $scope.historyText = 'Ver historial de cambios';
+        } else {
+          $scope.history = true;
+          $scope.historyText = 'Ocultar historial de cambios';
+        }
+      };
+
   		$scope.edited = function(valid) {
 
   			item.partialUpdate($scope.it).then(function(response) {

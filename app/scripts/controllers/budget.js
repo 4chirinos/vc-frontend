@@ -30,7 +30,7 @@ angular.module('frontend2App')
 
 		    modalInstance.result.then(function(it) {
 		    	$rootScope.statusGroups = it.statusGroups;
-		  		$scope.budget.item [index] = it;
+		  		$scope.budget.item[index] = it;
 		  		toastr.success('Cambio hecho con éxito.', 'Listo');
 			}, function() {
 			   	console.log('Modal dismissed at: ' + new Date());
