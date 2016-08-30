@@ -14,10 +14,10 @@ angular.module('frontend2App')
 
 	    $rootScope.statusGroups = response.data.statusGroups;
 
-	    if(response.data.guaranteeLetter.length == 1) {
-    		$scope.guaranteeLetter = response.data.guaranteeLetter[0];
-    		if(response.data.guaranteeLetter[0].request.length)
-    			$scope.history = response.data.guaranteeLetter[0].request;
+	    if(response.data.id) {
+    		$scope.guaranteeLetter = response.data;
+    		if(response.data.request.length)
+    			$scope.history = response.data.request;
     		else
     			$scope.history = null;
 

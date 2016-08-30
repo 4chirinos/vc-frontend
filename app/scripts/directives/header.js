@@ -24,7 +24,7 @@ angular.module('frontend2App')
 
       					$state.go(
 				            'main.home.guaranteeletterdetail', {
-				              	code: scope.code
+				              	id: scope.code
 				            }
 				        );
 

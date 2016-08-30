@@ -12,8 +12,8 @@ angular.module('frontend2App')
 
     var guaranteeLetter = {};
 
-    guaranteeLetter.getGuaranteeLetter = function(params) {
-      return vcrestangular.all('guaranteeLetter').customGET('', params, {token: localStorageService.get('token')});
+    guaranteeLetter.getGuaranteeLetterById = function(id) {
+      return vcrestangular.all('guaranteeLetter').get(id, {}, {token: localStorageService.get('token')});
     };
 
     return guaranteeLetter;

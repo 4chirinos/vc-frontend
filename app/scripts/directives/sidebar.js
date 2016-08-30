@@ -30,6 +30,7 @@ angular.module('frontend2App')
             })
 
             $scope.changeFilter = function(filter) {
+              if($rootScope.obj) $rootScope.obj.fill = false;
               $state.go('main.home.requestlist', {filter: filter}, {reload: true}); //second parameter is for $stateParams
             };
 

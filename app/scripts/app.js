@@ -54,12 +54,22 @@ angular
 	    			filter: ''
 	    		},
 	    		resolve: {
-	    			response: function($stateParams, request) {
-	    				return request.getRequest(1, 10, $stateParams.filter).then(function(response) {
-				    		return response;
-					  	}, function(response) {
-					  		return response;
-					  	});
+	    			response: function($rootScope, $stateParams, request) {
+
+	    				if($rootScope.obj && $rootScope.obj.fill) {
+	    					return request.getRequest($rootScope.obj).then(function(response) {
+					    		return response;
+						  	}, function(response) {
+						  		return response;
+						  	});
+	    				} else {
+	    					return request.getRequest({page: 1, pageSize: 6, statusId: $stateParams.filter}).then(function(response) {
+					    		return response;
+						  	}, function(response) {
+						  		return response;
+						  	});
+	    				}
+
 	    			}
 	    		}
 	    	})
@@ -126,12 +136,12 @@ angular
 	    		controller: 'DecisionCtrl'
 	    	})
 	    	.state('main.home.guaranteeletterdetail', {
-	    		url: '/cartaaval/:code/detalles',
+	    		url: '/cartaaval/:id/detalles',
 	    		templateUrl: 'views/guaranteeletterdetail.html',
 	    		controller: 'GuaranteeletterdetailCtrl',
 	    		resolve: {
 	    			response: function($stateParams, guaranteeletter) {
-	    				return guaranteeletter.getGuaranteeLetter({code: $stateParams.code}).then(function(response) {
+	    				return guaranteeletter.getGuaranteeLetterById($stateParams.id).then(function(response) {
 	    					return response;
 			          	}, function(response) {
 			            	return response;

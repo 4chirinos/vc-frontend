@@ -10,7 +10,9 @@
 angular.module('frontend2App')
 	.controller('RequestlistCtrl', function ($scope, $rootScope, $stateParams, $uibModal, $state, toastr, session, request, response) {
 
-	    var pageSize = 10;
+		//if($rootScope.obj) $rootScope.obj.fill = false;
+
+	    var pageSize = 6;
 	    $scope.selectedPage = 0;
     	$scope.user = session.getCurrentUser();
 
@@ -31,8 +33,7 @@ angular.module('frontend2App')
     			{filter: 'Asignada', statusId: '3'},
     			{filter: 'Atendida', statusId: '4'},
     			{filter: 'En revisión', statusId: '5'},
-    			{filter: 'Completada', statusId: '6'},
-    			{filter: 'Finalizada', statusId: '7'}
+    			{filter: 'Finalizada', statusId: '6'}
     		];
     	} else if($scope.user.userProfile == 'coordinador') {
     		$scope.filters = [
@@ -41,8 +42,7 @@ angular.module('frontend2App')
     			{filter: 'Asignada', statusId: '3'},
     			{filter: 'Atendida', statusId: '4'},
     			{filter: 'En revisión', statusId: '5'},
-    			{filter: 'Completada', statusId: '6'},
-    			{filter: 'Finalizada', statusId: '7'}
+    			{filter: 'Finalizada', statusId: '6'}
     		];
     	} else {
     		$scope.filters = [
@@ -50,8 +50,7 @@ angular.module('frontend2App')
     			{filter: 'Por atender', statusId: '3'},
     			{filter: 'Atendida', statusId: '4'},
     			{filter: 'En revisión', statusId: '5'},
-    			{filter: 'Completada', statusId: '6'},
-    			{filter: 'Finalizada', statusId: '7'}
+    			{filter: 'Finalizada', statusId: '6'}
     		];
     	}
 
@@ -60,6 +59,23 @@ angular.module('frontend2App')
             	selectChanged();
             }
         })*/
+
+        $scope.category = function() {
+
+        	if($rootScope.obj && $rootScope.obj.fill) {
+        		return 'Filtrando';
+        	}
+
+        	if($stateParams.filter) {
+        		if($stateParams.filter == 2) return 'Por asignar';
+        		else if($stateParams.filter == 3) return 'Asignadas';
+        		else if($stateParams.filter == 4) return 'Atendidas';
+        		else if($stateParams.filter == 5) return 'En revisión';
+        		else return 'Finalizadas';
+        	} else  {
+        		return 'Todas';
+        	}
+        };
 
         $scope.filter = function() {
         	
@@ -70,8 +86,11 @@ angular.module('frontend2App')
 				size: 'md'
 			});
 
-			modalInstance.result.then(function(cad) {
-			   	console.log(cad);
+			modalInstance.result.then(function(response) {
+				$scope.selectedPage = 0;
+				$scope.requests = response.data.requests;
+		    	$scope.pages = response.data.pageCount;
+		    	$rootScope.statusGroups = response.data.statusGroups;
 			}, function() {
 				console.log('Modal dismissed at: ' + new Date());
 			});
@@ -84,7 +103,6 @@ angular.module('frontend2App')
 	  			if(status == 'asignada') return 'asignada';
 	  			if(status == 'atendida') return 'atendida';
 	  			if(status == 'en revision') return 'en revision';
-	  			if(status == 'completada') return 'completada';
 	  			if(status == 'finalizada') return 'finalizada';
 	  		}
 	  		if($scope.user.userProfile == 'coordinador') {
@@ -92,14 +110,12 @@ angular.module('frontend2App')
 	  			if(status == 'asignada') return 'asignada';
 	  			if(status == 'atendida') return 'atendida';
 	  			if(status == 'en revision') return 'en revision';
-	  			if(status == 'completada') return 'completada';
 	  			if(status == 'finalizada') return 'finalizada';
 	  		}
 	  		if($scope.user.userProfile == 'visitador') {
 	  			if(status == 'asignada') return 'pendiente';
 	  			if(status == 'atendida') return 'atendida';
 	  			if(status == 'en revision') return 'en revision';
-	  			if(status == 'completada') return 'completada';
 	  			if(status == 'finalizada') return 'finalizada';
 	  		}
         };
@@ -110,7 +126,15 @@ angular.module('frontend2App')
     	};
 
     	var getRequest = function(page) {
-	  		request.getRequest(page, pageSize, $scope.selectedFilter).then(function(response) {
+
+    		var params = null;
+
+    		if($rootScope.obj) $rootScope.obj.page = page;
+
+    		if($rootScope.obj && $rootScope.obj.fill) params = $rootScope.obj;
+    		else params = {page: page, pageSize: pageSize, statusId: $stateParams.filter};
+
+	  		request.getRequest(params).then(function(response) {
 	    		$scope.requests = response.data.requests;
 	    		$scope.pages = response.data.pageCount;
 	    		$rootScope.statusGroups = response.data.statusGroups;
@@ -128,7 +152,6 @@ angular.module('frontend2App')
 	  			if(status == 'asignada') return 'label-primary';
 	  			if(status == 'atendida') return 'label-info';
 	  			if(status == 'en revision') return 'label-warning';
-	  			if(status == 'completada') return 'label-success';
 	  			if(status == 'finalizada') return 'label-default';
 	  		}
 
@@ -137,7 +160,6 @@ angular.module('frontend2App')
 	  			if(status == 'asignada') return 'label-primary';
 	  			if(status == 'atendida') return 'label-info';
 	  			if(status == 'en revision') return 'label-warning';
-	  			if(status == 'completada') return 'label-success';
 	  			if(status == 'finalizada') return 'label-default';
 	  		}
 
@@ -145,7 +167,6 @@ angular.module('frontend2App')
 	  			if(status == 'asignada') return 'label-danger';
 	  			if(status == 'atendida') return 'label-info';
 	  			if(status == 'en revision') return 'label-warning';
-	  			if(status == 'completada') return 'label-success';
 	  			if(status == 'finalizada') return 'label-default';
 	  		}
 

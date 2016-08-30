@@ -12,9 +12,9 @@ angular.module('frontend2App')
     
     var request = {};
 
-    request.getRequest = function(page, pageSize, statusId) {
+    request.getRequest = function(obj) {
       return vcrestangular.all('me').get('request',
-        {page: page, pageSize: pageSize, statusId: statusId},
+        obj,
         {token: localStorageService.get('token')});
     };
 
@@ -56,6 +56,10 @@ angular.module('frontend2App')
       .withHttpConfig({transformRequest: angular.identity})
       .customPOST(fd, '', {}, {'Content-Type': undefined, token: localStorageService.get('token')})
 
+    };
+
+    request.getRequestQS = function(obj) {
+      return vcrestangular.all('me').get('request', obj, {token: localStorageService.get('token')});
     };
 
     return request;
