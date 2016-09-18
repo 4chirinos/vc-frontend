@@ -18,13 +18,26 @@
       </div>
       <br>
       <div class="container-fluid">
+
         <form class="form-horizontal">
           <div class="form-group">
             <label class="col-sm-1 control-label">Estatus:</label>
             <div class="col-sm-1">
               <!--<a class="form-control-static btn btn-md" ng-class="status(guaranteeLetter.status.status)">{{guaranteeLetter.status.status}}</a>-->
-              <h5><span class="label" ng-class="status(guaranteeLetter.status.status)">{{guaranteeLetter.status.status}}</span></h5>
+              <h5><span class="label" ng-class="statusColor2(guaranteeLetter)">{{statusText2(guaranteeLetter)}}</span></h5>
               <!--<p class="form-control-static img-rounded" ng-class="status(guaranteeLetter.status.status)"><strong>{{guaranteeLetter.status.status}}</strong></a>-->
+            </div>
+            <label class="col-sm-2 control-label">Código carta aval:</label>
+            <div class="col-sm-1">
+              <p class="form-control-static">{{guaranteeLetter.id}}</p>
+            </div>
+            <label class="col-sm-1 control-label">Expide:</label>
+            <div class="col-sm-1">
+              <p class="form-control-static">{{date(guaranteeLetter.startDate)}}</p>
+            </div>
+            <label class="col-sm-1 control-label">Vence:</label>
+            <div class="col-sm-1">
+              <p class="form-control-static">{{date(guaranteeLetter.endDate)}}</p>
             </div>
             <!--<label class="col-sm-2 control-label">Visita asociada #:</label>
             <div class="col-sm-2">
@@ -35,7 +48,7 @@
                 <p class="form-control-static">No posee</p>
               </div>
             </div>-->
-            <div ng-if="canRequest()" class="col-sm-2">
+            <div ng-if="canRequest()" class="col-sm-offset-1 col-sm-2">
               <button ng-click="postRequest()" type="button" class="btn btn-danger btn-md">Solicitar visita</button>
             </div>
           </div>
@@ -76,21 +89,25 @@
 
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title">Póliza asociada #: {{guaranteeLetter.policy.id}}</h3>
+        <h3 class="panel-title">Póliza asociada</h3>
       </div>
       <br>
       <div class="container-fluid">
         <form class="form-horizontal">
           <div class="form-group">
+          <label class="col-sm-2 control-label">Código carta aval:</label>
+            <div class="col-sm-1">
+              <p class="form-control-static">{{guaranteeLetter.policy.id}}</p>
+            </div>
             <label class="col-sm-2 control-label">Cobertura desde:</label>
             <div class="col-sm-2">
               <p class="form-control-static">{{date(guaranteeLetter.policy.startDate)}}</p>
             </div>
-            <label class="col-sm-2 control-label">hasta:</label>
-            <div class="col-sm-2">
+            <label class="col-sm-1 control-label">hasta:</label>
+            <div class="col-sm-1">
               <p class="form-control-static">{{date(guaranteeLetter.policy.endDate)}}</p>
             </div>
-            <label class="col-sm-2 control-label">Prima</label>
+            <label class="col-sm-1 control-label">Prima</label>
             <div class="col-sm-2">
               <p class="form-control-static">Bs. {{guaranteeLetter.policy.cost}}</p>
             </div>

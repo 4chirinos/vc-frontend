@@ -7,7 +7,7 @@
  * # header
  */
 angular.module('frontend2App')
-  	.directive('header', function ($state, toastr, guaranteeletter, session) {
+  	.directive('header', function ($state, toastr, guaranteeletter, session, $uibModal) {
   		return {
       		templateUrl:'views/header.html',
       		restrict: 'E',
@@ -55,6 +55,23 @@ angular.module('frontend2App')
 		              		toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
 		            	}
 		          	});*/
+
+		        };
+
+		        scope.filter = function() {
+
+		        	var modalInstance = $uibModal.open({
+				      	animation: true,
+				      	templateUrl: 'views/filterguarantee.html',
+				      	controller: 'FilterguaranteeCtrl',
+				      	size: 'md'
+			    	});
+
+			    	modalInstance.result.then(function(response) {
+						console.log('Filtrado');
+					}, function() {
+						console.log('Modal dismissed at: ' + new Date());
+					});
 
 		        };
 

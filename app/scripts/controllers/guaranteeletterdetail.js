@@ -8,7 +8,7 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('GuaranteeletterdetailCtrl', function ($rootScope, $scope, $state, $stateParams, toastr, request, session, response) {
+  	.controller('GuaranteeletterdetailCtrl', function ($rootScope, $scope, $state, $stateParams, $uibModal, toastr, request, session, response) {
         
 	    $scope.user = session.getCurrentUser();
 
@@ -82,6 +82,28 @@ angular.module('frontend2App')
 
 	  	};
 
+	  	$scope.statusText2 = function(guarantee) {
+	    	var startDate = guarantee.startDate.split('T')[0].split('-'),
+	    		endDate = guarantee.endDate.split('T')[0].split('-');
+
+	    	if(startDate[0] > endDate[0]) return 'vencida';
+	    	if(startDate[1] > endDate[1]) return 'venvida';
+	    	if(startDate[2] > endDate[2]) return 'vencida';
+
+	      	return guarantee.status.status;
+	    };
+
+	    $scope.statusColor2 = function(guarantee) {
+	    	var startDate = guarantee.startDate.split('T')[0].split('-'),
+	    		endDate = guarantee.endDate.split('T')[0].split('-');
+
+	    	if(startDate[0] > endDate[0]) return 'label-danger';
+	    	if(startDate[1] > endDate[1]) return 'label-danger';
+	    	if(startDate[2] > endDate[2]) return 'label-danger';
+
+	      	return 'label-success';
+	    };
+
     	$scope.status = function(status) {
 
 	  		if(status == 'activada')
@@ -92,9 +114,17 @@ angular.module('frontend2App')
 	  	};
 
 	    $scope.date = function(date) {
-	      	date = date.split('T')[0].split('-');
-	      	var yyyy = date[0], mm = date[1], dd = date[2];
-	      	return dd + '/' + mm + '/' + yyyy;
+
+	    	var currentdate = new Date(date);
+			
+			var datetime = "Last Sync: " + currentdate.getDate() + "/"
+				+ (currentdate.getMonth() + 1)  + "/" 
+				+ currentdate.getFullYear() + " @ "  
+				+ currentdate.getHours() + ":"  
+				+ currentdate.getMinutes() + ":" 
+				+ currentdate.getSeconds();
+
+	      	return currentdate.getDate() + '/' + (currentdate.getMonth() + 1) + '/' + currentdate.getFullYear();
 	    };
 
 	    $scope.gender = function(gender) {
@@ -125,18 +155,72 @@ angular.module('frontend2App')
 	    };
 
 	    $scope.canRequest = function() {
+	    	
+	    	var startDate = $scope.guaranteeLetter.startDate.split('T')[0].split('-'),
+	    		endDate = $scope.guaranteeLetter.endDate.split('T')[0].split('-');
+
+	    	if(startDate[0] > endDate[0]) return false;
+	    	if(startDate[1] > endDate[1]) return false;
+	    	if(startDate[2] > endDate[2]) return false;
+
 	    	if(!$scope.history)
 	    		return true;
-	    	else {
-	    		for(var i = 0; i < $scope.history.length; i++) {
-	    			if($scope.history[i].status.id != 6) return false;
-	    		}
-	    		return true;
+	    	
+	    	for(var i = 0; i < $scope.history.length; i++) {
+	    		if($scope.history[i].status.id != 6) return false;
 	    	}
+
+	    	return true;
 	    };
 
 	    $scope.postRequest = function() {
-	    	request.postRequest({guaranteeLetterId: $scope.guaranteeLetter.id})
+
+	    	var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/comment.html',
+                controller: 'CommentCtrl',
+                size: 'md'
+            });
+
+            modalInstance.result.then(function(coment) {
+		    	//console.log(coment);
+
+		    	request.postRequest({guaranteeLetterId: $scope.guaranteeLetter.id, comment: coment})
+		    	.then(function(response) {
+		    		if(response.data.created) {
+		    			toastr.warning('Otro analista acaba de solicitar esta visita.', 'Atención');
+		    		} else {
+		    			toastr.success('Solicitud de visita generada con éxito.', 'Listo');
+		    		}
+		    		$scope.guaranteeLetter.request = {
+		    			id: response.data.id,
+		    			guaranteeLetterId: response.data.guaranteeLetterId,
+		    			statusId: response.data.statusId,
+		    			coordinatorId: response.data.coordinatorId,
+		    			visitorId: response.data.visitorId,
+		    			analystId: response.data.analystId,
+		    			formId: response.data.formId,
+		    			startDate: response.data.startDate,
+		    			endDate: response.data.endDate,
+		    			status: response.data.status
+		    		};
+
+		    		if(!$scope.history)
+		    			$scope.history = [$scope.guaranteeLetter.request];
+		    		else
+		    			$scope.history.push($scope.guaranteeLetter.request);
+		    		$rootScope.statusGroups = response.data.statusGroups;
+		    	}, function(response) {
+		    		if(response.status == 500) {
+				        toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+				    }
+		    	});
+
+			}, function() {
+			   	console.log('Modal dismissed at: ' + new Date());
+			});
+
+	    	/*request.postRequest({guaranteeLetterId: $scope.guaranteeLetter.id})
 	    	.then(function(response) {
 	    		if(response.data.created) {
 	    			toastr.warning('Otro analista acaba de solicitar esta visita.', 'Atención');
@@ -164,7 +248,7 @@ angular.module('frontend2App')
 	    		if(response.status == 500) {
 			        toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
 			    }
-	    	});
+	    	});*/
 	    };
 
   	});

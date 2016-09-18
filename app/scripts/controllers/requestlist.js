@@ -173,9 +173,17 @@ angular.module('frontend2App')
 	  	};
 
 	  	$scope.date = function(date) {
-	      	date = date.split('T')[0].split('-');
-	      	var yyyy = date[0], mm = date[1], dd = date[2];
-	      	return dd + '/' + mm + '/' + yyyy;
+
+	    	var currentdate = new Date(date);
+			
+			var datetime = "Last Sync: " + currentdate.getDate() + "/"
+				+ (currentdate.getMonth() + 1)  + "/" 
+				+ currentdate.getFullYear() + " @ "  
+				+ currentdate.getHours() + ":"  
+				+ currentdate.getMinutes() + ":" 
+				+ currentdate.getSeconds();
+
+	      	return currentdate.getDate() + '/' + (currentdate.getMonth() + 1) + '/' + currentdate.getFullYear();
 	    };
 
 	    $scope.pageSelected = function(index) {

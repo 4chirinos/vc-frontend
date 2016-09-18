@@ -18,6 +18,10 @@ angular.module('frontend2App')
         {token: localStorageService.get('token')});
     };
 
+    request.getComments = function(id) {
+      return vcrestangular.all('request').get(id + '/comment', {}, {token: localStorageService.get('token')});
+    };
+
     request.postRequest = function(obj) {
         return vcrestangular.all('request').post(obj, {}, {token: localStorageService.get('token')});
     };

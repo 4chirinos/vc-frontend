@@ -93,7 +93,16 @@ angular
 	    	.state('main.home.loaddata.requestdetail', {
 	    		url: '/detalles',
 	    		templateUrl: 'views/requestdetail.html',
-	    		controller: 'RequestdetailCtrl'
+	    		controller: 'RequestdetailCtrl',
+	    		resolve: {
+	    			comments: function($stateParams, request) {
+	    				return request.getComments($stateParams.id).then(function(response) {
+	    					return response;
+	    				}, function(response) {
+	    					return response;
+	    				});
+	    			}
+	    		}
 	    	})
 	    	.state('main.home.loaddata.budget', {
 	    		url: '/presupuesto',
@@ -133,7 +142,41 @@ angular
 	    	.state('main.home.loaddata.decision', {
 	    		url: '/accion',
 	    		templateUrl: 'views/decision.html',
-	    		controller: 'DecisionCtrl'
+	    		controller: 'DecisionCtrl',
+	    		resolve: {
+	    			comments: function($stateParams, request) {
+	    				return request.getComments($stateParams.id).then(function(response) {
+	    					return response;
+	    				}, function(response) {
+	    					return response;
+	    				});
+	    			}
+	    		}
+	    	})
+	    	.state('main.home.guaranteeletterlist', {
+	    		url: '/cartaaval?guaranteeId&status&firstName&lastName&BidentityCard',
+	    		templateUrl: 'views/guaranteelist.html',
+	    		controller: 'GuaranteelistCtrl',
+	    		resolve: {
+	    			response: function($stateParams, guaranteeletter) {
+
+	    				var obj = {
+			  				status: $stateParams.status,
+			  				guaranteeId: $stateParams.guaranteeId,
+			  				firstName: $stateParams.firstName,
+			  				lastName: $stateParams.lastName,
+			  				BidentityCard: $stateParams.BidentityCard,
+			  				page: 1,
+			  				pageSize: 6
+			  			};
+
+		    			return guaranteeletter.getGuaranteeQS(obj).then(function(response) {
+			  				return response;
+			  			}, function(response) {
+			  				return response;
+			  			});
+			  		}
+	    		}
 	    	})
 	    	.state('main.home.guaranteeletterdetail', {
 	    		url: '/cartaaval/:id/detalles',

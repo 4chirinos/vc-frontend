@@ -1,22 +1,57 @@
 <div class="row">
 
-    <div ng-if="user.userProfile == 'visitador'">
-        <center>
-            <button class="btn btn-md btn-info" ng-click="finish()">
-                <span class="glyphicon glyphicon-open"></span> Finalizar
-            </button>
-        </center>
+    <div class="col-sm-8">
+        
+        
+        <div class="alert" ng-class="infoClass()" role="alert">
+            <center>
+            {{info()}}
+            <a ng-if="user.userProfile == 'visitador' && showButton()" ng-click="finish()" href="" class="alert-link"><strong>Finalizar</strong></a>
+            <a ng-if="user.userProfile == 'coordinador' && canReview()" ng-click="review()" href="" class="alert-link"><strong>Revisar</strong></a>
+            <a ng-if="user.userProfile == 'coordinador' && canReview()">|</a>
+            <a ng-if="user.userProfile == 'coordinador' && canReview()" ng-click="authorize()" href="" class="alert-link"><strong>Autorizar</strong></a>
+            </center>
+        </div>
+
+        <!--<div ng-if="user.userProfile == 'visitador' && showButton()">
+            <center>
+                <button class="btn btn-md btn-info" ng-click="finish()">
+                    <span class="glyphicon glyphicon-open"></span> Finalizar
+                </button>
+            </center>
+        </div>
+
+        <div ng-if="user.userProfile == 'coordinador' && canReview()">
+            <center>
+                <button class="btn btn-md btn-info" ng-click="review()">
+                    <span class="glyphicon glyphicon-open"></span> A revisión
+                </button>
+                <button class="btn btn-md btn-info" ng-click="authorize()">
+                    <span class="glyphicon glyphicon-open"></span> Autorizar
+                </button>
+            </center>
+        </div>-->
+
     </div>
 
-    <div ng-if="user.userProfile == 'coordinador'">
-        <center>
-            <button class="btn btn-md btn-info" ng-click="review()">
-                <span class="glyphicon glyphicon-open"></span> A revisión
-            </button>
-            <button class="btn btn-md btn-info" ng-click="authorize()">
-                <span class="glyphicon glyphicon-open"></span> Autorizar
-            </button>
-        </center>
+    <div class="col-sm-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Historial de observaciones:</div>
+            <div id="box" class="panel-body" style="overflow-y:scroll; overflow-x:hidden; height:300px;">
+                <div ng-repeat="comment in comments">
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <strong>{{comment.commenter.person.firstName}} {{comment.commenter.person.lastName}} ({{comment.commenter.person.profile.profile}}):</strong>
+                            <p class="text-justify">{{comment.comment}}</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <h6 class="text-right"><span class="label label-primary">{{date(comment.date)}}</span></h6>
+                            <!--<h6 class="text-right">{{hour(comment.date)}}</h6>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>

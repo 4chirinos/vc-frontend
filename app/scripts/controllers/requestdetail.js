@@ -8,12 +8,13 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('RequestdetailCtrl', function ($rootScope, $scope, $stateParams, $uibModal, $state, toastr, session, user, request, budget, response, baseUrl) {
+  	.controller('RequestdetailCtrl', function ($rootScope, $scope, $stateParams, $uibModal, $state, toastr, session, user, request, budget, response, baseUrl, comment, comments) {
     	
     	var pageSize = 10;
 
     	$scope.user = session.getCurrentUser();
     	$scope.request = response.data;
+    	$scope.comments = comments.data.comment;
 
     	$scope.downloadBudget = function() {
   			window.open(baseUrl + '/document/budget/' + $scope.request.guaranteeLetter.budget.id);
@@ -74,29 +75,212 @@ angular.module('frontend2App')
 
 	  	};
 
-	  	$scope.date = function(date) {
-		    date = date.split('T')[0].split('-');
-		    var yyyy = date[0], mm = date[1], dd = date[2];
-		    return dd + '/' + mm + '/' + yyyy;
-		};
-
 		$scope.gender = function(gender) {
 		   	if(gender == 'M') return 'Masculino';
 		    return 'Femenino';
 		};
 
-		$scope.age = function(date) {
-		    var today = new Date();
-		    date = date.split('T')[0].split('-');
-		    var yyyy = date[0], mm = date[1], dd = date[2];
+		$scope.date = function(date) {
 
-		    var age = today.getFullYear() - yyyy;
+	    	var currentdate = new Date(date);
+			
+			var datetime = "Last Sync: " + currentdate.getDate() + "/"
+				+ (currentdate.getMonth() + 1)  + "/" 
+				+ currentdate.getFullYear() + " @ "  
+				+ currentdate.getHours() + ":"  
+				+ currentdate.getMinutes() + ":" 
+				+ currentdate.getSeconds();
 
-		    var aux1 = today.getMonth() + 1 - mm, aux2 = today.getDay() - dd;
+	      	return currentdate.getDate() + '/' + (currentdate.getMonth() + 1) + '/' + currentdate.getFullYear();
+	    };
 
-		    if(aux1 > 0 || (aux1 == 0 && aux2 >= 0)) age++;
+        $scope.hour = function(date) {
+            var currentdate = new Date(response.data.startDate);
+			
+			var datetime = "Last Sync: " + currentdate.getDate() + "/"
+				+ (currentdate.getMonth() + 1)  + "/" 
+				+ currentdate.getFullYear() + " @ "  
+				+ currentdate.getHours() + ":"  
+				+ currentdate.getMinutes() + ":" 
+				+ currentdate.getSeconds();
 
-		    return age;
-		};
+	      	return currentdate.getHours() + ':' + currentdate.getMinutes(); 
+        };
+
+        $scope.info = function() {
+            if($scope.user.userProfile == 'visitador') {
+                if($scope.request.status.status == 'atendida') {
+                    return 'Solicitud atendida.';
+                } else if($scope.request.status.status == 'en revision') {
+                    return 'Solicitud de visita en revisión.';
+                } else if($scope.request.status.status == 'asignada') {
+                    return 'Solicitud de visita pendiente.';
+                }
+            }
+            if($scope.user.userProfile == 'coordinador') {
+                if($scope.request.status.status == 'atendida') {
+                    return 'Solicitud atendida.';
+                } else if($scope.request.status.status == 'en revision') {
+                    return 'Solicitud de visita en revisión.';
+                } else if($scope.request.status.status == 'finalizada') {
+                    return 'Solicitud de visita completada.';
+                } else if($scope.request.status.status == 'por asignar') {
+                	return 'Solicitud de visita por asignar.';
+                } else if($scope.request.status.status == 'asignada') {
+                	return 'Solicitud de visita asignada.';
+                }
+            }
+            if($scope.user.userProfile == 'analista') {
+                if($scope.request.status.status == 'atendida') {
+                    return 'Solicitud atendida.';
+                } else if($scope.request.status.status == 'en revision') {
+                    return 'Solicitud de visita en revisión.';
+                } else if($scope.request.status.status == 'finalizada') {
+                    return 'Solicitud de visita completada.';
+                } else if($scope.request.status.status == 'por asignar') {
+                	return 'Solicitud de visita por asignar.';
+                }
+            }
+        };
+
+        $scope.infoClass = function() {
+            if($scope.request.status.status == 'atendida') return 'alert-info';
+            if($scope.request.status.status == 'en revision') return 'alert-danger';
+            if($scope.request.status.status == 'asignada') return 'alert-danger';
+            if($scope.request.status.status == 'finalizada') return 'alert-success';
+            if($scope.request.status.status == 'por asignar') return 'alert-danger';
+        };
+
+        $scope.canReview = function() {
+            if($scope.request.status.status == 'atendida') return true;
+            return false;
+        };
+
+        $scope.showButton = function() {
+            if($scope.request.status.status == 'asignada' || $scope.request.status.status == 'en revision')
+            	return true;
+            return false;
+        };
+
+        $scope.canAssign = function() {
+        	if($scope.request.status.status == 'por asignar') return true;
+        };
+
+        $scope.finish = function() {
+            
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/comment.html',
+                controller: 'CommentCtrl',
+                size: 'md'
+            });
+
+            modalInstance.result.then(function(coment) {
+
+                if(coment) {
+                    comment.post({requestId: $stateParams.id, comment: coment}).then(function(response1) {
+                        
+                        request.getComments($stateParams.id).then(function(r2) {
+                            $scope.comments = r2.data.comment;
+                        }, function(r2) {
+                            console.log('error trayendo la lista de observaciones');
+                        });
+
+                        //comments.data.comment.push(response1.data);
+                    }, function(response1) {
+                        console.log('error 500 con la observación');
+                    });
+                }
+                
+                request.partialUpdate({id: $stateParams.id, statusId: 4}).then(function(response1) {
+                    $scope.request = response1.data; // DETALLE AQUI Y ABAJO. ACTUALIZAR EL SCOPE.REQUEST Y EL RESPONSE.DATA
+                    response.data = response1.data;
+                    toastr.success('Finalización hecha con éxito.', 'Listo');
+                    $rootScope.statusGroups = response1.data.statusGroups;
+                }, function(response1) {
+                    toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+                });
+
+            }, function() {
+                console.log('Modal dismissed at: ' + new Date());
+            });
+
+        };
+
+        $scope.review = function() {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/comment.html',
+                controller: 'CommentCtrl',
+                size: 'md'
+            });
+
+            modalInstance.result.then(function(coment) {
+
+                if(coment) {
+                    comment.post({requestId: $stateParams.id, comment: coment}).then(function(response1) {
+                        request.getComments($stateParams.id).then(function(r2) {
+                            $scope.comments = r2.data.comment;
+                        }, function(r2) {
+                            console.log('error trayendo la lista de observaciones');
+                        });
+                    }, function(response1) {
+                        console.log('error 500 con la observación');
+                    });
+                }
+                
+                request.partialUpdate({id: $stateParams.id, statusId: 5})
+                .then(function(response1) {
+                    $scope.request = response1.data;
+                    toastr.success('Envío a revisión hecho con éxito.', 'Listo');
+                    $rootScope.statusGroups = response1.data.statusGroups;
+                }, function(response) {
+                    toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+                });
+
+            }, function() {
+                console.log('Modal dismissed at: ' + new Date());
+            });
+
+        };
+
+        $scope.authorize = function() {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/comment.html',
+                controller: 'CommentCtrl',
+                size: 'md'
+            });
+
+            modalInstance.result.then(function(coment) {
+
+                if(coment) {
+                    comment.post({requestId: $stateParams.id, comment: coment}).then(function(response1) {
+                        request.getComments($stateParams.id).then(function(r2) {
+                            $scope.comments = r2.data.comment;
+                        }, function(r2) {
+                            console.log('error trayendo la lista de observaciones');
+                        });
+                    }, function(response1) {
+                        console.log('error 500 con la observación');
+                    });
+                }
+                
+                request.partialUpdate({id: $stateParams.id, statusId: 6})
+                .then(function(response1) {
+                    $scope.request = response1.data;
+                    toastr.success('Autorización hecha con éxito.', 'Listo');
+                    $rootScope.statusGroups = response1.data.statusGroups;
+                }, function(response1) {
+                    toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+                });
+
+            }, function() {
+                console.log('Modal dismissed at: ' + new Date());
+            });
+
+        };
 
   });

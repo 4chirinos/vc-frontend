@@ -1,9 +1,9 @@
 		<!--<a><strong><i class="glyphicon glyphicon-dashboard"></i> Solicitudes</strong></a>-->
-		<a href="" ng-click="filter()"><strong><i class="glyphicon glyphicon-search"></i> Búsqueda de solicitudes de visita</strong></a>
+		<a><strong><i class="glyphicon glyphicon-search"></i> Resultados encontrados: {{guarantees.length}}</strong></a>
 		<hr>
 		<div class="panel panel-primary">
 	        <div class="panel-heading">
-	            <h2>Solicitudes de visitas - {{category()}}</h2>
+	            <h2>Cartas avales</h2>
 	        </div>
 
 	        <div class="panel-body">
@@ -25,49 +25,42 @@
 	                </nav>
 	            </center>
 
-	            <!--<div class="row">
-		            <form class="form-horizontal">
-						   <div class="form-group">
-							   <label class="col-sm-1 control-label">Filtro:</label>
-							   <div class="col-sm-2">
-									<select ng-model="selectedFilter" ng-options="filter.statusId as filter.filter for filter in filters" ng-change="selectChanged()"></select>
-							   </div>
-						</div>
-					</form>
-				</div>-->
-
-				<!--<div class="row">
-		            <div class="col-sm-3">
-						<a href="" ng-click="filter()"><strong><i class="glyphicon glyphicon-wrench"></i> Opciones de filtrado</strong></a>
-					</div>
-				</div>-->
-
 				<br>
 
 	            <div class="table-responsive">
 	                <table class="table table-hover table-condensed">
 
 	                    <tr>
-	                    	<th><center>Código de visita</center></th>
-	                        <th><center>Código carta aval</center></th>
-	                        <th><center>Fecha solicitud</center></th>
+	                    	<th><center>Código carta aval</center></th>
 	                        <th><center>Estatus</center></th>
+	                        <th><center>Póliza asociada</center></th>
+	                        <th><center>CI beneficiario</center></th>
+	                        <th><center>Nombre beneficiario</center></th>
+	                        <th><center>Apellido beneficiario</center></th>
 	                        <th><center>Acción</center></th>
 	                    </tr>
 
 	                    
-	                    <tr ng-repeat="request in requests">
-	                    	<td><center>{{request.id}}</center></td>
-	                        <td><center>{{request.guaranteeLetter.id}}</center></td>
-	                        <td><center>{{date(request.startDate)}}</center></td>
-	                        <td><center><span class="label" ng-class="status(request.status.status)">{{statusText(request.status.status)}}</span></center></td>
+	                    <tr ng-repeat="guarantee in guarantees">
+	                    	<td><center>{{guarantee.id}}</center></td>
+	                        <td><center><span class="label" ng-class="statusColor(guarantee)">{{statusText(guarantee)}}</span></center></td>
+	                        <td><center>{{guarantee.policyId}}</center></td>
+	                        <td><center>{{guarantee.beneficiary.identityCard}}</center></td>
+	                        <td><center>{{guarantee.beneficiary.firstName}}</center></td>
+	                        <td><center>{{guarantee.beneficiary.lastName}}</center></td>
+	                        <td>
+	                        	<center>
+	                        		<button ng-click="detail(guarantee.id)" type="button" class="btn btn-primary btn-xs">Ver</button>
+	                        	</center>
+	                        </td>
+	                        <!--<td><center><span class="label" ng-class="status(request.status.status)">{{statusText(request.status.status)}}</span></center></td>-->
 	                        <!--<td><center>status({{request.status.status}})</center></td>-->
 	                        <!--<td><center><p style="width: 100px" class="img-rounded" ng-class="status(request.status.status)">{{request.status.status}}</p></center></td>-->
-	                        <td>
+	                        <!--<td>
 	                        	<center>
 	                        		<button ng-click="detail(request.id)" type="button" class="btn btn-primary btn-xs">Ver</button>
 	                        	</center>
-	                        </td>
+	                        </td>-->
 	                    </tr>
 	              
 	                </table>
