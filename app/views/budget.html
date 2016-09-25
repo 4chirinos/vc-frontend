@@ -11,7 +11,7 @@
 	                        <th><center>Descripción</center></th>
 	                        <th><center>Cantidad</center></th>
 	                        <th><center>Costo Bs</center></th>
-	                        <th ng-if="user.userProfile == 'visitador'"><center>Acción</center></th>
+	                        <th ng-if="user.userProfile == 'visitador' && canEdit()"><center>Acción</center></th>
 	                    </tr>
 
 	                    
@@ -20,7 +20,7 @@
 	                        <td><center>{{item.description}}</center></td>
 	                        <td><center>{{item.quantity}}</center></td>
 	                        <td><center>{{item.cost}}</center></td>
-	                        <td ng-if="user.userProfile == 'visitador'">
+	                        <td ng-if="user.userProfile == 'visitador' && canEdit()">
 	                        	<center>
 	                        		<button ng-click="edit(item, $index)" type="button" class="btn btn-warning btn-xs">Editar</button>
 	                        	</center>

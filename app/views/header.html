@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <!--<input ng-model="code" type="text" class="form-control" placeholder={{placeholder}} required>-->
                 </div>
-                <button ng-click="filter()" type="button" class="btn btn-link"><i class="glyphicon glyphicon-search"></i><strong> Búsqueda de carta aval</strong></button>
+                <button ng-if="user.userProfile == 'analista'" ng-click="filter()" type="button" class="btn btn-link"><i class="glyphicon glyphicon-search"></i><strong> Búsqueda de carta aval</strong></button>
             </form>
         </div>
         <div class="navbar-collapse collapse">

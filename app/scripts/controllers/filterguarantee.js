@@ -19,6 +19,14 @@ angular.module('frontend2App')
 
       $scope.status = '';
 
+      $scope.reset = function() {
+        $scope.guaranteeId = '';
+        $scope.status = '';
+        $scope.firstName = '';
+        $scope.lastName = '';
+        $scope.BidentityCard = '';
+      };
+
   		$scope.filter = function() {
 
   			$state.go('main.home.guaranteeletterlist',
@@ -27,7 +35,7 @@ angular.module('frontend2App')
   					status: $scope.status,
   					firstName: $scope.firstName,
   					lastName: $scope.lastName,
-  					BidentityCard: $scope.identityCard
+  					BidentityCard: $scope.BidentityCard
   				}
   			);
 

@@ -1,4 +1,4 @@
-<div class="modal-header">
+<div class="modal-header modal-header-primary">
     <h3 class="modal-title">Asignación de visita clínica</h3>
 </div>
 <div class="modal-body">
@@ -34,24 +34,28 @@
 	                        <th><center>Cédula</center></th>
 	                        <th><center>Nombre</center></th>
 	                        <th><center>Visitas asignadas</center></th>
-	                        <th><center>Acción</center></th>
+	                        <th><center>Asignar</center></th>
 	                    </tr>
 
 	                    
-	                    <tr ng-repeat="visitor in visitors">
+	                    <tr ng-repeat="visitor in visitors track by $index">
 	                    	<td><center>{{visitor.person.identityCard}}</center></td>
 	                        <td><center>{{visitor.person.firstName}} {{visitor.person.lastName}}</center></td>
 	                        <td><center>{{visitor.assignments}}</center></td>
-	                        <td><center><button ng-click="assign(visitor)" type="button" class="btn btn-warning btn-xs">Asignar</button></center></td>
+	                        <!--<td><center><button ng-click="assign(visitor)" type="button" class="btn btn-warning btn-xs">Asignar</button></center></td>-->
+	                        <td><center><label><input type="radio" ng-model="$parent.visitor" ng-value="visitor"></label></center></td>
 	                    </tr>
 	                   
 	                </table>
 	            </div>
+
+	        	<textarea class="form-control" ng-model="coment" rows="1" id="comment" placeholder="Ingrese observación aquí. (Opcional)"></textarea>
+
 	        </div>
 	    </div>
 	</div>
 </div>
 <div class="modal-footer">
-    <!--<button class="btn btn-primary" type="button" ng-click="ok()">OK</button>-->
+    <button class="btn btn-primary" type="button" ng-click="ok()" ng-disabled="canAssign()">Asignar</button>
     <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
 </div>

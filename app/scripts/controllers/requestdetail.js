@@ -48,7 +48,24 @@ angular.module('frontend2App')
 			      	}
 		    	});
 
-		  		modalInstance.result.then(function(visitor) {
+		  		modalInstance.result.then(function(data) {
+                    var visitor = data.visitor, coment = data.coment;
+                    //console.log(coment);
+                    if(coment) {
+                        comment.post({requestId: $stateParams.id, comment: coment}).then(function(response1) {
+                            
+                            request.getComments($stateParams.id).then(function(r2) {
+                                $scope.comments = r2.data.comment;
+                            }, function(r2) {
+                                console.log('error trayendo la lista de observaciones');
+                            });
+
+                            //comments.data.comment.push(response1.data);
+                        }, function(response1) {
+                            console.log('error 500 con la observación');
+                        });
+                    }
+
 		  			request.partialUpdate({id: $scope.request.id, visitorId: visitor.id, statusId: 3}).then(function(response) {
 		  				if(response.data.created) {
 		  					toastr.warning('Otro coordinador acaba de asignar esta visita.', 'Atención');
@@ -94,8 +111,22 @@ angular.module('frontend2App')
 	      	return currentdate.getDate() + '/' + (currentdate.getMonth() + 1) + '/' + currentdate.getFullYear();
 	    };
 
+        $scope.age = function(date) {
+            var today = new Date();
+            date = date.split('T')[0].split('-');
+            var yyyy = date[0], mm = date[1], dd = date[2];
+
+            var age = today.getFullYear() - yyyy;
+
+            var aux1 = today.getMonth() + 1 - mm, aux2 = today.getDay() - dd;
+
+            if(aux1 > 0 || (aux1 == 0 && aux2 >= 0)) age++;
+
+            return age;
+        };
+
         $scope.hour = function(date) {
-            var currentdate = new Date(response.data.startDate);
+            var currentdate = new Date(date);
 			
 			var datetime = "Last Sync: " + currentdate.getDate() + "/"
 				+ (currentdate.getMonth() + 1)  + "/" 
@@ -115,6 +146,8 @@ angular.module('frontend2App')
                     return 'Solicitud de visita en revisión.';
                 } else if($scope.request.status.status == 'asignada') {
                     return 'Solicitud de visita pendiente.';
+                } else if($scope.request.status.status == 'finalizada') {
+                    return 'Solicitud de visita completada.';
                 }
             }
             if($scope.user.userProfile == 'coordinador') {
@@ -232,7 +265,8 @@ angular.module('frontend2App')
                 
                 request.partialUpdate({id: $stateParams.id, statusId: 5})
                 .then(function(response1) {
-                    $scope.request = response1.data;
+                    $scope.request = response1.data; // DETALLE AQUI Y ABAJO. ACTUALIZAR EL SCOPE.REQUEST Y EL RESPONSE.DATA
+                    response.data = response1.data;
                     toastr.success('Envío a revisión hecho con éxito.', 'Listo');
                     $rootScope.statusGroups = response1.data.statusGroups;
                 }, function(response) {
@@ -270,7 +304,8 @@ angular.module('frontend2App')
                 
                 request.partialUpdate({id: $stateParams.id, statusId: 6})
                 .then(function(response1) {
-                    $scope.request = response1.data;
+                    $scope.request = response1.data; // DETALLE AQUI Y ABAJO. ACTUALIZAR EL SCOPE.REQUEST Y EL RESPONSE.DATA
+                    response.data = response1.data;
                     toastr.success('Autorización hecha con éxito.', 'Listo');
                     $rootScope.statusGroups = response1.data.statusGroups;
                 }, function(response1) {

@@ -124,8 +124,8 @@ angular
 	    		templateUrl: 'views/survey.html',
 	    		controller: 'SurveyCtrl',
 	    		resolve: {
-	    			surveyData: function($stateParams, survey) {
-	    				return survey.getByRequestId($stateParams.id)
+	    			formData: function($stateParams, request) {
+	    				return request.getForm($stateParams.id)
 	    				.then(function(response) {
 	    					return response;
 	    				}, function(response) {

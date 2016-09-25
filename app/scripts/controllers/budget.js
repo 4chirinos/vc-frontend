@@ -8,9 +8,15 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('BudgetCtrl', function ($rootScope, $scope, $uibModal, toastr, budgetData, session) {
+  	.controller('BudgetCtrl', function ($rootScope, $scope, $uibModal, toastr, budgetData, session, response) {
 
     	$scope.budget = budgetData.data;
+
+    	$scope.canEdit = function() {
+    		if(response.data.statusId == '3' || response.data.statusId == '5')
+    			return true;
+    		return false;
+    	};
 
     	$scope.user = session.getCurrentUser();
 

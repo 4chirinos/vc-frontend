@@ -18,6 +18,7 @@ angular.module('frontend2App')
 
 	    var getVisitors = function(page) {
 	  		user.getVisitors(page, pageSize).then(function(response) {
+	  			$scope.visitor = null;
 	    		$scope.visitors = response.data.users;
 	    		$scope.pages = response.data.pageCount;
 	    		$rootScope.statusGroups = response.data.statusGroups;
@@ -58,9 +59,15 @@ angular.module('frontend2App')
 	    };
 
 
-		/*$scope.ok = function () {
-			$uibModalInstance.close($scope.selected.item);
-		};*/
+		$scope.ok = function () {
+			//onsole.log($scope.coment);
+			$uibModalInstance.close({visitor: $scope.visitor, coment: $scope.coment});
+		};
+
+		$scope.canAssign = function() {
+			if($scope.visitor) return false;
+			return true;
+		};
 
 		$scope.cancel = function () {
 			$uibModalInstance.dismiss('cancel');

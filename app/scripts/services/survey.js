@@ -16,6 +16,10 @@ angular.module('frontend2App')
       return vcrestangular.all('form').get('', {requestId: id}, {token: localStorageService.get('token')});
     };
 
+    survey.postAnswer = function(id, obj) {
+      return vcrestangular.all('request/' + id + '/answer').post({data: obj}, {}, {token: localStorageService.get('token')});
+    };
+
     survey.postDocument = function(id, files) {
 
       var fd = new FormData();
