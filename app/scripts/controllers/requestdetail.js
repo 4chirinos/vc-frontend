@@ -172,6 +172,8 @@ angular.module('frontend2App')
                     return 'Solicitud de visita completada.';
                 } else if($scope.request.status.status == 'por asignar') {
                 	return 'Solicitud de visita por asignar.';
+                } else if($scope.request.status.status == 'asignada') {
+                    return 'Solicitud por atender.'
                 }
             }
         };

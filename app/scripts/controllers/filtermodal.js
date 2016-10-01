@@ -8,7 +8,7 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-	.controller('FiltermodalCtrl', function ($scope, $rootScope, $uibModalInstance, toastr, session, request) {
+	.controller('FiltermodalCtrl', function ($scope, $state, $rootScope, $uibModalInstance, toastr, session, request) {
 
 		$scope.user = session.getCurrentUser();
 
@@ -78,19 +78,46 @@ angular.module('frontend2App')
 
 		$scope.filter = function () {
 			//$uibModalInstance.close('filtered');
+
+      var date1 = $rootScope.dt1, date2 = $rootScope.dt2;
+
+      if($rootScope.dt1) {
+        date1 = new Date($rootScope.dt1);
+        date1 = date1.getFullYear() + '-' + (date1.getMonth() + 1) + '-' + date1.getDate();
+      }
+
+      if($rootScope.dt2) {
+        date2 = new Date($rootScope.dt2);
+        date2 = date2.getFullYear() + '-' + (date2.getMonth() + 1) + '-' + date2.getDate();
+      }
+
       $rootScope.obj = {
-        sd1: $rootScope.dt1,
-        sd2: $rootScope.dt2,
+        sd1: date1,
+        sd2: date2,
         guaranteeLetterId: $rootScope.guaranteeId,
         requestId: $rootScope.requestId,
         statusId: $scope.selectedFilter,
         page: 1,
         pageSize: 6
       };
+      
+      //$uibModalInstance.close();
+
+      /*$state.go('main.home.requestlist', {
+        guaranteeLetterId: $rootScope.guaranteeId,
+        requestId: $rootScope.requestId,
+        statusId: $scope.selectedFilter,
+        page: 1,
+        pageSize: 6,
+        sd1: date1,
+        sd2: date2
+      });*/
 
       if($rootScope.obj.sd1 || $rootScope.obj.sd2 || $rootScope.obj.guaranteeLetterId || $rootScope.obj.requestId || $rootScope.obj.statusId) {
         $rootScope.obj.fill = true;
+        //console.log('hola');
       } else {
+        //console.log('chao');
         $rootScope.obj.fill = false;
       }
       

@@ -47,7 +47,7 @@ angular
 	    		abstract: true
 		    })
 	    	.state('main.home.requestlist', {
-	    		url: '/solicitud',
+	    		url: '/solicitud?statusId&guaranteeLetterId&requestId&page&pageSize&sd1&sd2', /*'/cartaaval?guaranteeId&status&firstName&lastName&BidentityCard'*/
 	    		templateUrl: 'views/requestlist.html',
 	    		controller: 'RequestlistCtrl',
 	    		params: {
@@ -69,6 +69,22 @@ angular
 						  		return response;
 						  	});
 	    				}
+
+	    				/*var obj = {
+					    	guaranteeLetterId: $stateParams.guaranteeLetterId,
+					        requestId: $stateParams.requestId,
+					        statusId: $stateParams.statusId,
+					        page: 1,
+					        pageSize: 6,
+					        sd1: $stateParams.sd1,
+					        sd2: $stateParams.sd2
+					    };
+
+	    				return request.getRequestQS(obj).then(function(response) {
+					    	return response;
+						}, function(response) {
+						  	return response;
+						});*/
 
 	    			}
 	    		}
@@ -161,7 +177,7 @@ angular
 	    			response: function($stateParams, guaranteeletter) {
 
 	    				var obj = {
-			  				status: $stateParams.status,
+			  				statusId: $stateParams.status,
 			  				guaranteeId: $stateParams.guaranteeId,
 			  				firstName: $stateParams.firstName,
 			  				lastName: $stateParams.lastName,

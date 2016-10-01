@@ -10,7 +10,7 @@
 angular.module('frontend2App')
 	.controller('GuaranteelistCtrl', function ($scope, $rootScope, $stateParams, $state, toastr, session, guaranteeletter, response) {
 
-		var pageSize = 6;
+		var pageSize = 1;
 	    $scope.selectedPage = 0;
 
 	    $scope.user = session.getCurrentUser();

@@ -62,9 +62,9 @@ angular.module('frontend2App')
 
         $scope.category = function() {
 
-        	if($rootScope.obj && $rootScope.obj.fill) {
+        	/*if($stateParams.requestId || $stateParams.statusId || $stateParams.guaranteeLetterId || $stateParams.sd1 || $stateParams.sd2) {
         		return 'Filtrando';
-        	}
+        	}*/
 
         	if($stateParams.filter) {
         		if($stateParams.filter == 2) return 'Por asignar';
@@ -72,12 +72,28 @@ angular.module('frontend2App')
         		else if($stateParams.filter == 4) return 'Atendidas';
         		else if($stateParams.filter == 5) return 'En revisión';
         		else return 'Finalizadas';
+        	}
+
+        	if($rootScope.obj && $rootScope.obj.fill) {
+        		return 'Filtrando';
+        	}
+
+        	/*if($stateParams.filter) {
+        		if($stateParams.filter == 2) return 'Por asignar';
+        		else if($stateParams.filter == 3) return 'Asignadas';
+        		else if($stateParams.filter == 4) return 'Atendidas';
+        		else if($stateParams.filter == 5) return 'En revisión';
+        		else return 'Finalizadas';
         	} else  {
         		return 'Todas';
-        	}
+        	}*/
+
+        	return 'Todas';
         };
 
         $scope.filter = function() {
+
+        	//$stateParams.filter = '';
         	
         	var modalInstance = $uibModal.open({
 				animation: true,
@@ -87,6 +103,7 @@ angular.module('frontend2App')
 			});
 
 			modalInstance.result.then(function(response) {
+				$stateParams.filter = '';
 				$scope.selectedPage = 0;
 				$scope.requests = response.data.requests;
 		    	$scope.pages = response.data.pageCount;

@@ -30,8 +30,24 @@ angular.module('frontend2App')
             })
 
             $scope.changeFilter = function(filter) {
-              if($rootScope.obj) $rootScope.obj.fill = false;
-              $state.go('main.home.requestlist', {filter: filter}, {reload: true}); //second parameter is for $stateParams
+              //if($rootScope.obj) $rootScope.obj.fill = false;
+              /*var obj = {
+                guaranteeLetterId: null,
+                requestId: null,
+                statusId: filter,
+                page: 1,
+                pageSize: 6,
+                sd1: null,
+                sd2: null
+              };*/
+              /*$rootScope.dt1 = null;
+              $rootScope.dt2 = null;
+              $rootScope.guaranteeId = null;
+              $rootScope.guaranteeId = null;
+              $rootScope.requestId = null;
+              $rootScope.selectedFilter = '';*/
+              $state.go('main.home.requestlist', {filter: filter}, {reload: true});
+              //$state.go('main.home.requestlist', {filter: filter}, {reload: true}); //second parameter is for $stateParams
             };
 
           }
