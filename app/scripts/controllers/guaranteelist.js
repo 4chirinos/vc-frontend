@@ -8,10 +8,12 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-	.controller('GuaranteelistCtrl', function ($scope, $rootScope, $stateParams, $state, toastr, session, guaranteeletter, response) {
+	.controller('GuaranteelistCtrl', function ($scope, $rootScope, $stateParams, $state, $uibModal, toastr, session, guaranteeletter, response) {
 
-		var pageSize = 1;
+		var pageSize = 6;
 	    $scope.selectedPage = 0;
+
+	    $scope.params = null;
 
 	    $scope.user = session.getCurrentUser();
 
@@ -24,7 +26,7 @@ angular.module('frontend2App')
 
 		var getGuarantee = function(page) {
 
-    		var params = {
+    		/*var params = {
     			page: page,
     			pageSize: pageSize,
     			status: $stateParams.status,
@@ -32,7 +34,24 @@ angular.module('frontend2App')
 			  	firstName: $stateParams.firstName,
 			  	lastName: $stateParams.lastName,
 			  	BidentityCard: $stateParams.BidentityCard
-    		};
+    		};*/
+
+    		/*if($scope.params) $scope.params.page = page;
+    		else {
+    			$scope.params = {page: page, pageSize: pageSize, statusId: $stateParams.statusId};
+    		}*/
+
+    		var params = {
+				guaranteeId: $stateParams.guaranteeId,
+				requestId: $stateParams.requestId,
+				statusId: $stateParams.selectedFilter,
+				policyId: $stateParams.policyId,
+				firstName: $stateParams.firstName,
+				lastName: $stateParams.lastName,
+				BidentityCard: $stateParams.BidentityCard,
+				page: page,
+				pageSize: pageSize
+			};
 
 	  		guaranteeletter.getGuaranteeQS(params).then(function(response) {
 	  			$scope.guarantees = response.data.guaranteeLetter;
@@ -44,6 +63,36 @@ angular.module('frontend2App')
 		        }
 		  	});
 	  	};
+
+	  	$scope.filter = function() {
+
+		    var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'views/filterguarantee.html',
+				controller: 'FilterguaranteeCtrl',
+				size: 'md'
+			});
+
+			modalInstance.result.then(function(/*response*/) {
+				/*$scope.params = response;
+				$scope.params.page = 1;
+
+				guaranteeletter.getGuaranteeQS($scope.params).then(function(response) {
+		  			$scope.guarantees = response.data.guaranteeLetter;
+		  			$scope.pages = response.data.pageCount;
+		  			$scope.selectedPage = 0;
+		  			$rootScope.statusGroups = response.data.statusGroups;
+			  	}, function(response) {
+			  		if(response.status == 500) {
+			        	toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+			        }
+			  	});*/
+
+			}, function() {
+				console.log('Modal dismissed at: ' + new Date());
+			});
+
+		};
 
 	  	$scope.pageSelected = function(index) {
 	    	$scope.selectedPage = index;

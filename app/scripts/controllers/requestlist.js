@@ -66,17 +66,23 @@ angular.module('frontend2App')
         		return 'Filtrando';
         	}*/
 
-        	if($stateParams.filter) {
-        		if($stateParams.filter == 2) return 'Por asignar';
-        		else if($stateParams.filter == 3) return 'Asignadas';
-        		else if($stateParams.filter == 4) return 'Atendidas';
-        		else if($stateParams.filter == 5) return 'En revisión';
+        	/*if($scope.params && ($scope.params.sd1 || $scope.params.sd2 || $scope.params.guaranteeLetterId || $scope.params.requestId || $scope.params.statusId))
+        		return 'Resultados de la búsqueda';*/
+
+        	if($stateParams.guaranteeLetterId || $stateParams.requestId || $stateParams.sd1 || $stateParams.sd2)
+        		return 'Resultados de la búsqueda';
+
+        	if($stateParams.statusId) {
+        		if($stateParams.statusId == 2) return 'Por asignar';
+        		else if($stateParams.statusId == 3) return 'Asignadas';
+        		else if($stateParams.statusId == 4) return 'Atendidas';
+        		else if($stateParams.statusId == 5) return 'En revisión';
         		else return 'Finalizadas';
         	}
 
-        	if($rootScope.obj && $rootScope.obj.fill) {
+        	/*if($rootScope.obj && $rootScope.obj.fill) {
         		return 'Filtrando';
-        	}
+        	}*/
 
         	/*if($stateParams.filter) {
         		if($stateParams.filter == 2) return 'Por asignar';
@@ -102,12 +108,13 @@ angular.module('frontend2App')
 				size: 'md'
 			});
 
-			modalInstance.result.then(function(response) {
+			modalInstance.result.then(function(/*r*/) {
+				/*$scope.params = r.params;
 				$stateParams.filter = '';
 				$scope.selectedPage = 0;
-				$scope.requests = response.data.requests;
-		    	$scope.pages = response.data.pageCount;
-		    	$rootScope.statusGroups = response.data.statusGroups;
+				$scope.requests = r.response.data.requests;
+		    	$scope.pages = r.response.data.pageCount;
+		    	$rootScope.statusGroups = r.response.data.statusGroups;*/
 			}, function() {
 				console.log('Modal dismissed at: ' + new Date());
 			});
@@ -144,12 +151,28 @@ angular.module('frontend2App')
 
     	var getRequest = function(page) {
 
-    		var params = null;
+    		/*var params = null;
 
     		if($rootScope.obj) $rootScope.obj.page = page;
 
     		if($rootScope.obj && $rootScope.obj.fill) params = $rootScope.obj;
-    		else params = {page: page, pageSize: pageSize, statusId: $stateParams.filter};
+    		else params = {page: page, pageSize: pageSize, statusId: $stateParams.filter};*/
+
+    		/*if($scope.params) {
+    			$scope.params.page = page;
+    		} else {
+    			$scope.params = {page: page, pageSize: pageSize, statusId: $stateParams.filter};
+    		}*/
+
+    		var params = {
+				guaranteeLetterId: $stateParams.guaranteeLetterId,
+				requestId: $stateParams.requestId,
+				statusId: $stateParams.statusId,
+				page: page,
+				pageSize: pageSize,
+				sd1: $stateParams.sd1,
+				sd2: $stateParams.sd2
+			};
 
 	  		request.getRequest(params).then(function(response) {
 	    		$scope.requests = response.data.requests;

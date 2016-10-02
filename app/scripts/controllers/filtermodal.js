@@ -8,11 +8,11 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-	.controller('FiltermodalCtrl', function ($scope, $state, $rootScope, $uibModalInstance, toastr, session, request) {
+	.controller('FiltermodalCtrl', function ($scope, $state, $uibModalInstance, toastr, session, request) {
 
 		$scope.user = session.getCurrentUser();
 
-    if($rootScope.selectedFilter == null) $rootScope.selectedFilter = '';
+    $scope.selectedFilter = '';
 
 		/*$scope.dateOptions = {
 		    formatYear: 'yyyy',
@@ -79,65 +79,69 @@ angular.module('frontend2App')
 		$scope.filter = function () {
 			//$uibModalInstance.close('filtered');
 
-      var date1 = $rootScope.dt1, date2 = $rootScope.dt2;
+      var date1 = $scope.dt1, date2 = $scope.dt2;
 
-      if($rootScope.dt1) {
-        date1 = new Date($rootScope.dt1);
+      if($scope.dt1) {
+        date1 = new Date($scope.dt1);
         date1 = date1.getFullYear() + '-' + (date1.getMonth() + 1) + '-' + date1.getDate();
       }
 
-      if($rootScope.dt2) {
-        date2 = new Date($rootScope.dt2);
+      if($scope.dt2) {
+        date2 = new Date($scope.dt2);
         date2 = date2.getFullYear() + '-' + (date2.getMonth() + 1) + '-' + date2.getDate();
       }
 
-      $rootScope.obj = {
+      /*var obj = {
         sd1: date1,
         sd2: date2,
-        guaranteeLetterId: $rootScope.guaranteeId,
-        requestId: $rootScope.requestId,
+        guaranteeLetterId: $scope.guaranteeId,
+        requestId: $scope.requestId,
         statusId: $scope.selectedFilter,
         page: 1,
         pageSize: 6
-      };
+      };*/
       
-      //$uibModalInstance.close();
+      $uibModalInstance.close();
 
-      /*$state.go('main.home.requestlist', {
-        guaranteeLetterId: $rootScope.guaranteeId,
-        requestId: $rootScope.requestId,
+      $state.go('main.home.requestlist', {
+        guaranteeLetterId: $scope.guaranteeId,
+        requestId: $scope.requestId,
         statusId: $scope.selectedFilter,
         page: 1,
         pageSize: 6,
         sd1: date1,
         sd2: date2
-      });*/
+      });
 
-      if($rootScope.obj.sd1 || $rootScope.obj.sd2 || $rootScope.obj.guaranteeLetterId || $rootScope.obj.requestId || $rootScope.obj.statusId) {
+      /*if($rootScope.obj.sd1 || $rootScope.obj.sd2 || $rootScope.obj.guaranteeLetterId || $rootScope.obj.requestId || $rootScope.obj.statusId) {
         $rootScope.obj.fill = true;
         //console.log('hola');
       } else {
         //console.log('chao');
         $rootScope.obj.fill = false;
-      }
+      }*/
       
-      request.getRequest($rootScope.obj).then(function(response) {
+      /*request.getRequest(obj).then(function(response) {
         toastr.success('Búsqueda hecha con éxito.', 'Listo');
-        $uibModalInstance.close(response);
+        var r = {
+          params: obj,
+          response: response
+        };
+        $uibModalInstance.close(r);
       }, function(response) {
         toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
-      });
+      });*/
 
 		};
 
     $scope.reset = function() {
-      $rootScope.dt1 = null;
-      $rootScope.dt2 = null;
-      $rootScope.guaranteeId = null;
-      $rootScope.guaranteeId = null;
-      $rootScope.requestId = null;
-      $rootScope.selectedFilter = '';
-      if($rootScope.obj) $rootScope.obj.fill = false;
+      $scope.dt1 = null;
+      $scope.dt2 = null;
+      $scope.guaranteeId = null;
+      $scope.guaranteeId = null;
+      $scope.requestId = null;
+      $scope.selectedFilter = '';
+      //if($scope.obj) $scope.obj.fill = false;
     };
 
 		$scope.cancel = function () {

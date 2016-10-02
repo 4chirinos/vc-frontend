@@ -9,25 +9,25 @@
 		    <div class="form-group">
 		    	<label class="col-sm-6 control-label">Estatus:</label>
 				<div class="col-sm-4">
-					<select class="selectpicker form-control" ng-model="$root.selectedFilter" ng-options="filter.statusId as filter.filter for filter in filters"></select>
+					<select class="selectpicker form-control" ng-model="selectedFilter" ng-options="filter.statusId as filter.filter for filter in filters"></select>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-6 control-label">Código visita:</label>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" ng-model="$root.requestId">
+					<input type="text" class="form-control" ng-model="requestId">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-6 control-label">Código carta aval:</label>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" ng-model="$root.guaranteeId">
+					<input type="text" class="form-control" ng-model="guaranteeId">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-6 control-label">Fecha solicitud (desde):</label>
 				<div class="col-sm-3 input-group">
-					<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="$root.dt1" is-open="popup1.opened" datepicker-options="dateOptions" readonly="true" close-text="Cerrar" clear-text="Limpiar" current-text="Hoy" alt-input-formats="altInputFormats" datepicker-options="dateOptions"/>
+					<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt1" is-open="popup1.opened" datepicker-options="dateOptions" readonly="true" close-text="Cerrar" clear-text="Limpiar" current-text="Hoy" alt-input-formats="altInputFormats" datepicker-options="dateOptions"/>
 		          	<span class="input-group-btn">
 		            	<button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
 		          	</span>
@@ -36,7 +36,7 @@
 			<div class="form-group">
 				<label class="col-sm-6 control-label">Fecha solicitud (hasta):</label>
 				<div class="col-sm-3 input-group">
-					<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="$root.dt2" is-open="popup2.opened" datepicker-options="dateOptions" readonly="true" close-text="Cerrar" clear-text="Limpiar" current-text="Hoy" alt-input-formats="altInputFormats" datepicker-options="dateOptions"/>
+					<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt2" is-open="popup2.opened" datepicker-options="dateOptions" readonly="true" close-text="Cerrar" clear-text="Limpiar" current-text="Hoy" alt-input-formats="altInputFormats" datepicker-options="dateOptions"/>
 		          	<span class="input-group-btn">
 		            	<button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
 		          	</span>

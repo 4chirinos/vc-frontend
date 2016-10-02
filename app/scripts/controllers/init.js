@@ -12,13 +12,13 @@ angular.module('frontend2App')
   		
   		if(session.getToken()) {
 
-  			$rootScope.dt1 = null;
+  			/*$rootScope.dt1 = null;
 		    $rootScope.dt2 = null;
 		    $rootScope.guaranteeId = null;
 		    $rootScope.guaranteeId = null;
 		    $rootScope.requestId = null;
 		    $rootScope.selectedFilter = '';
-		    $rootScope.obj = null;
+		    $rootScope.obj = null;*/
 
 	  		$state.go('main.home.requestlist', {
 	  			filter: ''

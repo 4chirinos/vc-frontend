@@ -27,11 +27,26 @@ angular.module('frontend2App')
                   else $scope.completadas = $rootScope.statusGroups[i].cantidad;
                 }
               }
-            })
+            });
+
+            $scope.guaranteeFilter = function(filter) {
+
+              var params = {
+                guaranteeId: null,
+                requestId: null,
+                statusId: filter,
+                policyId: null,
+                firstName: null,
+                lastName: null,
+                BidentityCard: null
+              };
+
+              $state.go('^.guaranteeletterlist', params);
+            };
 
             $scope.changeFilter = function(filter) {
-              //if($rootScope.obj) $rootScope.obj.fill = false;
-              /*var obj = {
+
+              var obj = {
                 guaranteeLetterId: null,
                 requestId: null,
                 statusId: filter,
@@ -39,14 +54,9 @@ angular.module('frontend2App')
                 pageSize: 6,
                 sd1: null,
                 sd2: null
-              };*/
-              /*$rootScope.dt1 = null;
-              $rootScope.dt2 = null;
-              $rootScope.guaranteeId = null;
-              $rootScope.guaranteeId = null;
-              $rootScope.requestId = null;
-              $rootScope.selectedFilter = '';*/
-              $state.go('main.home.requestlist', {filter: filter}, {reload: true});
+              };
+
+              $state.go('^.requestlist', obj);
               //$state.go('main.home.requestlist', {filter: filter}, {reload: true}); //second parameter is for $stateParams
             };
 

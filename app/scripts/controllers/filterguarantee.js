@@ -25,21 +25,35 @@ angular.module('frontend2App')
         $scope.firstName = '';
         $scope.lastName = '';
         $scope.BidentityCard = '';
+        $scope.policyId = '';
       };
 
   		$scope.filter = function() {
 
-  			$state.go('main.home.guaranteeletterlist',
-  				{
-  					guaranteeId: $scope.guaranteeId,
-  					status: $scope.status,
-  					firstName: $scope.firstName,
-  					lastName: $scope.lastName,
-  					BidentityCard: $scope.BidentityCard
-  				}
-  			);
+  			/*var params = {
+  				guaranteeId: $scope.guaranteeId,
+  				statusId: $scope.status,
+  				firstName: $scope.firstName,
+  				lastName: $scope.lastName,
+  				BidentityCard: $scope.BidentityCard,
+          policyId: $scope.policyId,
+          pageSize: 6
+  			};*/
 
-  			$uibModalInstance.close('filtrado');
+  			$uibModalInstance.close(/*params*/);
+
+        $state.go('main.home.guaranteeletterlist', {
+          guaranteeId: $scope.guaranteeId,
+          requestId: $scope.requestId,
+          statusId: $scope.selectedFilter,
+          policyId: $scope.policyId,
+          firstName: $scope.firstName,
+          lastName: $scope.lastName,
+          BidentityCard: $scope.BidentityCard,
+          page: 1,
+          pageSize: 6
+        });
+
 	    };
 
   		$scope.cancel = function () {

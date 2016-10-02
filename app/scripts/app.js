@@ -47,7 +47,7 @@ angular
 	    		abstract: true
 		    })
 	    	.state('main.home.requestlist', {
-	    		url: '/solicitud?statusId&guaranteeLetterId&requestId&page&pageSize&sd1&sd2', /*'/cartaaval?guaranteeId&status&firstName&lastName&BidentityCard'*/
+	    		url: '/solicitud?statusId&guaranteeLetterId&requestId&sd1&sd2', /*'/cartaaval?guaranteeId&status&firstName&lastName&BidentityCard'*/
 	    		templateUrl: 'views/requestlist.html',
 	    		controller: 'RequestlistCtrl',
 	    		params: {
@@ -56,21 +56,22 @@ angular
 	    		resolve: {
 	    			response: function($rootScope, $stateParams, request) {
 
-	    				if($rootScope.obj && $rootScope.obj.fill) {
+	    				/*if($rootScope.obj && $rootScope.obj.fill) {
 	    					return request.getRequest($rootScope.obj).then(function(response) {
 					    		return response;
 						  	}, function(response) {
 						  		return response;
 						  	});
 	    				} else {
+	    					//console.log('ahi voy');
 	    					return request.getRequest({page: 1, pageSize: 6, statusId: $stateParams.filter}).then(function(response) {
 					    		return response;
 						  	}, function(response) {
 						  		return response;
 						  	});
-	    				}
+	    				//}*/
 
-	    				/*var obj = {
+	    				var obj = {
 					    	guaranteeLetterId: $stateParams.guaranteeLetterId,
 					        requestId: $stateParams.requestId,
 					        statusId: $stateParams.statusId,
@@ -84,7 +85,7 @@ angular
 					    	return response;
 						}, function(response) {
 						  	return response;
-						});*/
+						});
 
 	    			}
 	    		}
@@ -170,23 +171,31 @@ angular
 	    		}
 	    	})
 	    	.state('main.home.guaranteeletterlist', {
-	    		url: '/cartaaval?guaranteeId&status&firstName&lastName&BidentityCard',
+	    		url: '/cartaaval?guaranteeId&statusId&requestId&firstName&lastName&BidentityCard&policyId',
 	    		templateUrl: 'views/guaranteelist.html',
 	    		controller: 'GuaranteelistCtrl',
 	    		resolve: {
 	    			response: function($stateParams, guaranteeletter) {
 
-	    				var obj = {
-			  				statusId: $stateParams.status,
-			  				guaranteeId: $stateParams.guaranteeId,
-			  				firstName: $stateParams.firstName,
-			  				lastName: $stateParams.lastName,
-			  				BidentityCard: $stateParams.BidentityCard,
+	    				/*var obj = {
+			  				statusId: $stateParams.statusId,
 			  				page: 1,
 			  				pageSize: 6
-			  			};
+			  			};*/
 
-		    			return guaranteeletter.getGuaranteeQS(obj).then(function(response) {
+			  			var params = {
+				          guaranteeId: $stateParams.guaranteeId,
+				          requestId: $stateParams.requestId,
+				          statusId: $stateParams.selectedFilter,
+				          policyId: $stateParams.policyId,
+				          firstName: $stateParams.firstName,
+				          lastName: $stateParams.lastName,
+				          BidentityCard: $stateParams.BidentityCard,
+				          page: 1,
+				          pageSize: 6
+				        };
+
+		    			return guaranteeletter.getGuaranteeQS(params).then(function(response) {
 			  				return response;
 			  			}, function(response) {
 			  				return response;
