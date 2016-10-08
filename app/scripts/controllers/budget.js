@@ -12,6 +12,20 @@ angular.module('frontend2App')
 
     	$scope.budget = budgetData.data;
 
+    	var updateCost = function() {
+
+    		var cost = 0;
+
+    		for(var i = 0; i < $scope.budget.item.length; i++) {
+    			cost += $scope.budget.item[i].cost * $scope.budget.item[i].quantity;
+    		}
+
+    		$scope.cost = cost.toFixed(2);
+
+    	};
+
+    	updateCost();
+
     	$scope.canEdit = function() {
     		if(response.data.statusId == '3' || response.data.statusId == '5')
     			return true;
@@ -37,6 +51,7 @@ angular.module('frontend2App')
 		    modalInstance.result.then(function(it) {
 		    	$rootScope.statusGroups = it.statusGroups;
 		  		$scope.budget.item[index] = it;
+		  		updateCost();
 		  		toastr.success('Cambio hecho con éxito.', 'Listo');
 			}, function() {
 			   	console.log('Modal dismissed at: ' + new Date());

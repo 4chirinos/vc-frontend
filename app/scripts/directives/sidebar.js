@@ -56,7 +56,7 @@ angular.module('frontend2App')
                 sd2: null
               };
 
-              $state.go('^.requestlist', obj);
+              $state.go('main.home.requestlist', obj);
               //$state.go('main.home.requestlist', {filter: filter}, {reload: true}); //second parameter is for $stateParams
             };
 

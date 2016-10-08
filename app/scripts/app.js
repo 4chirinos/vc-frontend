@@ -19,7 +19,8 @@ angular
 	    'angular-loading-bar',
 	    'ui.bootstrap',
 	    'LocalStorageModule',
-	    'file-model'
+	    'file-model',
+	    'thatisuday.ng-image-gallery'
   	])
   	.config(function($stateProvider, $urlRouterProvider) {
 

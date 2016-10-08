@@ -34,6 +34,8 @@ module.exports = function(config) {
       'bower_components/angular-loading-bar/build/loading-bar.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-file-model/angular-file-model.js',
+      'bower_components/hammerjs/hammer.js',
+      'bower_components/ng-image-gallery/dist/ng-image-gallery.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

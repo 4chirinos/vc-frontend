@@ -12,6 +12,52 @@ angular.module('frontend2App')
 
 		//if($rootScope.obj) $rootScope.obj.fill = false;
 
+		// inside your app controller
+		/*$scope.images = [
+		    {
+		        title : 'This is amazing photo of nature',
+		        alt : 'amazing nature photo',
+		        thumbUrl : 'https://pixabay.com/static/uploads/photo/2016/06/13/07/32/cactus-1453793__340.jpg',
+		        url : 'https://pixabay.com/static/uploads/photo/2016/06/13/07/32/cactus-1453793_960_720.jpg',
+		        extUrl : 'http://mywebsitecpm/photo/1453793'
+		    },
+		    {
+		        url : 'https://i.imgsafe.org/1b6ee795f5.png',
+		        thumbUrl: 'https://i.imgsafe.org/1b6ee795f5.png',
+		        extUrl : 'https://i.imgsafe.org/1b6ee795f5.png'
+		    },
+		    {
+		        thumbUrl : 'https://pixabay.com/static/uploads/photo/2016/04/11/18/53/aviator-1322701__340.jpg',
+		        url : 'https://pixabay.com/static/uploads/photo/2016/04/11/18/53/aviator-1322701_960_720.jpg'
+		    }
+		];
+
+		// gallery methods
+		$scope.methods = {};
+		 
+		// so you will bind openGallery method to a button on page
+		// to open this gallery like ng-click="openGallery();"
+		$scope.openGallery = function(){
+		    $scope.methods.open();
+		    
+		    // You can also open gallery model with visible image index
+		    // Image at that index will be shown when gallery modal opens
+		    //scope.methods.open(index); 
+		};
+		 
+		// Similar to above function
+		$scope.closeGallery = function(){
+		    $scope.methods.close();
+		};
+		 
+		$scope.nextImg = function(){
+		    $scope.methods.next();
+		};
+		 
+		$scope.prevImg = function(){
+		    $scope.methods.prev();
+		};*/
+
 	    var pageSize = 6;
 	    $scope.selectedPage = 0;
     	$scope.user = session.getCurrentUser();

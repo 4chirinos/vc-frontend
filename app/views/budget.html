@@ -10,7 +10,7 @@
 	                    	<th><center>Concepto</center></th>
 	                        <th><center>Descripción</center></th>
 	                        <th><center>Cantidad</center></th>
-	                        <th><center>Costo Bs</center></th>
+	                        <th><center>Costo Bs (unitario)</center></th>
 	                        <th ng-if="user.userProfile == 'visitador' && canEdit()"><center>Acción</center></th>
 	                    </tr>
 
@@ -26,6 +26,13 @@
 	                        	</center>
 	                        </td>
 	                    </tr>
+
+	                    <tr>
+				          <td><center><strong>- - - - - - -</strong></center></td>
+				          <td><center><strong>- - - - - - -</strong></center></td>
+				          <td><center><strong>- - - - - - -</strong></center></td>
+				          <th><center>Total: {{cost}} </center></th>
+				        </tr>
 	                   
 	                </table>
 	            </div>

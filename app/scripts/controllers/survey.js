@@ -44,7 +44,6 @@ angular.module('frontend2App')
   				if(response.data.statusId == '3' || response.data.statusId == '5') {
   					return false;
   				}
-  				return true;
   			}
 	    	return true;
   		};

@@ -3,8 +3,15 @@
     <div class="row">
         
         <div class="col-sm-6">
+
             <label class="text-primary">Imágenes cargadas sobre el presupuesto</label>
-            <ul class="list-group">
+
+            <ng-image-gallery
+                images="images1"
+                methods="methods1"
+            ></ng-image-gallery>
+
+            <!--<ul class="list-group">
                 <li ng-repeat="file in budgetPaths track by $index" class="list-group-item">
                     {{file.path}}
                     <span class="pull-right">
@@ -13,12 +20,18 @@
                         </button>
                     </span>
                 </li>
-            </ul>
+            </ul>-->
         </div>
 
         <div class="col-sm-6">
             <label class="text-success">Imágenes cargadas sobre la encuesta</label>
-            <ul class="list-group">
+
+            <ng-image-gallery
+                images="images2"
+                methods="methods2"
+            ></ng-image-gallery>
+
+            <!--<ul class="list-group">
                 <li ng-repeat="file in surveyPaths track by $index" class="list-group-item">
                     {{file.path}}
                     <span class="pull-right">
@@ -27,7 +40,7 @@
                         </button>
                     </span>
                 </li>
-            </ul>
+            </ul>-->
         </div>
 
     </div>
@@ -36,7 +49,7 @@
 
         <br><br><br>
 
-        <div class="row">
+        <div class="row" ng-if="!disabled()">
 
             <div class="col-sm-6">
             	<div class="form-group">
@@ -82,7 +95,7 @@
 
         <br><br><br>
 
-        <div class="row">
+        <div class="row" ng-if="!disabled()">
             <center>
                 <button ng-disabled="loadable()" class="btn btn-md btn-info" ng-click="loadData()">
                     <span class="glyphicon glyphicon-open"></span> Subir imágenes
