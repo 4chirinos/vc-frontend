@@ -41,7 +41,7 @@ angular.module('frontend2App')
                 BidentityCard: null
               };
 
-              $state.go('^.guaranteeletterlist', params);
+              $state.go('main.home.guaranteeletterlist', params);
             };
 
             $scope.changeFilter = function(filter) {
