@@ -52,6 +52,46 @@
               <button ng-click="postRequest()" type="button" class="btn btn-danger btn-md">Solicitar visita</button>
             </div>
           </div>
+        <!--</form>-->
+
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <!--<h3 class="panel-title">Datos del beneficiario</h3>-->
+              Datos del beneficiario
+            </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <label class="col-sm-3 col-md-2 control-label">Nombre:</label>
+                <div class="col-sm-3 col-md-2">
+                  <p class="form-control-static">{{guaranteeLetter.beneficiary.firstName}} {{guaranteeLetter.beneficiary.lastName}}</p>
+                </div>
+                <label class="col-sm-3 col-md-2 control-label">Cédula:</label>
+                <div class="col-sm-3 col-md-2">
+                  <p class="form-control-static">{{guaranteeLetter.beneficiary.identityCard}}</p>
+                </div>
+                <label class="col-sm-3 col-md-2 control-label">Género:</label>
+                <div class="col-sm-3 col-md-2">
+                  <p class="form-control-static">{{gender(guaranteeLetter.beneficiary.gender)}}</p>
+                </div>
+                <label class="col-sm-3 col-md-2 control-label">Edad:</label>
+                <div class="col-sm-3 col-md-2">
+                  <p class="form-control-static">{{age(guaranteeLetter.beneficiary.birthDate)}}</p>
+                </div>
+                <label class="col-sm-3 col-md-2 control-label">Teléfono:</label>
+                <div class="col-sm-3 col-md-2">
+                  <p class="form-control-static">{{guaranteeLetter.beneficiary.phoneNumber}}</p>
+                </div>
+                <label class="col-sm-2 col-md-1 control-label">Email:</label>
+                <div class="col-sm-4 col-md-3">
+                  <p class="form-control-static">{{guaranteeLetter.beneficiary.email}}</p>
+                </div>
+                <label class="col-sm-3 col-md-2 control-label">Dirección:</label>
+                <div class="col-sm-9 col-md-10">
+                  <p class="form-control-static">{{guaranteeLetter.beneficiary.address}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </form>
 
         <div ng-if="history">
@@ -189,9 +229,8 @@
               </div>
             </div>
           </div>
-          <div class="panel panel-primary">
+          <!--<div class="panel panel-primary">
             <div class="panel-heading">
-              <!--<h3 class="panel-title">Datos del beneficiario</h3>-->
               Datos del beneficiario
             </div>
             <div class="panel-body">
@@ -226,7 +265,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div>-->
         </form>
       </div>
     </div>

@@ -17,7 +17,7 @@
                         </ul>
                     </div>
                     <div ng-if="user.userProfile == 'coordinador'">
-                        <ul class="nav nav-stacked collapse in" id="userMenu">
+                        <ul class="nav nav-stacked collapse" id="userMenu"> <!-- collapse in para que salga abierto -->
                             <li><a href="" ng-click="changeFilter('')"><i class="glyphicon glyphicon-envelope"></i> Todas <span class="badge badge-info"></span></a></li>
                             <li><a href="" ng-click="changeFilter('2')"><i class="glyphicon glyphicon-envelope"></i> No asignadas <span class="badge badge-info">{{porAsignarse}}</span></a></li>
                             <li><a href="" ng-click="changeFilter('4')"><i class="glyphicon glyphicon-envelope"></i> Atendidas <span class="badge badge-info">{{atendidas}}</span></a></li>
@@ -25,7 +25,7 @@
                         </ul>
                     </div>
                     <div ng-if="user.userProfile == 'visitador'">
-                        <ul class="nav nav-stacked collapse in" id="userMenu">
+                        <ul class="nav nav-stacked collapse" id="userMenu"> <!-- collapse in para que salga abierto -->
                             <li><a href="" ng-click="changeFilter('')"><i class="glyphicon glyphicon-envelope"></i> Todas <span class="badge badge-info"></span></a></li>
                             <li><a href="" ng-click="changeFilter('3')"><i class="glyphicon glyphicon-envelope"></i> No atendidas <span class="badge badge-info">{{asignadas}}</span></a></li>
                             <li><a href="" ng-click="changeFilter('5')"><i class="glyphicon glyphicon-envelope"></i> En revisión <span class="badge badge-info">{{enRevision}}</span></a></li>

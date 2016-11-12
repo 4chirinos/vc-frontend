@@ -31,6 +31,7 @@ angular.module('frontend2App')
 
         survey.postAnswer($stateParams.id, data).then(function(response) {
           //console.log(response.data);
+          toastr.success('Carga hecha con éxito.', 'Listo');
         }, function(response) {
           if(response.status == 500) {
             toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');

@@ -135,7 +135,7 @@ angular.module('frontend2App')
 	    		endDate = guarantee.endDate.split('T')[0].split('-');
 
 	    	if(startDate[0] > endDate[0]) return 'vencida';
-	    	if(startDate[1] > endDate[1]) return 'venvida';
+	    	if(startDate[1] > endDate[1]) return 'vencida';
 	    	if(startDate[2] > endDate[2]) return 'vencida';
 
 	      	return guarantee.status.status;

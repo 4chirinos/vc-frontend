@@ -119,7 +119,7 @@ angular.module('frontend2App')
         		return 'Resultados de la búsqueda';
 
         	if($stateParams.statusId) {
-        		if($stateParams.statusId == 2) return 'Por asignar';
+        		if($stateParams.statusId == 2) return 'No asignadas';
         		else if($stateParams.statusId == 3) return 'Asignadas';
         		else if($stateParams.statusId == 4) return 'Atendidas';
         		else if($stateParams.statusId == 5) return 'En revisión';
