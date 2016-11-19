@@ -6,30 +6,37 @@
             <hr>
 
             <ul class="nav nav-stacked">
-                <li class="nav-header"> <a ng-click="liked = !liked" href="" data-toggle="collapse" data-target="#userMenu">Solicitud de Visita <i ng-class="{'glyphicon glyphicon-chevron-right': !liked, 'glyphicon glyphicon-chevron-down': liked}"></i></a>
+                <li class="nav-header"> <a ng-click="liked = !liked" href="" data-toggle="collapse" data-target="#userMenu">Solicitud de Visita <i ng-class="{'glyphicon glyphicon-chevron-right': liked, 'glyphicon glyphicon-chevron-down': !liked}"></i></a>
+
                     <div ng-if="user.userProfile == 'analista'">
-                        <ul class="nav nav-stacked collapse" id="userMenu">
+                        <ul class="nav nav-stacked collapse in" id="userMenu">
+                            <li><a href="" ng-click="refresh()"><i class="glyphicon glyphicon-refresh"></i> Resfrescar </a></li>
                             <li><a href="" ng-click="changeFilter('')"><i class="glyphicon glyphicon-envelope"></i> Todas <span class="badge badge-info"></span></a></li>
-                            <!--<li><a href=""><i class="glyphicon glyphicon-envelope"></i> No asignadas <span class="badge badge-info">{{porAsignarse}}</span></a></li>
-                            <li><a href=""><i class="glyphicon glyphicon-envelope"></i> Asignadas <span class="badge badge-info">{{asignadas}}</span></a></li>
-                            <li><a href=""><i class="glyphicon glyphicon-envelope"></i> Atendidas <span class="badge badge-info">{{atendidas}}</span></a></li>-->
+                            <li><a href="" ng-click="changeFilter('2')"><i class="glyphicon glyphicon-envelope"></i> No asignadas <span class="badge badge-info">{{porAsignarse}}</span></a></li>
+                            <li><a href="" ng-click="changeFilter('3')"><i class="glyphicon glyphicon-envelope"></i> Asignadas <span class="badge badge-info">{{asignadas}}</span></a></li>
+                            <li><a href="" ng-click="changeFilter('4')"><i class="glyphicon glyphicon-envelope"></i> Atendidas <span class="badge badge-info">{{atendidas}}</span></a></li>
+                            <li><a href="" ng-click="changeFilter('5')"><i class="glyphicon glyphicon-envelope"></i> En revisión <span class="badge badge-info">{{enRevision}}</span></a></li>
                             <li><a href="" ng-click="changeFilter('6')"><i class="glyphicon glyphicon-envelope"></i> Finalizadas <span class="badge badge-info">{{completadas}}</span></a></li>
                         </ul>
                     </div>
                     <div ng-if="user.userProfile == 'coordinador'">
-                        <ul class="nav nav-stacked collapse" id="userMenu"> <!-- collapse in para que salga abierto -->
+                        <ul class="nav nav-stacked collapse in" id="userMenu"> <!-- collapse in para que salga abierto -->
+                            <li><a href="" ng-click="refresh()"><i class="glyphicon glyphicon-refresh"></i> Resfrescar </a></li>
                             <li><a href="" ng-click="changeFilter('')"><i class="glyphicon glyphicon-envelope"></i> Todas <span class="badge badge-info"></span></a></li>
                             <li><a href="" ng-click="changeFilter('2')"><i class="glyphicon glyphicon-envelope"></i> No asignadas <span class="badge badge-info">{{porAsignarse}}</span></a></li>
+                            <li><a href="" ng-click="changeFilter('3')"><i class="glyphicon glyphicon-envelope"></i> Asignadas <span class="badge badge-info">{{asignadas}}</span></a></li>
                             <li><a href="" ng-click="changeFilter('4')"><i class="glyphicon glyphicon-envelope"></i> Atendidas <span class="badge badge-info">{{atendidas}}</span></a></li>
-                            <!--<li><a href="" ng-click="changeFilter('6')"><i class="glyphicon glyphicon-envelope"></i> Completadas <span class="badge badge-info">{{completadas}}</span></a></li>-->
+                            <li><a href="" ng-click="changeFilter('5')"><i class="glyphicon glyphicon-envelope"></i> En revisión <span class="badge badge-info">{{enRevision}}</span></a></li>
+                            <li><a href="" ng-click="changeFilter('6')"><i class="glyphicon glyphicon-envelope"></i> Finalizadas <span class="badge badge-info">{{completadas}}</span></a></li>
                         </ul>
                     </div>
                     <div ng-if="user.userProfile == 'visitador'">
-                        <ul class="nav nav-stacked collapse" id="userMenu"> <!-- collapse in para que salga abierto -->
+                        <ul class="nav nav-stacked collapse in" id="userMenu"> <!-- collapse in para que salga abierto -->
+                            <li><a href="" ng-click="refresh()"><i class="glyphicon glyphicon-refresh"></i> Resfrescar </a></li>
                             <li><a href="" ng-click="changeFilter('')"><i class="glyphicon glyphicon-envelope"></i> Todas <span class="badge badge-info"></span></a></li>
-                            <li><a href="" ng-click="changeFilter('3')"><i class="glyphicon glyphicon-envelope"></i> No atendidas <span class="badge badge-info">{{asignadas}}</span></a></li>
+                            <li><a href="" ng-click="changeFilter('3')"><i class="glyphicon glyphicon-envelope"></i> Por atender <span class="badge badge-info">{{asignadas}}</span></a></li>
                             <li><a href="" ng-click="changeFilter('5')"><i class="glyphicon glyphicon-envelope"></i> En revisión <span class="badge badge-info">{{enRevision}}</span></a></li>
-                            <!--<li><a href=""><i class="glyphicon glyphicon-envelope"></i> Completadas <span class="badge badge-info">{{completadas}}</span></a></li>-->
+                            <li><a href="" ng-click="changeFilter('6')"><i class="glyphicon glyphicon-envelope"></i> Finalizadas <span class="badge badge-info">{{completadas}}</span></a></li>
                         </ul>
                     </div>
                 </li>
@@ -40,9 +47,9 @@
                 <hr>
 
                 <ul class="nav nav-stacked">
-                    <li class="nav-header"> <a ng-click="liked2 = !liked2" href="" data-toggle="collapse" data-target="#guaranteeMenu">Carta Aval <i ng-class="{'glyphicon glyphicon-chevron-right': !liked2, 'glyphicon glyphicon-chevron-down': liked2}"></i></a>
+                    <li class="nav-header"> <a ng-click="liked2 = !liked2" href="" data-toggle="collapse" data-target="#guaranteeMenu">Carta Aval <i ng-class="{'glyphicon glyphicon-chevron-right': liked2, 'glyphicon glyphicon-chevron-down': !liked2}"></i></a>
                         <div ng-if="user.userProfile == 'analista'">
-                            <ul class="nav nav-stacked collapse" id="guaranteeMenu">
+                            <ul class="nav nav-stacked collapse in" id="guaranteeMenu">
                                 <li><a href="" ng-click="guaranteeFilter('')"><i class="glyphicon glyphicon-envelope"></i> Todas <span class="badge badge-info"></span></a></li>
                                 <!--<li><a href=""><i class="glyphicon glyphicon-envelope"></i> No asignadas <span class="badge badge-info">{{porAsignarse}}</span></a></li>
                                 <li><a href=""><i class="glyphicon glyphicon-envelope"></i> Asignadas <span class="badge badge-info">{{asignadas}}</span></a></li>

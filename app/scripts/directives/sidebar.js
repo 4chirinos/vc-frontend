@@ -44,6 +44,10 @@ angular.module('frontend2App')
               $state.go('main.home.guaranteeletterlist', params);
             };
 
+            $scope.refresh = function() {
+              $state.reload();
+            };
+
             $scope.changeFilter = function(filter) {
 
               var obj = {

@@ -120,7 +120,11 @@ angular.module('frontend2App')
 
         	if($stateParams.statusId) {
         		if($stateParams.statusId == 2) return 'No asignadas';
-        		else if($stateParams.statusId == 3) return 'Asignadas';
+        		else if($stateParams.statusId == 3) {
+        			if($scope.user.userProfile == 'visitador')
+        				return 'Por atender';
+        			return 'Asignadas';
+        		}
         		else if($stateParams.statusId == 4) return 'Atendidas';
         		else if($stateParams.statusId == 5) return 'En revisión';
         		else return 'Finalizadas';
@@ -183,7 +187,7 @@ angular.module('frontend2App')
 	  			if(status == 'finalizada') return 'finalizada';
 	  		}
 	  		if($scope.user.userProfile == 'visitador') {
-	  			if(status == 'asignada') return 'pendiente';
+	  			if(status == 'asignada') return 'por atender';
 	  			if(status == 'atendida') return 'atendida';
 	  			if(status == 'en revision') return 'en revision';
 	  			if(status == 'finalizada') return 'finalizada';
