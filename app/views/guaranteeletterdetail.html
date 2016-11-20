@@ -54,6 +54,36 @@
           </div>
         <!--</form>-->
 
+          <div ng-if="history">
+            <div class="panel panel-primary">
+              <div class="panel-heading">Historial de visitas</div>
+              <div class="panel-body">
+                
+                <div class="table-responsive">
+                  <table class="table table-hover table-condensed">
+                    <tr>
+                      <th><center>Código de visita</center></th>
+                      <th><center>Fecha solicitud</center></th>
+                      <th><center>Estatus</center></th>
+                      <th><center>Acción</center></th>
+                    </tr>
+                    <tr ng-repeat="request in history">
+                      <td><center>{{request.id}}</center></td>
+                      <td><center>{{date(request.startDate)}}</center></td>
+                      <td><center><span class="label" ng-class="status2(request.status.status)">{{statusText(request.status.status)}}</span></center></td>
+                      <td>
+                        <center>
+                          <button ng-click="detail(request.id)" type="button" class="btn btn-primary btn-xs">Ver</button>
+                        </center>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
           <div class="panel panel-primary">
             <div class="panel-heading">
               <!--<h3 class="panel-title">Datos de la institución prestadora de servicio</h3>-->
@@ -129,7 +159,7 @@
           </div>
         </form>
 
-        <div ng-if="history">
+        <!--<div ng-if="history">
           <div class="panel panel-primary">
             <div class="panel-heading">Historial de visitas</div>
             <div class="panel-body">
@@ -157,7 +187,7 @@
 
             </div>
           </div>
-        </div>
+        </div>-->
 
       </div>
     </div>
