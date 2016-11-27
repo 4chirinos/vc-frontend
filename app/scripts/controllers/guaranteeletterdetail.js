@@ -177,18 +177,21 @@ angular.module('frontend2App')
 
 	    	var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'views/comment.html',
-                controller: 'CommentCtrl',
+                templateUrl: 'views/requestmodal.html',
+                controller: 'RequestmodalCtrl',
                 size: 'md'
             });
 
-            modalInstance.result.then(function(coment) {
-		    	//console.log(coment);
+            modalInstance.result.then(function(data) {
 
-		    	request.postRequest({guaranteeLetterId: $scope.guaranteeLetter.id, comment: coment})
+		    	request.postRequest({
+		    		guaranteeLetterId: $scope.guaranteeLetter.id,
+		    		comment: data.coment,
+		    		endDate: data.date
+		    	})
 		    	.then(function(response) {
 		    		if(response.data.created) {
-		    			toastr.warning('Otro analista acaba de solicitar esta visita.', 'Atención');
+		    			toastr.warning('Otro analista acaba de solicitar una visita para esta carta aval.', 'Atención');
 		    		} else {
 		    			toastr.success('Solicitud de visita generada con éxito.', 'Listo');
 		    		}
@@ -220,35 +223,6 @@ angular.module('frontend2App')
 			   	console.log('Modal dismissed at: ' + new Date());
 			});
 
-	    	/*request.postRequest({guaranteeLetterId: $scope.guaranteeLetter.id})
-	    	.then(function(response) {
-	    		if(response.data.created) {
-	    			toastr.warning('Otro analista acaba de solicitar esta visita.', 'Atención');
-	    		} else {
-	    			toastr.success('Solicitud de visita generada con éxito.', 'Listo');
-	    		}
-	    		$scope.guaranteeLetter.request = {
-	    			id: response.data.id,
-	    			guaranteeLetterId: response.data.guaranteeLetterId,
-	    			statusId: response.data.statusId,
-	    			coordinatorId: response.data.coordinatorId,
-	    			visitorId: response.data.visitorId,
-	    			analystId: response.data.analystId,
-	    			formId: response.data.formId,
-	    			startDate: response.data.startDate,
-	    			endDate: response.data.endDate,
-	    			status: response.data.status
-	    		};
-	    		if(!$scope.history)
-	    			$scope.history = [$scope.guaranteeLetter.request];
-	    		else
-	    			$scope.history.push($scope.guaranteeLetter.request);
-	    		$rootScope.statusGroups = response.data.statusGroups;
-	    	}, function(response) {
-	    		if(response.status == 500) {
-			        toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
-			    }
-	    	});*/
 	    };
 
   	});

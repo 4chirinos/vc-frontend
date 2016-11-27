@@ -94,6 +94,20 @@ angular.module('frontend2App')
 
 		};
 
+		$scope.date = function(date) {
+
+	    	var currentdate = new Date(date);
+			
+			var datetime = "Last Sync: " + currentdate.getDate() + "/"
+				+ (currentdate.getMonth() + 1)  + "/" 
+				+ currentdate.getFullYear() + " @ "  
+				+ currentdate.getHours() + ":"  
+				+ currentdate.getMinutes() + ":" 
+				+ currentdate.getSeconds();
+
+	      	return currentdate.getDate() + '/' + (currentdate.getMonth() + 1) + '/' + currentdate.getFullYear();
+	    };
+
 	  	$scope.pageSelected = function(index) {
 	    	$scope.selectedPage = index;
 	    	getGuarantee($scope.selectedPage + 1);

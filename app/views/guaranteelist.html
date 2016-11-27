@@ -36,10 +36,10 @@
 	                    <tr>
 	                    	<th><center>Código carta aval</center></th>
 	                        <th><center>Estatus</center></th>
-	                        <th><center>Póliza asociada</center></th>
+	                        <th><center>Expide</center></th>
+	                        <th><center>Vence</center></th>
 	                        <th><center>CI beneficiario</center></th>
 	                        <th><center>Nombre beneficiario</center></th>
-	                        <th><center>Apellido beneficiario</center></th>
 	                        <th><center>Acción</center></th>
 	                    </tr>
 
@@ -47,10 +47,14 @@
 	                    <tr ng-repeat="guarantee in guarantees">
 	                    	<td><center>{{guarantee.id}}</center></td>
 	                        <td><center><span class="label" ng-class="statusColor(guarantee)">{{statusText(guarantee)}}</span></center></td>
-	                        <td><center>{{guarantee.policyId}}</center></td>
+	                        <td><center>{{date(guarantee.startDate)}}</center></td>
+	                        <td><center>{{date(guarantee.endDate)}}</center></td>
 	                        <td><center>{{guarantee.beneficiary.identityCard}}</center></td>
-	                        <td><center>{{guarantee.beneficiary.firstName}}</center></td>
-	                        <td><center>{{guarantee.beneficiary.lastName}}</center></td>
+	                        <td>
+	                        	<center>
+	                        		{{guarantee.beneficiary.firstName}} {{guarantee.beneficiary.lastName}}
+	                        	</center>
+	                        </td>
 	                        <td>
 	                        	<center>
 	                        		<button ng-click="detail(guarantee.id)" type="button" class="btn btn-primary btn-xs">Ver</button>

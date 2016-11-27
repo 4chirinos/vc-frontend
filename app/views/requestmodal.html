@@ -1,0 +1,27 @@
+<div class="modal-header modal-header-primary">
+    <h3 class="modal-title">Suministrar la siguiente información</h3>
+</div>
+<div class="modal-body">
+    <div class="container-fluid">
+	    
+	    <form name="form" class="form-horizontal">
+	    	<div class="form-group">
+				<label class="col-sm-6 control-label">Fecha límite para realizar visita:</label>
+				<div class="col-sm-3 input-group">
+					<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt1" is-open="popup1.opened" datepicker-options="dateOptions" readonly="true" close-text="Cerrar" clear-text="Limpiar" current-text="Hoy" alt-input-formats="altInputFormats" datepicker-options="dateOptions" required/>
+		          	<span class="input-group-btn">
+		            	<button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+		          	</span>
+				</div>
+			</div>
+		    <div class="form-group">
+  				<textarea class="form-control" ng-model="coment" rows="5" id="comment" placeholder="Ingrese observación aquí. (Opcional)"></textarea>
+			</div>
+		</form>
+
+	</div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()" ng-disabled="!validDate()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+</div>
