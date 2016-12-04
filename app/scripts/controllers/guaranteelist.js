@@ -8,7 +8,7 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-	.controller('GuaranteelistCtrl', function ($scope, $rootScope, $stateParams, $state, $uibModal, toastr, session, guaranteeletter, response) {
+	.controller('GuaranteelistCtrl', function ($scope, $rootScope, $stateParams, $state, $uibModal, toastr, session, guaranteeletter, request, response) {
 
 		var pageSize = 6;
 	    $scope.selectedPage = 0;
@@ -161,6 +161,77 @@ angular.module('frontend2App')
 		    		id: id
 		    	}    
 		    );
-	    };   
+	    };
+
+	    $scope.canRequest = function(guarantee) {
+	    	
+	    	var startDate = guarantee.startDate.split('T')[0].split('-'),
+	    		endDate = guarantee.endDate.split('T')[0].split('-');
+
+	    	if(startDate[0] > endDate[0]) return false;
+	    	if(startDate[1] > endDate[1]) return false;
+	    	if(startDate[2] > endDate[2]) return false;
+
+	    	for(var i = 0; i < guarantee.request.length; i++) {
+	    		if(guarantee.request[i].status.id != 6) return false;
+	    	}
+
+	    	return true;
+	    };
+
+	    $scope.postRequest = function(id) {
+
+	    	var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/requestmodal.html',
+                controller: 'RequestmodalCtrl',
+                size: 'md'
+            });
+
+	    	modalInstance.result.then(function(data) {
+
+	    		//console.log(data.comment)
+
+		    	request.postRequest({
+		    		guaranteeLetterId: id,
+		    		comment: data.comment,
+		    		endDate: data.date
+		    	})
+		    	.then(function(response) {
+		    		if(response.data.created) {
+		    			toastr.warning('Otro analista acaba de solicitar una visita para esta carta aval.', 'Atención');
+		    		} else {
+		    			toastr.success('Solicitud de visita generada con éxito.', 'Listo');
+		    		}
+		    		/*$scope.guaranteeLetter.request = {
+		    			id: response.data.id,
+		    			guaranteeLetterId: response.data.guaranteeLetterId,
+		    			statusId: response.data.statusId,
+		    			coordinatorId: response.data.coordinatorId,
+		    			visitorId: response.data.visitorId,
+		    			analystId: response.data.analystId,
+		    			formId: response.data.formId,
+		    			startDate: response.data.startDate,
+		    			endDate: response.data.endDate,
+		    			status: response.data.status
+		    		};
+
+		    		if(!$scope.history)
+		    			$scope.history = [$scope.guaranteeLetter.request];
+		    		else
+		    			$scope.history.push($scope.guaranteeLetter.request);*/
+		    		$rootScope.statusGroups = response.data.statusGroups;
+		    		$state.reload();
+		    	}, function(response) {
+		    		if(response.status == 500) {
+				        toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+				    }
+		    	});
+
+			}, function() {
+			   	console.log('Modal dismissed at: ' + new Date());
+			});
+
+	    };
 
   	});

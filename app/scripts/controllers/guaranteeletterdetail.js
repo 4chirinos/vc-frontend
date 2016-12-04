@@ -186,7 +186,7 @@ angular.module('frontend2App')
 
 		    	request.postRequest({
 		    		guaranteeLetterId: $scope.guaranteeLetter.id,
-		    		comment: data.coment,
+		    		comment: data.comment,
 		    		endDate: data.date
 		    	})
 		    	.then(function(response) {

@@ -30,7 +30,7 @@
 
 				<br>
 
-	            <div class="table-responsive">
+	            <div>
 	                <table class="table table-hover table-condensed">
 
 	                    <tr>
@@ -40,7 +40,7 @@
 	                        <th><center>Vence</center></th>
 	                        <th><center>CI beneficiario</center></th>
 	                        <th><center>Nombre beneficiario</center></th>
-	                        <th><center>Acción</center></th>
+	                        <th><center>Acciones</center></th>
 	                    </tr>
 
 	                    
@@ -56,21 +56,25 @@
 	                        	</center>
 	                        </td>
 	                        <td>
-	                        	<center>
+	                        	<!--<center>
 	                        		<button ng-click="detail(guarantee.id)" type="button" class="btn btn-primary btn-xs">Ver</button>
-	                        	</center>
-	                        </td>
-	                        <!--<td><center><span class="label" ng-class="status(request.status.status)">{{statusText(request.status.status)}}</span></center></td>-->
-	                        <!--<td><center>status({{request.status.status}})</center></td>-->
-	                        <!--<td><center><p style="width: 100px" class="img-rounded" ng-class="status(request.status.status)">{{request.status.status}}</p></center></td>-->
-	                        <!--<td>
+	                        		<button ng-click="detail(guarantee.id)" type="button" class="btn btn-danger btn-xs">Solicitar Visita</button>
+	                        	</center>-->
 	                        	<center>
-	                        		<button ng-click="detail(request.id)" type="button" class="btn btn-primary btn-xs">Ver</button>
-	                        	</center>
-	                        </td>-->
+		                        	<div class="dropdown">
+										<button class="btn btn-primary dropdown-toggle btn-xs" type="button" data-toggle="dropdown">Acción
+									  	<span class="caret"></span></button>
+									  	<ul class="dropdown-menu dropdown-menu-right">
+									    	<li><a href="" ng-click="detail(guarantee.id)"><i class="glyphicon glyphicon-eye-open"></i> Ver</a></li>
+									    	<li ng-if="canRequest(guarantee)"><a href="" ng-click="postRequest(guarantee.id)"><i class="glyphicon glyphicon-dashboard"></i> Solicitar Visita</a></li>
+									  </ul>
+									</div> 
+								</center>
+	                        </td>
 	                    </tr>
 	              
 	                </table>
+	                <!--<br><br><br>-->
 	            </div>
 	        </div>
 	    </div>

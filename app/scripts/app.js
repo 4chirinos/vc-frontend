@@ -126,6 +126,7 @@ angular
 	    		url: '/presupuesto',
 	    		templateUrl: 'views/budget.html',
 	    		controller: 'BudgetCtrl',
+	    		abstract: true,
 	    		resolve: {
 	    			budgetData: function($stateParams, budget) {
 	    				return budget.getByRequestId($stateParams.id)
@@ -136,6 +137,16 @@ angular
 	    				});
 	    			}
 	    		}
+	    	})
+	    	.state('main.home.loaddata.budget.originalbudget', {
+	    		url: '/original',
+	    		templateUrl: 'views/originalbudget.html',
+	    		controller: 'BudgetCtrl'
+	    	})
+	    	.state('main.home.loaddata.budget.currentbudget', {
+	    		url: '/modificado',
+	    		templateUrl: 'views/currentbudget.html',
+	    		controller: 'BudgetCtrl'
 	    	})
 	    	.state('main.home.loaddata.survey', {
 	    		url: '/encuesta',

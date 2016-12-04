@@ -1,40 +1,99 @@
-		<div class="panel panel-primary">
-	        <div class="panel-heading">
-	            <h2>Presupuesto</h2>  
-	        </div>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+	    <h2>Presupuesto</h2>  
+	</div>
 
-	            <div class="table-responsive">
-	                <table class="table table-hover table-condensed">
+	<div class="panel-body">
 
-	                    <tr>
-	                    	<th><center>Concepto</center></th>
-	                        <th><center>Descripción</center></th>
-	                        <th><center>Cantidad</center></th>
-	                        <th><center>Costo Bs (unitario)</center></th>
-	                        <th ng-if="user.userProfile == 'visitador' && canEdit()"><center>Acción</center></th>
-	                    </tr>
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs">
+			<li ui-sref-active="active"><a ui-sref=".originalbudget"><i class="glyphicon glyphicon-info-sign"></i> Presupuesto Original</a></li>
+		    <li ui-sref-active="active"><a ui-sref=".currentbudget"><i class="glyphicon glyphicon-list-alt"></i> Presupuesto Modificado</a></li>
+		</ul>
 
-	                    
-	                    <tr ng-repeat="item in budget.item">
-	                    	<td><center>{{item.concept}}</center></td>
-	                        <td><center>{{item.description}}</center></td>
-	                        <td><center>{{item.quantity}}</center></td>
-	                        <td><center>{{item.cost}}</center></td>
-	                        <td ng-if="user.userProfile == 'visitador' && canEdit()">
-	                        	<center>
-	                        		<button ng-click="edit(item, $index)" type="button" class="btn btn-warning btn-xs">Editar</button>
-	                        	</center>
-	                        </td>
-	                    </tr>
+		<!-- Tab panes -->
+		<div class="tab-content">
+		  	<br>
+		    <div ui-view></div>
+		</div>
 
-	                    <tr>
-				          <td><center><strong>- - - - - - -</strong></center></td>
-				          <td><center><strong>- - - - - - -</strong></center></td>
-				          <td><center><strong>- - - - - - -</strong></center></td>
-				          <th><center>Total: {{cost}} </center></th>
-				        </tr>
+		<!--<div class="col-sm-6">
+			
+			<div class="table-responsive">
+	            <table class="table table-hover table-condensed">
+
+	                <tr>
+	                	<th><center><strong>No.</strong></center></th>
+	                    <th><center>Concepto</center></th>
+	                    <th><center>Descripción</center></th>
+	                    <th><center>Cantidad</center></th>
+	                    <th><center>Costo Bs (unitario)</center></th>
+	                    <th><center>Editar</center></th>
+	                </tr>
+
+	                <tr ng-repeat="item in budget.item track by $index">
+	                	<td><center><strong>{{$index + 1}}</strong></center></td>
+	                    <td><center>{{item.concept}}</center></td>
+	                    <td><center>{{item.description}}</center></td>
+	                    <td><center>{{item.quantity}}</center></td>
+	                    <td><center>{{item.cost}}</center></td>
+	                   	<td><center>Editar</center></td>
+	                </tr>
+
+	                <tr>
+				        <td></td>
+				        <td></td>
+				        <td></td>
+				        <td></td>
+				        <th><center>Total: {{cost}} </center></th>
+				    </tr>
 	                   
-	                </table>
-	            </div>
+	            </table>
 	        </div>
-	    </div>
+
+		</div>
+
+		<div class="col-sm-6">
+			
+			<div class="table-responsive">
+	            <table class="table table-hover table-condensed">
+
+	                <tr>
+	                	<td><center><strong>No.</strong></center></td>
+	                    <th><center>Concepto</center></th>
+	                    <th><center>Descripción</center></th>
+	                    <th><center>Cantidad</center></th>
+	                    <th><center>Costo Bs (unitario)</center></th>
+	                    <th ng-if="user.userProfile == 'visitador' && canEdit()"><center>Acción</center></th>
+	                </tr>
+
+	                <tr ng-repeat="item in budget.item track by $index">
+	                	<td><center><strong>{{$index + 1}}</strong></center></td>
+	                    <td><center>{{item.concept}}</center></td>
+	                    <td><center>{{item.description}}</center></td>
+	                    <td><center>{{item.quantity}}</center></td>
+	                    <td><center>{{item.cost}}</center></td>
+	                    <td ng-if="user.userProfile == 'visitador' && canEdit()">
+	                       	<center>
+	                        	<button ng-click="edit(item, $index)" type="button" class="btn btn-warning btn-xs">Editar</button>
+	                        </center>
+	                    </td>
+	                </tr>
+
+	                <tr>
+				        <td></td>
+				        <td></td>
+				        <td></td>
+				        <td></td>
+				        <td></td>
+				        <th><center>Total: {{cost}} </center></th>
+				    </tr>
+	                   
+	            </table>
+	        </div>
+
+		</div>-->
+
+	</div>
+
+</div>

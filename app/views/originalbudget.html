@@ -1,0 +1,28 @@
+<div class="table-responsive">
+	<table class="table table-hover table-condensed">
+		<tr>
+	    	<th><center><strong>No.</strong></center></th>
+	        <th><center>Concepto</center></th>
+	        <th><center>Descripción</center></th>
+	        <th><center>Cantidad</center></th>
+	        <th><center>Costo Bs (unitario)</center></th>
+	    </tr>
+
+	    <tr ng-repeat="item in budget.item track by $index">
+	      	<td><center><strong>{{$index + 1}}</strong></center></td>
+	        <td><center>{{item.concept}}</center></td>
+	        <td><center>{{item.description}}</center></td>
+	        <td><center>{{item.quantity}}</center></td>
+	        <td><center>{{item.cost}}</center></td>
+	    </tr>
+
+	    <tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<th><center>Total: {{cost}} </center></th>
+		</tr>
+	                   
+	</table>
+</div>
