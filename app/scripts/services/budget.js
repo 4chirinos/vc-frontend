@@ -20,6 +20,10 @@ angular.module('frontend2App')
       return vcrestangular.all('budget').get('', {requestId: id}, {token: localStorageService.get('token')});
     };
 
+    budget.postBudget = function(obj) {
+      return vcrestangular.all('budget').post(obj, {}, {token: localStorageService.get('token')});
+    };
+
     budget.postDocument = function(id, files) {
 
       var fd = new FormData();

@@ -1,5 +1,5 @@
 <div class="table-responsive">
-	<table class="table table-hover table-condensed">
+	<table class="table table-hover table-condensed table-striped">
 
 	    <tr>
 	     	<td><center><strong>No.</strong></center></td>
@@ -10,7 +10,7 @@
 	        <th ng-if="user.userProfile == 'visitador' && canEdit()"><center>Acción</center></th>
 	    </tr>
 
-	    <tr ng-repeat="item in budget.item track by $index">
+	    <tr ng-repeat="item in currentBudget.item track by $index">
 	     	<td><center><strong>{{$index + 1}}</strong></center></td>
 	        <td><center>{{item.concept}}</center></td>
 	        <td><center>{{item.description}}</center></td>
@@ -28,9 +28,18 @@
 			<td></td>
 			<td></td>
 			<td></td>
-			<td></td>
-			<th><center>Total: {{cost}} </center></th>
+			<th><center>Total: {{currentCost}} </center></th>
+			<td ng-if="user.userProfile == 'visitador' && canEdit()"></td>
 		</tr>
 	                   
 	</table>
+</div>
+
+<div class="row" ng-if="user.userProfile == 'visitador' && canEdit()">
+    <center>
+        <button class="btn btn-md btn-info" ng-click="loadBudget()">
+            <span class="glyphicon glyphicon-open"></span> Cargar modificaciones
+        </button>
+        <p class="help-block">Las nuevas modificaciones sustituirán las anteriores</p>
+    </center>
 </div>

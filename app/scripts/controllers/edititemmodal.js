@@ -29,13 +29,15 @@ angular.module('frontend2App')
 
   		$scope.edited = function(valid) {
 
-  			item.partialUpdate($scope.it).then(function(response) {
+        $uibModalInstance.close($scope.it);
+
+  			/*item.partialUpdate($scope.it).then(function(response) {
   				$uibModalInstance.close(response.data);
   			}, function(response) {
   				if(response.status == 500) {
 			        toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
 			    }
-  			});
+  			});*/
 
 	    };
 
@@ -43,4 +45,4 @@ angular.module('frontend2App')
 			$uibModalInstance.dismiss('cancel');
 		};
 
-  	});
+  });

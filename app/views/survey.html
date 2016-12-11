@@ -15,7 +15,7 @@
           <label class="radio-inline"><input type="radio" ng-model="e" ng-value="4" ng-disabled="disabled()">Muy malo</label>
         </div>
       </div>-->
-      <div class="form-group" ng-repeat="question in form.question track by $index">        
+      <!--<div class="form-group" ng-repeat="question in form.question track by $index">        
         <label class="col-sm-12">{{question.question}}</label>
         <div class="col-sm-12">
           <label class="radio-inline"><input type="radio" ng-model="$parent.values[$index]" ng-value="5" ng-required="!$parent.values[$index]" ng-disabled="disabled()">Excelente</label>
@@ -24,6 +24,37 @@
           <label class="radio-inline"><input type="radio" ng-model="$parent.values[$index]" ng-value="2" ng-required="!$parent.values[$index]" ng-disabled="disabled()">Malo</label>
           <label class="radio-inline"><input type="radio" ng-model="$parent.values[$index]" ng-value="1" ng-required="!$parent.values[$index]" ng-disabled="disabled()">Muy malo</label>
         </div>
+      </div>-->
+
+      <div class="table-responsive">
+        <table class="table table-hover table-condensed table-striped">
+
+          <tr>
+            <th><center>No.<strong></strong></center></th>
+            <th><center>Pregunta</center></th>
+            <th><center>Calificación</center></th>
+          </tr>
+
+          <tr ng-repeat="question in form.question track by $index">
+            <td><center><strong>{{$index + 1}}</strong></center></td>
+            <td><center>{{question.question}}</center></td>
+            <td>
+              <center>
+                <label class="radio-inline"><input type="radio" ng-model="$parent.values[$index]" ng-value="5" ng-required="!$parent.values[$index]" ng-disabled="disabled()">Excelente</label>
+                <label class="radio-inline"><input type="radio" ng-model="$parent.values[$index]" ng-value="4" ng-required="!$parent.values[$index]" ng-disabled="disabled()">Bueno</label>
+                <label class="radio-inline"><input type="radio" ng-model="$parent.values[$index]" ng-value="3" ng-required="!$parent.values[$index]" ng-disabled="disabled()">Regular</label>
+                <label class="radio-inline"><input type="radio" ng-model="$parent.values[$index]" ng-value="2" ng-required="!$parent.values[$index]" ng-disabled="disabled()">Malo</label>
+                <label class="radio-inline"><input type="radio" ng-model="$parent.values[$index]" ng-value="1" ng-required="!$parent.values[$index]" ng-disabled="disabled()">Muy malo</label>
+                <!--<label class="radio-inline"><input type="radio">Excelente</label>
+                <label class="radio-inline"><input type="radio">Bueno</label>
+                <label class="radio-inline"><input type="radio">Regular</label>
+                <label class="radio-inline"><input type="radio">Malo</label>
+                <label class="radio-inline"><input type="radio">Muy malo</label>-->
+              </center>
+            </td>
+          </tr>
+                     
+        </table>
       </div>
 
 

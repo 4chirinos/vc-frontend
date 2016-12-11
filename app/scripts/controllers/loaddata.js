@@ -8,7 +8,7 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('LoaddataCtrl', function ($scope, $stateParams, toastr, session, response) {
+  	.controller('LoaddataCtrl', function ($scope, $state, $stateParams, toastr, session, response) {
 	    
   		$scope.user = session.getCurrentUser();
 
@@ -36,5 +36,9 @@ angular.module('frontend2App')
   			if($scope.user.userProfile == 'coordinador') return 'glyphicon glyphicon-question-sign';
   			return 'Algo';
   		};
+
+      $scope.shouldBeActive = function() {
+        return $state.includes("main.home.loaddata.budget.originalbudget") || $state.includes("main.home.loaddata.budget.currentbudget");
+      };
 
   	});
