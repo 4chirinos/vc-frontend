@@ -1,3 +1,7 @@
+.myHidden{
+   visibility:hidden;
+ }
+
 .navbar-static-top {
   margin-bottom:20px;
 }

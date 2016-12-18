@@ -21,8 +21,12 @@ angular.module('frontend2App')
   		};
 
   		$scope.downloadGuarantee = function() {
-  			window.open(baseUrl + '/document/budget/' + $scope.request.guaranteeLetter.budget.id);
+  			window.open(baseUrl + '/document/guaranteeLetter/request/' + $scope.request.id);
   		};
+
+        $scope.downloadSurvey = function() {
+            window.open(baseUrl + '/document/form/request/' + $scope.request.id);
+        };
 
   		$scope.load = function() {
   			$state.go(

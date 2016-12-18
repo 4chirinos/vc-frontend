@@ -64,6 +64,14 @@ angular.module('frontend2App')
               //$state.go('main.home.requestlist', {filter: filter}, {reload: true}); //second parameter is for $stateParams
             };
 
+            $scope.searchUsers = function() {
+              $state.go('main.home.userlist');
+            };
+
+            $scope.searchPersons = function() {
+              $state.go('main.home.personlist');
+            };
+
           }
     	};
 

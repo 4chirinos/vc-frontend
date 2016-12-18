@@ -12,17 +12,16 @@ angular.module('frontend2App')
   		
   		if(session.getToken()) {
 
-  			/*$rootScope.dt1 = null;
-		    $rootScope.dt2 = null;
-		    $rootScope.guaranteeId = null;
-		    $rootScope.guaranteeId = null;
-		    $rootScope.requestId = null;
-		    $rootScope.selectedFilter = '';
-		    $rootScope.obj = null;*/
+  			var user = session.getCurrentUser();
 
-	  		$state.go('main.home.requestlist', {
-	  			filter: ''
-	  		});
+  			if(user.userProfile == 'administrador') {
+		    	$state.go('main.home.personlist');
+		    } else {
+		    	$state.go('main.home.requestlist', {
+		  			filter: ''
+		  		});
+		    }
+		    
 	  	} else {
 	  		$state.go('login');
 	  	}

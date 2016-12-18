@@ -1,10 +1,10 @@
 
 <div ng-if="guaranteeLetter">
-  <a><strong><i class="glyphicon glyphicon-dashboard"></i> Detalles de la carta aval de código: {{guaranteeLetter.id}}</strong></a>
+  <a><strong><i class="glyphicon glyphicon-dashboard"></i> Detalles de la Carta Aval de Código: {{guaranteeLetter.id}}</strong></a>
 </div>
 
 <div ng-if="!guaranteeLetter">
-  <a><strong><i class="glyphicon glyphicon-dashboard"></i> No se encontró carta aval asociada al código.</strong></a>
+  <a><strong><i class="glyphicon glyphicon-dashboard"></i> No se encontró Carta Aval asociada al Código.</strong></a>
 </div>
 
 
@@ -14,7 +14,7 @@
   <div class="container-fluid">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title">Datos de carta aval</h3>
+        <h3 class="panel-title">Datos de Carta Aval</h3>
       </div>
       <br>
       <div class="container-fluid">
@@ -27,7 +27,7 @@
               <h5><span class="label" ng-class="statusColor2(guaranteeLetter)">{{statusText2(guaranteeLetter)}}</span></h5>
               <!--<p class="form-control-static img-rounded" ng-class="status(guaranteeLetter.status.status)"><strong>{{guaranteeLetter.status.status}}</strong></a>-->
             </div>
-            <label class="col-sm-2 control-label">Código carta aval:</label>
+            <label class="col-sm-2 control-label">Código Carta Aval:</label>
             <div class="col-sm-1">
               <p class="form-control-static">{{guaranteeLetter.id}}</p>
             </div>
@@ -49,7 +49,7 @@
               </div>
             </div>-->
             <div ng-if="canRequest()" class="col-sm-offset-1 col-sm-2">
-              <button ng-click="postRequest()" type="button" class="btn btn-danger btn-md">Solicitar visita</button>
+              <button ng-click="postRequest()" type="button" class="btn btn-danger btn-md">Solicitar Visita</button>
             </div>
           </div>
         <!--</form>-->
@@ -62,8 +62,8 @@
                 <div class="table-responsive">
                   <table class="table table-hover table-condensed">
                     <tr>
-                      <th><center>Código de visita</center></th>
-                      <th><center>Fecha solicitud</center></th>
+                      <th><center>Código de Visita</center></th>
+                      <th><center>Fecha Solicitud</center></th>
                       <th><center>Estatus</center></th>
                       <th><center>Acción</center></th>
                     </tr>
@@ -87,7 +87,7 @@
           <div class="panel panel-primary">
             <div class="panel-heading">
               <!--<h3 class="panel-title">Datos de la institución prestadora de servicio</h3>-->
-              Datos de la institución prestadora de servicio
+              Datos de la Institución Prestadora de Servicio
             </div>
             <div class="panel-body">
               <!--<form class="form-horizontal">-->
@@ -126,7 +126,7 @@
           <div class="panel panel-primary">
             <div class="panel-heading">
               <!--<h3 class="panel-title">Datos del beneficiario</h3>-->
-              Datos del beneficiario
+              Datos del Beneficiario
             </div>
             <div class="panel-body">
               <div class="form-group">

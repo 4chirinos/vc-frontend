@@ -1,0 +1,59 @@
+<a href="" ng-click="filter()"><strong><i class="glyphicon glyphicon-search"></i> Búsqueda de Usuarios</strong></a>
+<hr>
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+	    <h2>Usuarios</h2>
+	</div>
+
+	<div class="panel-body">
+	    <center>
+	        <nav>
+	            <ul class="pagination">
+	                <li>
+	                    <a ng-click="previousPage()" href="" aria-label="Previous">
+	                        <span aria-hidden="true">&laquo;</span>
+	                    </a>
+	                </li>
+	                <li ng-class="{'active': selectedPage == $index}" ng-repeat="i in [].constructor(pages) track by $index"><a ng-click="pageSelected($index)" href="">{{$index + 1}}</a></li>
+	                <li>
+	                    <a ng-click="nextPage()" href="" aria-label="Next">
+	                        <span aria-hidden="true">&raquo;</span>
+	                    </a>
+	                </li>
+	            </ul>
+	        </nav>
+	    </center>
+
+		<br>
+
+	        <div class="table-responsive">
+	            <table class="table table-hover table-condensed table-striped">
+
+	                <tr>
+	                	<th><center>Código de Visita</center></th>
+	                   	<th><center>Código Carta Aval</center></th>
+	                    <th><center>Fecha Solicitud</center></th>
+	                    <th><center>Estatus</center></th>
+	                    <th><center>Acción</center></th>
+	                </tr>
+
+	                    
+	               <tr ng-repeat="request in requests">
+	                	<td><center>{{request.id}}</center></td>
+	                   	<td><center>{{request.guaranteeLetter.id}}</center></td>
+	                   	<td><center>{{date(request.startDate)}}</center></td>
+	                   	<td><center><span class="label" ng-class="status(request.status.status)">{{statusText(request.status.status)}}</span></center></td>
+	                        <!--<td><center>status({{request.status.status}})</center></td>-->
+	                        <!--<td><center><p style="width: 100px" class="img-rounded" ng-class="status(request.status.status)">{{request.status.status}}</p></center></td>-->
+	                   <td>
+	                       	<center>
+	                        	<button ng-click="detail(request.id)" type="button" class="btn btn-primary btn-xs">Ver</button>
+	                        </center>
+	                    </td>
+	                </tr>
+	              
+	            </table>
+	        </div>
+	</div>
+</div>

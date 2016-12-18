@@ -57,21 +57,6 @@ angular
 	    		resolve: {
 	    			response: function($rootScope, $stateParams, request) {
 
-	    				/*if($rootScope.obj && $rootScope.obj.fill) {
-	    					return request.getRequest($rootScope.obj).then(function(response) {
-					    		return response;
-						  	}, function(response) {
-						  		return response;
-						  	});
-	    				} else {
-	    					//console.log('ahi voy');
-	    					return request.getRequest({page: 1, pageSize: 6, statusId: $stateParams.filter}).then(function(response) {
-					    		return response;
-						  	}, function(response) {
-						  		return response;
-						  	});
-	    				//}*/
-
 	    				var obj = {
 					    	guaranteeLetterId: $stateParams.guaranteeLetterId,
 					        requestId: $stateParams.requestId,
@@ -88,6 +73,51 @@ angular
 						  	return response;
 						});
 
+	    			}
+	    		}
+	    	})
+	    	.state('main.home.userlist', {
+	    		url: '/usuario',
+	    		templateUrl: 'views/userlist.html',
+	    		controller: 'UserlistCtrl'
+	    	})
+	    	.state('main.home.personlist', {
+	    		url: '/persona?identityCard&firstName&lastName&profileId&stateId',
+	    		templateUrl: 'views/personlist.html',
+	    		controller: 'PersonlistCtrl',
+	    		resolve: {
+	    			response: function($stateParams, person) {
+
+	    				var obj = {
+					    	identityCard: $stateParams.identityCard,
+					        firstName: $stateParams.firstName,
+					        lastName: $stateParams.lastName,
+					        profileId: $stateParams.profileId,
+					        stateId: $stateParams.stateId,
+					        page: 1,
+					        pageSize: 6
+					    };
+
+	    				return person.getPersonQS(obj)
+	    				.then(function(response) {
+	    					return response;
+	    				}, function(response) {
+	    					return response;
+	    				});
+	    			}
+	    		}
+	    	})
+	    	.state('main.home.persondetail', {
+	    		url: '/persona/:id/detalles',
+	    		templateUrl: 'views/persondetail.html',
+	    		controller: 'PersondetailCtrl',
+	    		resolve: {
+	    			response: function($stateParams, person) {
+	    				return person.getPersonById($stateParams.id).then(function(response) {
+	    					return response;
+			          	}, function(response) {
+			            	return response;
+			          	});
 	    			}
 	    		}
 	    	})

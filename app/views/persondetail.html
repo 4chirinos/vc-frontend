@@ -1,0 +1,96 @@
+<div ng-if="person">
+  <a><strong><i class="glyphicon glyphicon-user"></i> Detalles de la persona:</strong></a>
+</div>
+
+<div ng-if="!person">
+  <a><strong><i class="glyphicon glyphicon-user"></i> No se encontró persona asociada al Código.</strong></a>
+</div>
+
+
+<hr>
+
+<div ng-if="person">
+  <div class="container-fluid">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Datos de la persona</h3>
+      </div>
+      <br>
+      <div class="container-fluid">
+
+        <form class="form-horizontal">
+          <div class="form-group">
+           
+            <label class="col-sm-1 control-label">Cédula:</label>
+            <div class="col-sm-2">
+              <p class="form-control-static">{{person.identityCard}}</p>
+            </div>
+            <label class="col-sm-1 control-label">Nombre:</label>
+            <div class="col-sm-3">
+              <p class="form-control-static">{{person.firstName}} {{person.lastName}}</p>
+            </div>
+            <label class="col-sm-1 control-label">Cargo:</label>
+            <div class="col-sm-1">
+              <p class="form-control-static">{{person.profile.profile}}</p>
+            </div>
+            <div class="col-sm-3">
+              <button ng-class="{'myHidden': person.user.id }" ng-click="createUser()" type="button" class="btn btn-info btn-md">Crear Usuario</button>
+            </div>
+            
+            <label class="col-sm-1 control-label">Edad:</label>
+            <div class="col-sm-1">
+              <p class="form-control-static">{{age(person.birthDate)}}</p>
+            </div>
+            <label class="col-sm-1 control-label">Email:</label>
+            <div class="col-sm-3">
+              <p class="form-control-static">{{person.email}}</p>
+            </div>
+            <label class="col-sm-1 control-label">Teléfono:</label>
+            <div class="col-sm-2">
+              <p class="form-control-static">{{person.phoneNumber}}</p>
+            </div>
+            <label class="col-sm-1 control-label">Género:</label>
+            <div class="col-sm-2">
+              <p class="form-control-static">{{gender(person.gender)}}</p>
+            </div>
+
+            <label class="col-sm-1 control-label">Dirección:</label>
+            <div class="col-sm-2">
+              <p class="form-control-static">{{person.address}}</p>
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid" ng-if="person.user.id">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Datos del usuario asociado a la persona</h3>
+      </div>
+      <br>
+      <div class="container-fluid">
+
+        <form class="form-horizontal">
+          <div class="form-group">
+           
+            <label class="col-sm-1 control-label">Usuario:</label>
+            <div class="col-sm-2">
+              <p class="form-control-static">{{person.user.userName}}</p>
+            </div>
+            <label class="col-sm-1 control-label">Estatus:</label>
+            <div class="col-sm-1">
+              <h5><span class="label" ng-class="statusColor(person.user)">{{statusText(person.user)}}</span></h5>
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+</div>

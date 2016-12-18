@@ -17,7 +17,7 @@ angular.module('frontend2App')
 	  		if(valid) {
 
 		  		var data = {
-		  			identityCard: $scope.login.identityCard,
+		  			userName: $scope.login.identityCard,
 		  			password: $scope.login.password
 		  		};
 
@@ -26,10 +26,16 @@ angular.module('frontend2App')
 		  			session.setToken(response.data.token);
 
 			        session.setCurrentUser(response.data);
-			        
-			        $state.go('main.home.requestlist', {
-			        	filter: ''
-			        });
+
+			        var user = session.getCurrentUser();
+
+		  			if(user.userProfile == 'administrador') {
+				    	$state.go('main.home.personlist');
+				    } else {
+				    	$state.go('main.home.requestlist', {
+				  			filter: ''
+				  		});
+				    }
 
 		  		}, function(response) {
 

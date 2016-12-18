@@ -12,11 +12,13 @@ angular.module('frontend2App')
 
     	$scope.budget = budgetData.data;
 
+        //console.log('hola');
+
         if($scope.budget.currentBudget.id) {
             $scope.currentBudget = $scope.budget.currentBudget;
             $scope.currentBudget.flag = $scope.budget.currentBudget.id;
         } else {
-            $scope.currentBudget = $scope.budget;
+            $scope.currentBudget = angular.copy($scope.budget);
             $scope.currentBudget.flag = -1;
         }
 
@@ -28,9 +30,22 @@ angular.module('frontend2App')
     			cost += $scope.budget.item[i].cost * $scope.budget.item[i].quantity;
     		}
 
-    		$scope.cost = cost.toFixed(2);
+    		//$scope.cost = cost.toFixed(2);
+
+            cost = cost.toFixed(2);
+            cost = parseFloat(cost);
+            cost = cost.toLocaleString('de-DE');
+
+            $scope.cost = cost;
 
     	};
+
+        $scope.formattedCost = function(cost) {
+            cost = cost.toFixed(2);
+            cost = parseFloat(cost);
+            cost = cost.toLocaleString('de-DE');
+            return cost;
+        };
 
         var updateCurrentCost = function() {
 
@@ -40,7 +55,11 @@ angular.module('frontend2App')
                 cost += $scope.currentBudget.item[i].cost * $scope.currentBudget.item[i].quantity;
             }
 
-            $scope.currentCost = cost.toFixed(2);
+            cost = cost.toFixed(2);
+            cost = parseFloat(cost);
+            cost = cost.toLocaleString('de-DE');
+
+            $scope.currentCost = cost;
 
         };
 
