@@ -12,7 +12,7 @@ angular.module('frontend2App')
 
     	$scope.budget = budgetData.data;
 
-        //console.log('hola');
+        var arr = [];
 
         if($scope.budget.currentBudget.id) {
             $scope.currentBudget = $scope.budget.currentBudget;
@@ -89,6 +89,7 @@ angular.module('frontend2App')
 		    });
 
 		    modalInstance.result.then(function(it) {
+                arr[index] = true;
                 $scope.currentBudget.item[index] = it;
                 updateCurrentCost();
 		    	/*$rootScope.statusGroups = it.statusGroups;
@@ -100,6 +101,10 @@ angular.module('frontend2App')
 			});
 
     	};
+
+        $scope.edited = function(index) {
+            return arr[index];
+        };
 
         $scope.loadBudget = function() {
 
@@ -125,6 +130,7 @@ angular.module('frontend2App')
                 $scope.budget.currentBudget = response.data;
                 $scope.currentBudget = response.data;
                 $scope.currentBudget.flag = response.data.id;
+                arr = [];
             }, function(response) {
                 if(response.status == 500) {
                     toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');

@@ -21,7 +21,7 @@ angular.module('frontend2App')
   		};
 
   		$scope.downloadGuarantee = function() {
-  			window.open(baseUrl + '/document/guaranteeLetter/request/' + $scope.request.id);
+  			window.open(baseUrl + '/document/guaranteeLetter/' + $scope.request.guaranteeLetterId);
   		};
 
         $scope.downloadSurvey = function() {

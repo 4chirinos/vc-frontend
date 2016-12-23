@@ -8,7 +8,7 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('GuaranteeletterdetailCtrl', function ($rootScope, $scope, $state, $stateParams, $uibModal, toastr, request, session, response) {
+  	.controller('GuaranteeletterdetailCtrl', function ($rootScope, $scope, $state, $stateParams, $uibModal, toastr, request, session, baseUrl, response) {
         
 	    $scope.user = session.getCurrentUser();
 
@@ -25,6 +25,14 @@ angular.module('frontend2App')
     		$scope.guaranteeLetter = null;
     		toastr.error('No se encontró carta aval asociada al código.', 'Error');
     	}
+
+    	$scope.downloadBudget = function() {
+  			window.open(baseUrl + '/document/budget/' + $scope.guaranteeLetter.budget.id);
+  		};
+
+  		$scope.downloadGuarantee = function() {
+  			window.open(baseUrl + '/document/guaranteeLetter/' + $scope.guaranteeLetter.id);
+  		};
 
     	$scope.statusText = function(status) {
         	if($scope.user.userProfile == 'analista') {
@@ -128,8 +136,8 @@ angular.module('frontend2App')
 	    };
 
 	    $scope.gender = function(gender) {
-	    	if(gender == 'M') return 'Masculino';
-	    	return 'Femenino';
+	    	if(gender == 'M') return 'MASCULINO';
+	    	return 'FEMENINO';
 	    };
 
 	    $scope.age = function(date) {

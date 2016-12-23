@@ -15,16 +15,39 @@
                 <button ng-if="user.userProfile == 'analista'" ng-click="filter()" type="button" class="btn btn-link"><i class="glyphicon glyphicon-search"></i><strong> Búsqueda de carta aval</strong></button>
             </form>-->
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" role="button" data-toggle="dropdown" href=""><i class="glyphicon glyphicon-user"></i> {{user.firstName}} <span class="caret"></span></a>
-                    <ul id="g-account-menu" class="dropdown-menu" role="menu">
-                        <li><a ng-click="logout()" href=""><i class="glyphicon glyphicon-lock"></i> Salir</a></li>
-                    </ul>
-                </li>
-            </ul>
+
+        
+        <div class="hidden-xs hidden-sm" style="float: right; display: flex;">
+            <div style="padding-top: 15px; padding-right: 15px;">
+                <p style="color: white;">Ubicación: {{user.state}}</p>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" role="button" data-toggle="dropdown" href=""><i class="glyphicon glyphicon-user"></i> {{user.firstName}} <span class="caret"></span></a>
+                        <ul id="g-account-menu" class="dropdown-menu" role="menu">
+                            <li><a href=""><i class="glyphicon glyphicon-cog"></i> Configuración</a></li>
+                            <li><a ng-click="logout()" href=""><i class="glyphicon glyphicon-lock"></i> Salir</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
+
+        <div class="hidden-md hidden-lg">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" role="button" data-toggle="dropdown" href=""><i class="glyphicon glyphicon-user"></i> {{user.firstName}} <span class="caret"></span></a>
+                        <ul id="g-account-menu" class="dropdown-menu" role="menu">
+                            <li><a ng-click="logout()" href=""><i class="glyphicon glyphicon-lock"></i> Salir</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        
     </div>
     <!-- /container -->
 </div>

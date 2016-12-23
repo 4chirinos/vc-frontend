@@ -37,7 +37,8 @@ angular.module('frontend2App')
         lastName: data.user.person.lastName,
         identityCard: data.user.person.identityCard,
         email: data.user.person.email,
-        userProfile: data.user.profile.profile
+        userProfile: data.user.profile.profile,
+        state: data.user.person.state.stateName
       };
       localStorageService.set('currentUser', user);
     };

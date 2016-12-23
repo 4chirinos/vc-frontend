@@ -18,6 +18,14 @@ angular.module('frontend2App')
       return vcrestangular.all('user').get('', {page: page, pageSize: pageSize, profile: visitorProfile}, {token: localStorageService.get('token')});
     };
 
+    user.postUser = function(obj) {
+      return vcrestangular.all('user').post(obj, {}, {token: localStorageService.get('token')});
+    };
+
+    user.partialUpdate = function(obj) {
+      return vcrestangular.all('user/' + obj.id).patch(obj, {}, {token: localStorageService.get('token')});
+    };
+
     return user;
 
   });

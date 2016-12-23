@@ -8,8 +8,10 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('PersondetailCtrl', function ($scope, $stateParams, $state, toastr, $uibModal, response) {
+  	.controller('PersondetailCtrl', function ($scope, $stateParams, $state, toastr, session, user, $uibModal, response) {
     	
+    	$scope.user = session.getCurrentUser();
+
   		if(response.data.id) {
   			$scope.person = response.data;
   		} else {
@@ -32,8 +34,8 @@ angular.module('frontend2App')
 	    };
 
 	    $scope.gender = function(gender) {
-	    	if(gender == 'M') return 'Masculino';
-	    	return 'Femenino';
+	    	if(gender == 'M') return 'MASCULINO';
+	    	return 'FEMENINO';
 	    };
 
 	    $scope.createUser = function() {
@@ -54,7 +56,15 @@ angular.module('frontend2App')
 
             modalInstance.result.then(function(data) {
 
-		    	console.log('ok');
+		    	user.postUser({personId: $scope.person.id, profileId: data.profileId})
+		    	.then(function(response) {
+		    		$scope.person = response.data;
+		    		toastr.success('Creación de usuario hecha con exito.', 'Listo');
+		    	}, function(response) {
+		    		if(response.status == 500) {
+		    			toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+		    		}
+		    	});
 
 			}, function() {
 			   	console.log('Modal dismissed at: ' + new Date());
@@ -64,18 +74,78 @@ angular.module('frontend2App')
 
 	    $scope.statusColor = function(user) {
 	    	if(user.available) {
-	    		return 'label-danger';
-	    	} else {
 	    		return 'label-success';
+	    	} else {
+	    		return 'label-warning';
 	    	}
 	    };
 
 	    $scope.statusText = function(user) {
 	    	if(user.available) {
-	    		return 'deshabilitado';
-	    	} else {
 	    		return 'habilitado';
+	    	} else {
+	    		return 'deshabilitado';
 	    	}
+	    };
+
+	    $scope.userEnabled = function() {
+	    	user.partialUpdate({id: $scope.person.user.id, available: true})
+		    .then(function(response) {
+		    	$scope.person = response.data;
+		    	toastr.success('Habilitación de usuario hecha con exito.', 'Listo');
+		    }, function(response) {
+		    	if(response.status == 500) {
+		    		toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+		    	}
+		    });
+	    };
+
+	    $scope.userDisabled = function() {
+	    	user.partialUpdate({id: $scope.person.user.id, available: false})
+		    .then(function(response) {
+		    	$scope.person = response.data;
+		    	toastr.warning('Deshabilitación de usuario hecha con exito.', 'Listo');
+		    }, function(response) {
+		    	if(response.status == 500) {
+		    		toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+		    	}
+		    });
+	    };
+
+	    $scope.changeRole = function() {
+
+	    	var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/createusermodal.html',
+                controller: 'CreateusermodalCtrl',
+                size: 'md'
+            });
+
+            modalInstance.result.then(function(data) {
+
+		    	user.partialUpdate({id: $scope.person.user.id, profileId: data.profileId})
+			    .then(function(response) {
+			    	$scope.person = response.data;
+			    	toastr.success('Cambio de rol hecho con exito.', 'Listo');
+			    }, function(response) {
+			    	if(response.status == 500) {
+			    		toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+			    	}
+			    });
+
+			}, function() {
+			   	console.log('Modal dismissed at: ' + new Date());
+			});
+
+	    	/*user.partialUpdate({id: $scope.person.user.id, available: false})
+		    .then(function(response) {
+		    	$scope.person = response.data;
+		    	toastr.warning('Deshabilitación de usuario hecha con exito.', 'Listo');
+		    }, function(response) {
+		    	if(response.status == 500) {
+		    		toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+		    	}
+		    });*/
 	    };
 
   	});

@@ -8,7 +8,7 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('PersonlistCtrl', function ($scope, $stateParams, $state, toastr, person, response) {
+  	.controller('PersonlistCtrl', function ($scope, $stateParams, $state, toastr, $uibModal, person, response) {
     	
     	var pageSize = 6;
     	$scope.selectedPage = 0;
@@ -42,6 +42,30 @@ angular.module('frontend2App')
 		        }
 		  	});
 	  	};
+
+	  	$scope.filter = function() {
+
+        	//$stateParams.filter = '';
+        	
+        	var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'views/filterperson.html',
+				controller: 'FilterpersonCtrl',
+				size: 'sm'
+			});
+
+			modalInstance.result.then(function(/*r*/) {
+				/*$scope.params = r.params;
+				$stateParams.filter = '';
+				$scope.selectedPage = 0;
+				$scope.requests = r.response.data.requests;
+		    	$scope.pages = r.response.data.pageCount;
+		    	$rootScope.statusGroups = r.response.data.statusGroups;*/
+			}, function() {
+				console.log('Modal dismissed at: ' + new Date());
+			});
+
+        };
 
     	$scope.pageSelected = function(index) {
 	    	$scope.selectedPage = index;

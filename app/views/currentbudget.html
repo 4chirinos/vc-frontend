@@ -10,7 +10,7 @@
 	        <th ng-if="user.userProfile == 'visitador' && canEdit()"><center>Acción</center></th>
 	    </tr>
 
-	    <tr ng-repeat="item in currentBudget.item track by $index">
+	    <tr ng-repeat="item in currentBudget.item track by $index" ng-class="{'danger': edited($index)}">
 	     	<td><center><strong>{{$index + 1}}</strong></center></td>
 	        <td><center>{{item.concept}}</center></td>
 	        <td><center>{{item.description}}</center></td>
@@ -18,7 +18,7 @@
 	        <td><center>{{formattedCost(item.cost)}}</center></td>
 	        <td ng-if="user.userProfile == 'visitador' && canEdit()">
 	            <center>
-	             <button ng-click="edit(item, $index)" type="button" class="btn btn-warning btn-xs">Editar</button>
+	            	<button ng-click="edit(item, $index)" type="button" class="btn btn-warning btn-xs">Editar</button>
 	            </center>
 	        </td>
 	    </tr>

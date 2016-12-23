@@ -42,7 +42,7 @@ angular.module('frontend2App')
 	    };
 
 	    $scope.cancel = function () {
-			$uibModalInstance.dismiss('cancel');
-		};
+  			$uibModalInstance.dismiss('cancel');
+  		};
 
   });

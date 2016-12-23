@@ -27,9 +27,9 @@
       <ul class="list-inline">
         <li><button ng-click="downloadBudget()" type="button" class="btn btn-info btn-xs">Descargar Presupuesto</button></li>
         <li><button ng-click="downloadGuarantee()" type="button" class="btn btn-info btn-xs">Descargar Carta Aval</button></li>
-        <li><button ng-click="downloadSurvey()" type="button" class="btn btn-info btn-xs">Descargar Encuesta</button></li>
+        <li ng-if="user.userProfile == 'visitador'""><button ng-click="downloadSurvey()" type="button" class="btn btn-info btn-xs">Descargar Encuesta</button></li>
       </ul>
-     </center>
+    </center>
 
       <!--<div ng-if="user.userProfile == 'analista'">
         <div ng-if="request.statusId == 2">
@@ -148,14 +148,14 @@
                   <p class="form-control-static">{{request.guaranteeLetter.budget.affiliated.name}}</p>
                 </div>
                 <label class="col-sm-2 control-label">Estado:</label>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                   <p class="form-control-static">{{request.guaranteeLetter.budget.affiliated.state.stateName}}</p>
                 </div>
                 <label class="col-sm-2 control-label">Teléfono:</label>
                 <div class="col-sm-2">
                   <p class="form-control-static">{{request.guaranteeLetter.budget.affiliated.phoneNumber}}</p>
                 </div>
-                <label class="col-sm-2 control-label">RIF:</label>
+                <label class="col-sm-1 control-label">RIF:</label>
                 <div class="col-sm-2">
                   <p class="form-control-static">{{request.guaranteeLetter.budget.affiliated.rif}}</p>
                 </div>
