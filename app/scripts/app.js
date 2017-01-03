@@ -47,6 +47,11 @@ angular
 	    		controller: 'HomeCtrl',
 	    		abstract: true
 		    })
+		    .state('main.home.config', {
+	    		url: '/configuracion',
+	    		templateUrl: 'views/userconfiguration.html',
+	    		controller: 'UserconfigurationCtrl'
+		    })
 	    	.state('main.home.requestlist', {
 	    		url: '/solicitud?statusId&guaranteeLetterId&requestId&sd1&sd2', /*'/cartaaval?guaranteeId&status&firstName&lastName&BidentityCard'*/
 	    		templateUrl: 'views/requestlist.html',

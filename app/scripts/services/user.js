@@ -26,6 +26,10 @@ angular.module('frontend2App')
       return vcrestangular.all('user/' + obj.id).patch(obj, {}, {token: localStorageService.get('token')});
     };
 
+    user.verifyUsername = function(obj) {
+      return vcrestangular.all('verification/user/username').get('', obj, {token: localStorageService.get('token')});
+    };
+
     return user;
 
   });

@@ -1,0 +1,45 @@
+<div class="modal-header modal-header-primary">
+    <h3 class="modal-title">Cambio de Nombre de Usuario</h3>
+</div>
+<div class="modal-body">
+    
+    <div class="container-fluid">
+	    
+	    <form name="form" class="form-horizontal">
+
+			<div class="form-group has-feedback" ng-class="feedClass()">
+			  <label class="col-sm-5 control-label">Nuevo Nombre de Usuario:</label>
+			  <div class="input-group col-sm-7">
+			    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+			    <input type="text" class="form-control" ng-model="userName" ng-change="verifyUserName()" placeholder="Nuevo Nombre de Usuario">
+			    <div ng-if="feedClass() == 'has-warning'">
+				    <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+	  				<span class="sr-only">(warning)</span>
+  				</div>
+  				<div ng-if="feedClass() == 'has-success'">
+				    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+	  				<span class="sr-only">(success)</span>
+  				</div>
+			  </div>
+			  <center ng-if="feedClass() == 'has-error'"><p class="help-block">El nombre de usuario es inválido o ya existe. Por favor, intente con otro.</p></center>
+			</div>
+
+		</form>
+
+		
+		<div class="text-danger">
+			Reglas para el Nombre de Usuario:
+			<ul>
+			  <li>Debe estar conformado solo por letras y números.</li>
+			  <li>Debe tener una longitud entre 4 y 10 carácteres.</li>
+			</ul>
+		</div>
+		
+
+	</div>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()" ng-disabled="canSubmit()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+</div>

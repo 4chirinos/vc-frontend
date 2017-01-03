@@ -95,6 +95,10 @@ angular.module('frontend2App')
 	          		});
 	        	};
 
+	        	$scope.config = function() {
+	        		$state.go('main.home.config');
+	        	};
+
 	      	}
 
     	};

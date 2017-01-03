@@ -38,9 +38,14 @@ angular.module('frontend2App')
         identityCard: data.user.person.identityCard,
         email: data.user.person.email,
         userProfile: data.user.profile.profile,
-        state: data.user.person.state.stateName
+        state: data.user.person.state.stateName,
+        userName: data.user.userName
       };
       localStorageService.set('currentUser', user);
+    };
+
+    session.setCurrentUser2 = function(data) {
+      localStorageService.set('currentUser', data);
     };
 
     session.getCurrentUser = function() {
