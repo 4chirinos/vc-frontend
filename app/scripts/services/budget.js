@@ -16,6 +16,11 @@ angular.module('frontend2App')
       return vcrestangular.all('budget').get(id, {}, {token: localStorageService.get('token')});
     };
 
+    budget.getCurrentBudget = function(id, obj) {
+      return vcrestangular.all('budget/' + id + '/currentBudget')
+      .get('', obj, {token: localStorageService.get('token')});
+    };
+
     budget.getByRequestId = function(id) {
       return vcrestangular.all('budget').get('', {requestId: id}, {token: localStorageService.get('token')});
     };

@@ -8,18 +8,28 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('BudgetCtrl', function ($rootScope, $scope, $uibModal, toastr, budgetData, session, budget, response) {
+  	.controller('BudgetCtrl', function ($rootScope, $stateParams, $scope, $uibModal, toastr, budgetData, session, budget, response, lastCurrentBudget) {
 
     	$scope.budget = budgetData.data;
 
+        console.log(lastCurrentBudget.data);
+
+        /*if(lastCurrentBudget.data.budgets) {
+            $scope.pages = lastCurrentBudget.data.pageCount;
+            $scope.selectedPage = $scope.pages - 1;
+            $scope.currentBudget = lastCurrentBudget.data.budgets[0]; 
+        }*/
+
         var arr = [];
 
-        if($scope.budget.currentBudget.id) {
-            $scope.currentBudget = $scope.budget.currentBudget;
-            $scope.currentBudget.flag = $scope.budget.currentBudget.id;
+        if(lastCurrentBudget.data != [] && lastCurrentBudget.data.budgets.length > 0) {
+            //var i = lastCurrentBudget.data.budgets.length;
+            $scope.currentBudget = angular.copy(lastCurrentBudget.data.budgets[0]);
+            $scope.pages = lastCurrentBudget.data.pageCount;
+            $scope.selectedPage = $scope.pages - 1;
         } else {
             $scope.currentBudget = angular.copy($scope.budget);
-            $scope.currentBudget.flag = -1;
+            $scope.pages = 0;
         }
 
     	var updateCost = function() {
@@ -66,6 +76,10 @@ angular.module('frontend2App')
     	updateCost();
         updateCurrentCost();
 
+        /*if($scope.currentBudget) {
+            updateCurrentCost();
+        }*/
+
     	$scope.canEdit = function() {
     		if(response.data.statusId == '3' || response.data.statusId == '5')
     			return true;
@@ -108,9 +122,16 @@ angular.module('frontend2App')
 
         $scope.loadBudget = function() {
 
+            var parent;
+
+            if($scope.currentBudget.budgetId) {
+                parent = $scope.currentBudget.budgetId
+            } else {
+                parent = $scope.currentBudget.id;
+            }
+
             var obj = {
-                id: $scope.currentBudget.flag,
-                parentBudgetId: $scope.currentBudget.id,
+                parentBudgetId: parent,
                 items: []
             };
 
@@ -122,20 +143,67 @@ angular.module('frontend2App')
                 obj.items[i] = $scope.currentBudget.item[i];
             }
 
-            //console.log(obj);
-
             budget.postBudget(obj).then(function(response) {
                 toastr.success('Cambios hechos con éxito.', 'Listo');
-                budgetData.data.currentBudget = response.data;
-                $scope.budget.currentBudget = response.data;
+                //budgetData.data.currentBudget = response.data;
+                //$scope.budget.currentBudget = response.data;
                 $scope.currentBudget = response.data;
-                $scope.currentBudget.flag = response.data.id;
+                lastCurrentBudget.data.budgets[0] = response.data;
+                lastCurrentBudget.data.pageCount++;
+                $scope.pages++;
+                $scope.selectedPage = $scope.pages - 1;
                 arr = [];
             }, function(response) {
                 if(response.status == 500) {
                     toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
                 }
             })
+        };
+
+        var getCurrentBudget = function(page) {
+
+            var obj = {
+                page: page
+            };
+
+            return budget.getCurrentBudget($stateParams.id, obj)
+            .then(function(response) {
+                $scope.currentBudget = response.data.budgets[0];
+                console.log($scope.currentBudget);
+            }, function(response) {
+                if(response.status == 500) {
+                    toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+                }
+            });
+            
+        };
+
+        $scope.pageSelected = function(index) {
+            $scope.selectedPage = index;
+            getCurrentBudget($scope.selectedPage + 1);
+            //getRequest($scope.selectedPage + 1);
+        };
+
+        $scope.previousPage = function() {
+            if($scope.selectedPage - 1 >= 0) {
+                $scope.selectedPage--;
+                getCurrentBudget($scope.selectedPage + 1);
+                //getRequest($scope.selectedPage + 1);
+            }
+            else {
+                console.log('extremo izquierdo');
+            }
+        };
+
+        $scope.nextPage = function() {
+            if($scope.selectedPage + 1 < $scope.pages) {
+                $scope.selectedPage++;
+                getCurrentBudget($scope.selectedPage + 1);
+                //getRequest($scope.selectedPage + 1);
+            }
+            else {
+                console.log('extremo derecho');
+            }
         };
 
   	});

@@ -139,7 +139,7 @@ angular.module('frontend2App')
 
 	    	if(startDate[0] > endDate[0]) return 'label-danger';
 	    	if(startDate[1] > endDate[1]) return 'label-danger';
-	    	if(startDate[2] > endDate[2]) return 'label-danger';
+	    	if(startDate[2] > endDate[2] && startDate[1] >= endDate[1]) return 'label-danger';
 
 	      	return 'label-success';
 	    };
@@ -150,7 +150,7 @@ angular.module('frontend2App')
 
 	    	if(startDate[0] > endDate[0]) return 'vencida';
 	    	if(startDate[1] > endDate[1]) return 'vencida';
-	    	if(startDate[2] > endDate[2]) return 'vencida';
+	    	if(startDate[2] > endDate[2] && startDate[1] >= endDate[1]) return 'vencida';
 
 	      	return guarantee.status.status;
 	    };
@@ -170,7 +170,7 @@ angular.module('frontend2App')
 
 	    	if(startDate[0] > endDate[0]) return false;
 	    	if(startDate[1] > endDate[1]) return false;
-	    	if(startDate[2] > endDate[2]) return false;
+	    	if(startDate[2] > endDate[2] && startDate[1] >= endDate[1]) return false;
 
 	    	for(var i = 0; i < guarantee.request.length; i++) {
 	    		if(guarantee.request[i].status.id != 6) return false;

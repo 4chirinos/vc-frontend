@@ -170,6 +170,19 @@ angular
 	    				}, function(response) {
 	    					return response;
 	    				});
+	    			},
+	    			lastCurrentBudget: function($stateParams, budget) {
+
+	    				var obj = {
+	    					lastPage: true
+	    				};
+
+	    				return budget.getCurrentBudget($stateParams.id, obj)
+	    				.then(function(response) {
+	    					return response;
+	    				}, function(response) {
+	    					return response;
+	    				});
 	    			}
 	    		}
 	    	})
