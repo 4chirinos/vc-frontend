@@ -1,12 +1,3 @@
-<!--<div ng-if="request">
-  <a><strong><i class="glyphicon glyphicon-dashboard"></i> Detalles de la solicitud: # {{request.id}}</strong></a>
-</div>
-
-<div ng-if="!request">
-  <a><strong><i class="glyphicon glyphicon-dashboard"></i> No se encontró visita asociada al código.</strong></a>
-</div>
-
-<hr>-->
 
 <div ng-if="request">
 
@@ -29,110 +20,7 @@
         <li><button ng-click="downloadGuarantee()" type="button" class="btn btn-info btn-xs">Descargar Carta Aval</button></li>
         <li ng-if="user.userProfile == 'visitador'"><button ng-click="downloadSurvey()" type="button" class="btn btn-info btn-xs">Descargar Encuesta</button></li>
       </ul>
-    </center>
-
-      <!--<div ng-if="user.userProfile == 'analista'">
-        <div ng-if="request.statusId == 2">
-          <div class="alert alert-danger" role="alert">
-            <center>Solicitud de visita no asignada.</center>
-          </div>     
-        </div>
-        <div ng-if="request.statusId == 3">
-          <div class="alert alert-info" role="alert">
-            <center>Solicitud de visita asignada.</center>
-          </div>    
-        </div>
-        <div ng-if="request.statusId == 4">
-          <div class="alert alert-success" role="alert">
-            <center>Solicitud atendida.</center>
-          </div>      
-        </div>
-        <div ng-if="request.statusId == 5">
-          <div class="alert alert-warning" role="alert">
-            <center>Solicitud de visita en revisión.</center>
-          </div>
-        </div>
-        <div ng-if="request.statusId == 6">
-          <div class="alert alert-success" role="alert">
-            <center>Solicitud de visita completada.</center>
-          </div>
-        </div>
-      </div>
-
-      <div ng-if="user.userProfile == 'coordinador'">
-        <div ng-if="request.statusId == 2">
-          <div class="alert alert-danger" role="alert">
-            <center>Solicitud de visita no asignada. <a ng-click="assign()" href="" class="alert-link"><strong>Asignar</strong></a></center>
-          </div>     
-        </div>
-        <div ng-if="request.statusId == 3">
-          <div class="alert alert-info" role="alert">
-            <center>Solicitud de visita asignada.</center>
-          </div>      
-        </div>
-        <div ng-if="request.statusId == 4">
-          <div class="alert alert-success" role="alert">
-            <center>Solicitud atendida.</center>
-          </div>      
-        </div>
-        <div ng-if="request.statusId == 5">
-          <div class="alert alert-warning" role="alert">
-            <center>Solicitud de visita en revisión.</center>
-          </div>
-        </div>
-        <div ng-if="request.statusId == 6">
-          <div class="alert alert-success" role="alert">
-            <center>Solicitud de visita completada.</center>
-          </div>
-        </div>
-      </div>
-
-      <div ng-if="user.userProfile == 'visitador'">
-        <div ng-if="request.statusId == 3">
-          <div class="alert alert-danger" role="alert">
-            <center>
-              Solicitud de visita pendiente.<br>
-              </center>
-          </div>
-          <center>
-            <ul class="list-inline">
-              <li><button ng-click="downloadBudget()" type="button" class="btn btn-info btn-xs">Ver presupuesto</button></li>
-              <li><button ng-click="downloadGuarantee()" type="button" class="btn btn-info btn-xs">Ver carta aval</button></li>
-            </ul>
-            </center>
-        </div> 
-        <div ng-if="request.statusId == 4">
-          <div class="alert alert-info" role="alert">
-            <center>Solicitud atendida.</center>
-          </div>      
-        </div> 
-        <div ng-if="request.statusId == 5">
-          <div class="alert alert-warning" role="alert">
-            <center>
-              Solicitud de visita en revisión.<br>
-              </center>
-          </div>
-          <center>
-            <ul class="list-inline">
-              <li><button ng-click="downloadBudget()" type="button" class="btn btn-info btn-xs">Ver presupuesto</button></li>
-              <li><button ng-click="downloadGuarantee()" type="button" class="btn btn-info btn-xs">Ver carta aval</button></li>
-            </ul>
-            </center>
-        </div>
-        <div ng-if="request.statusId == 6">
-          <div class="alert alert-success" role="alert">
-            <center>
-              Solicitud de visita completada.<br>
-              </center>
-          </div>
-          <center>
-            <ul class="list-inline">
-              <li><button ng-click="downloadBudget()" type="button" class="btn btn-info btn-xs">Ver presupuesto</button></li>
-              <li><button ng-click="downloadGuarantee()" type="button" class="btn btn-info btn-xs">Ver carta aval</button></li>
-            </ul>
-            </center>
-        </div>
-      </div>-->     
+    </center>    
         
     <div class="row">
       <div class="col-sm-12 col-md-8">
@@ -173,46 +61,6 @@
             </form>
           </div>
         </div>
-
-        <!--<div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Datos del asegurado</h3>
-          </div>
-          <div class="panel-body">
-            <form class="form-horizontal">
-              <div class="form-group">
-                <label class="col-sm-3 col-md-2 control-label">Nombre:</label>
-                <div class="col-sm-3 col-md-2">
-                  <p class="form-control-static">{{request.guaranteeLetter.policy.owner.firstName}} {{request.guaranteeLetter.policy.holder.lastName}}</p>
-                </div>
-                <label class="col-sm-3 col-md-2 control-label">Cédula:</label>
-                <div class="col-sm-3 col-md-2">
-                  <p class="form-control-static">{{request.guaranteeLetter.policy.owner.identityCard}}</p>
-                </div>
-                <label class="col-sm-3 col-md-2 control-label">Género:</label>
-                <div class="col-sm-3 col-md-2">
-                  <p class="form-control-static">{{gender(request.guaranteeLetter.policy.owner.gender)}}</p>
-                </div>
-                <label class="col-sm-3 col-md-2 control-label">Edad:</label>
-                <div class="col-sm-3 col-md-2">
-                  <p class="form-control-static">{{age(request.guaranteeLetter.policy.owner.birthDate)}}</p>
-                </div>
-                <label class="col-sm-3 col-md-2 control-label">Teléfono:</label>
-                <div class="col-sm-3 col-md-2">
-                  <p class="form-control-static">{{request.guaranteeLetter.policy.owner.phoneNumber}}</p>
-                </div>
-                <label class="col-sm-2 col-md-1 control-label">Email:</label>
-                <div class="col-sm-4 col-md-3">
-                  <p class="form-control-static">{{request.guaranteeLetter.policy.owner.email}}</p>
-                </div>
-                <label class="col-sm-3 col-md-2 control-label">Dirección:</label>
-                <div class="col-sm-9 col-md-10">
-                  <p class="form-control-static">{{request.guaranteeLetter.policy.holder.address}}</p>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>-->
 
         <div class="panel panel-primary">
           <div class="panel-heading">

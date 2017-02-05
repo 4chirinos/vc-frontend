@@ -16,6 +16,16 @@
 	</nav>
 </center>
 
+<center>
+	<a>
+		<strong class="text-danger">
+			<i class="glyphicon glyphicon-dashboard"></i> Fecha y Hora de Carga: {{date(currentBudget.startDate)}} {{hour(currentBudget.startDate)}}
+		</strong>
+	</a>
+</center>
+
+<br>
+
 <div class="table-responsive">
 	<table class="table table-hover table-condensed table-striped">
 
@@ -25,7 +35,7 @@
 	        <th><center>Descripción</center></th>
 	        <th><center>Cantidad</center></th>
 	        <th><center>Costo Bs (unitario)</center></th>
-	        <th ng-if="user.userProfile == 'visitador' && canEdit()"><center>Acción</center></th>
+	        <th ng-if="user.userProfile == 'visitador' && canEdit() && selectedPage + 1 == pages"><center>Acción</center></th>
 	    </tr>
 
 	    <tr ng-repeat="item in currentBudget.item track by $index" ng-class="{'danger': edited($index)}">
@@ -34,7 +44,7 @@
 	        <td><center>{{item.description}}</center></td>
 	        <td><center>{{item.quantity}}</center></td>
 	        <td><center>{{formattedCost(item.cost)}}</center></td>
-	        <td ng-if="user.userProfile == 'visitador' && canEdit()">
+	        <td ng-if="user.userProfile == 'visitador' && canEdit() && selectedPage + 1 == pages">
 	            <center>
 	            	<button ng-click="edit(item, $index)" type="button" class="btn btn-warning btn-xs">Editar</button>
 	            </center>
@@ -53,10 +63,10 @@
 	</table>
 </div>
 
-<div class="row" ng-if="user.userProfile == 'visitador' && canEdit()">
+<div class="row" ng-if="user.userProfile == 'visitador' && canEdit() && selectedPage + 1 == pages && anyEdited() > 0">
     <center>
         <button class="btn btn-md btn-info" ng-click="loadBudget()">
-            <span class="glyphicon glyphicon-open"></span> Cargar modificaciones
+            <span class="glyphicon glyphicon-open"></span> Cargar
         </button>
         <p class="help-block">Las nuevas modificaciones sustituirán las anteriores</p>
     </center>

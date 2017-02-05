@@ -12,14 +12,6 @@ angular.module('frontend2App')
 
     	$scope.budget = budgetData.data;
 
-        console.log(lastCurrentBudget.data);
-
-        /*if(lastCurrentBudget.data.budgets) {
-            $scope.pages = lastCurrentBudget.data.pageCount;
-            $scope.selectedPage = $scope.pages - 1;
-            $scope.currentBudget = lastCurrentBudget.data.budgets[0]; 
-        }*/
-
         var arr = [];
 
         if(lastCurrentBudget.data != [] && lastCurrentBudget.data.budgets.length > 0) {
@@ -39,8 +31,6 @@ angular.module('frontend2App')
     		for(var i = 0; i < $scope.budget.item.length; i++) {
     			cost += $scope.budget.item[i].cost * $scope.budget.item[i].quantity;
     		}
-
-    		//$scope.cost = cost.toFixed(2);
 
             cost = cost.toFixed(2);
             cost = parseFloat(cost);
@@ -75,10 +65,6 @@ angular.module('frontend2App')
 
     	updateCost();
         updateCurrentCost();
-
-        /*if($scope.currentBudget) {
-            updateCurrentCost();
-        }*/
 
     	$scope.canEdit = function() {
     		if(response.data.statusId == '3' || response.data.statusId == '5')
@@ -117,7 +103,7 @@ angular.module('frontend2App')
     	};
 
         $scope.edited = function(index) {
-            return arr[index];
+            return arr[index] && $scope.selectedPage + 1 == $scope.pages;
         };
 
         $scope.loadBudget = function() {
@@ -160,6 +146,16 @@ angular.module('frontend2App')
             })
         };
 
+        $scope.date = function(date) {
+            var currentdate = new Date(date);
+            return currentdate.getDate() + '/' + (currentdate.getMonth() + 1) + '/' + currentdate.getFullYear();
+        };
+
+        $scope.hour = function(date) {
+            var currentdate = new Date(date);
+            return currentdate.getHours() + ':' + currentdate.getMinutes(); 
+        };
+
         var getCurrentBudget = function(page) {
 
             var obj = {
@@ -169,7 +165,6 @@ angular.module('frontend2App')
             return budget.getCurrentBudget($stateParams.id, obj)
             .then(function(response) {
                 $scope.currentBudget = response.data.budgets[0];
-                console.log($scope.currentBudget);
             }, function(response) {
                 if(response.status == 500) {
                     toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
@@ -178,9 +173,14 @@ angular.module('frontend2App')
             
         };
 
+        $scope.anyEdited = function() {
+            return arr.length;
+        };
+
         $scope.pageSelected = function(index) {
             $scope.selectedPage = index;
             getCurrentBudget($scope.selectedPage + 1);
+            arr = [];
             //getRequest($scope.selectedPage + 1);
         };
 
@@ -188,6 +188,7 @@ angular.module('frontend2App')
             if($scope.selectedPage - 1 >= 0) {
                 $scope.selectedPage--;
                 getCurrentBudget($scope.selectedPage + 1);
+                arr = [];
                 //getRequest($scope.selectedPage + 1);
             }
             else {
@@ -199,6 +200,7 @@ angular.module('frontend2App')
             if($scope.selectedPage + 1 < $scope.pages) {
                 $scope.selectedPage++;
                 getCurrentBudget($scope.selectedPage + 1);
+                arr = [];
                 //getRequest($scope.selectedPage + 1);
             }
             else {
