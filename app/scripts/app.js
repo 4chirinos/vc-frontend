@@ -202,7 +202,7 @@ angular
 	    		controller: 'SurveyCtrl',
 	    		resolve: {
 	    			formData: function($stateParams, request) {
-	    				return request.getForm($stateParams.id)
+	    				return request.getForm($stateParams.id, {lastPage: true})
 	    				.then(function(response) {
 	    					return response;
 	    				}, function(response) {

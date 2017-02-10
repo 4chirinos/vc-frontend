@@ -14,14 +14,16 @@ angular.module('frontend2App')
 
         var arr = [];
 
-        if(lastCurrentBudget.data != [] && lastCurrentBudget.data.budgets.length > 0) {
-            //var i = lastCurrentBudget.data.budgets.length;
+        //console.log(lastCurrentBudget);
+
+        if(lastCurrentBudget.data != 'nada' && lastCurrentBudget.data.budgets.length > 0) {
             $scope.currentBudget = angular.copy(lastCurrentBudget.data.budgets[0]);
             $scope.pages = lastCurrentBudget.data.pageCount;
             $scope.selectedPage = $scope.pages - 1;
         } else {
             $scope.currentBudget = angular.copy($scope.budget);
-            $scope.pages = 0;
+            $scope.pages = 1;
+            $scope.selectedPage = $scope.pages - 1;
         }
 
     	var updateCost = function() {
@@ -134,8 +136,16 @@ angular.module('frontend2App')
                 //budgetData.data.currentBudget = response.data;
                 //$scope.budget.currentBudget = response.data;
                 $scope.currentBudget = response.data;
-                lastCurrentBudget.data.budgets[0] = response.data;
-                lastCurrentBudget.data.pageCount++;
+                if(lastCurrentBudget.data != 'nada') {
+                    lastCurrentBudget.data.budgets[0] = response.data;
+                    lastCurrentBudget.data.pageCount++;
+                } else {
+                    lastCurrentBudget.data = {};
+                    lastCurrentBudget.data.pageCount = 0;
+                    lastCurrentBudget.data.budgets = [];
+                    lastCurrentBudget.data.budgets[0] = response.data;
+                    lastCurrentBudget.data.pageCount++;
+                }
                 $scope.pages++;
                 $scope.selectedPage = $scope.pages - 1;
                 arr = [];
@@ -178,10 +188,15 @@ angular.module('frontend2App')
         };
 
         $scope.pageSelected = function(index) {
-            $scope.selectedPage = index;
-            getCurrentBudget($scope.selectedPage + 1);
-            arr = [];
-            //getRequest($scope.selectedPage + 1);
+            if(index == 0) {
+                $scope.currentBudget = angular.copy($scope.budget);
+                $scope.selectedPage = 0;
+                arr = [];
+            } else {
+                $scope.selectedPage = index;
+                getCurrentBudget($scope.selectedPage + 1);
+                arr = [];
+            }
         };
 
         $scope.previousPage = function() {
@@ -189,7 +204,6 @@ angular.module('frontend2App')
                 $scope.selectedPage--;
                 getCurrentBudget($scope.selectedPage + 1);
                 arr = [];
-                //getRequest($scope.selectedPage + 1);
             }
             else {
                 console.log('extremo izquierdo');
@@ -201,7 +215,6 @@ angular.module('frontend2App')
                 $scope.selectedPage++;
                 getCurrentBudget($scope.selectedPage + 1);
                 arr = [];
-                //getRequest($scope.selectedPage + 1);
             }
             else {
                 console.log('extremo derecho');

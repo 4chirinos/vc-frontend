@@ -18,8 +18,11 @@
 
 <center>
 	<a>
-		<strong class="text-danger">
+		<strong ng-if="selectedPage != 0" class="text-danger">
 			<i class="glyphicon glyphicon-dashboard"></i> Fecha y Hora de Carga: {{date(currentBudget.startDate)}} {{hour(currentBudget.startDate)}}
+		</strong>
+		<strong ng-if="selectedPage == 0" class="text-danger">
+			<i class="glyphicon glyphicon-dashboard"></i> Versión Original
 		</strong>
 	</a>
 </center>
