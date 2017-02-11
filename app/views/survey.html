@@ -22,6 +22,16 @@
     </nav>
   </center>
 
+  <center>
+    <a>
+      <strong class="text-danger">
+        <i class="glyphicon glyphicon-dashboard"></i> Fecha y Hora de Carga: {{date(formSubmitDate)}} {{hour(formSubmitDate)}}
+      </strong>
+    </a>
+  </center>
+
+  <br>
+
     <form class="form-horizontal">
 
       <div class="table-responsive">
@@ -38,11 +48,11 @@
             <td><center>{{question.question}}</center></td>
             <td>
               <center>
-                <label class="radio-inline"><input type="radio" ng-model="$parent.values[$index]" ng-value="5" ng-required="!$parent.values[$index]" ng-disabled="disabled()">Excelente</label>
-                <label class="radio-inline"><input type="radio" ng-model="$parent.values[$index]" ng-value="4" ng-required="!$parent.values[$index]" ng-disabled="disabled()">Bueno</label>
-                <label class="radio-inline"><input type="radio" ng-model="$parent.values[$index]" ng-value="3" ng-required="!$parent.values[$index]" ng-disabled="disabled()">Regular</label>
-                <label class="radio-inline"><input type="radio" ng-model="$parent.values[$index]" ng-value="2" ng-required="!$parent.values[$index]" ng-disabled="disabled()">Malo</label>
-                <label class="radio-inline"><input type="radio" ng-model="$parent.values[$index]" ng-value="1" ng-required="!$parent.values[$index]" ng-disabled="disabled()">Muy malo</label>
+                <label class="radio-inline"><input type="radio" ng-model="$parent.values[$index]" ng-value="5" ng-required="!$parent.values[$index]" ng-disabled="disabled() || selectedPage + 1 != pages">Excelente</label>
+                <label class="radio-inline"><input type="radio" ng-model="$parent.values[$index]" ng-value="4" ng-required="!$parent.values[$index]" ng-disabled="disabled() || selectedPage + 1 != pages">Bueno</label>
+                <label class="radio-inline"><input type="radio" ng-model="$parent.values[$index]" ng-value="3" ng-required="!$parent.values[$index]" ng-disabled="disabled() || selectedPage + 1 != pages">Regular</label>
+                <label class="radio-inline"><input type="radio" ng-model="$parent.values[$index]" ng-value="2" ng-required="!$parent.values[$index]" ng-disabled="disabled() || selectedPage + 1 != pages">Malo</label>
+                <label class="radio-inline"><input type="radio" ng-model="$parent.values[$index]" ng-value="1" ng-required="!$parent.values[$index]" ng-disabled="disabled() || selectedPage + 1 != pages">Muy malo</label>
                 <!--<label class="radio-inline"><input type="radio">Excelente</label>
                 <label class="radio-inline"><input type="radio">Bueno</label>
                 <label class="radio-inline"><input type="radio">Regular</label>
@@ -56,7 +66,7 @@
       </div>
 
 
-      <center ng-if="!disabled()">
+      <center ng-if="!disabled() && selectedPage + 1 == pages">
         <button class="btn btn-md btn-info" ng-click="loadData()">
           <span class="glyphicon glyphicon-open"></span> Cargar
         </button>

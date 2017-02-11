@@ -14,6 +14,8 @@ angular.module('frontend2App')
 
       $scope.form = formData.data.information.form;
 
+      $scope.formSubmitDate = formData.data.submitDate;
+
       $scope.values = [];
 
       for(var i = 0; i < $scope.form.question.length; i++) {
@@ -33,7 +35,20 @@ angular.module('frontend2App')
         }
 
         survey.postAnswer($stateParams.id, data).then(function(response) {
-          //console.log(response.data);
+
+          $scope.form = response.data.information.form;
+          $scope.values = [];
+          $scope.formSubmitDate = response.data.submitDate;
+
+          for(var i = 0; i < $scope.form.question.length; i++) {
+            if($scope.form.question[i].answer) {
+              $scope.values[i] = $scope.form.question[i].answer.answer;
+            }
+          }
+
+          $scope.pages = response.data.pageCount;
+          $scope.selectedPage = $scope.pages - 1;
+
           toastr.success('Carga hecha con éxito.', 'Listo');
         }, function(response) {
           if(response.status == 500) {
@@ -52,6 +67,8 @@ angular.module('frontend2App')
 	    	return true;
   		};
 
+      // COLOCAR QUERY QB para hacer WHERE segun el requestId
+
       $scope.pageSelected = function(index) {
         request.getForm($stateParams.id, {page: index + 1})
         .then(function(resp) {
@@ -64,9 +81,9 @@ angular.module('frontend2App')
               $scope.values[i] = $scope.form.question[i].answer.answer;
             }
           }
-
+          $scope.formSubmitDate = resp.data.submitDate;
           $scope.pages = resp.data.pageCount;
-          $scope.selectedPage = $scope.pages - 1;
+          $scope.selectedPage = index;
         }, function(resp) {
           if(resp.status == 500) {
             toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
@@ -77,7 +94,7 @@ angular.module('frontend2App')
       $scope.previousPage = function() {
         if($scope.selectedPage - 1 >= 0) {
           $scope.selectedPage--;
-          //getCurrentBudget($scope.selectedPage + 1);
+          $scope.pageSelected($scope.selectedPage);
           //arr = [];
         }
         else {
@@ -88,12 +105,22 @@ angular.module('frontend2App')
       $scope.nextPage = function() {
         if($scope.selectedPage + 1 < $scope.pages) {
           $scope.selectedPage++;
-          //getCurrentBudget($scope.selectedPage + 1);
+          $scope.pageSelected($scope.selectedPage);
           //arr = [];
         }
         else {
           console.log('extremo derecho');
         }
+      };
+
+      $scope.date = function(date) {
+        var currentdate = new Date(date);
+        return currentdate.getDate() + '/' + (currentdate.getMonth() + 1) + '/' + currentdate.getFullYear();
+      };
+
+      $scope.hour = function(date) {
+        var currentdate = new Date(date);
+        return currentdate.getHours() + ':' + currentdate.getMinutes(); 
       };
 
   	});
