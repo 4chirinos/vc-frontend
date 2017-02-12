@@ -22,7 +22,7 @@
     </nav>
   </center>
 
-  <center>
+  <center ng-if="formSubmitDate">
     <a>
       <strong class="text-danger">
         <i class="glyphicon glyphicon-dashboard"></i> Fecha y Hora de Carga: {{date(formSubmitDate)}} {{hour(formSubmitDate)}}

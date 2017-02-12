@@ -14,8 +14,6 @@ angular.module('frontend2App')
 
         var arr = [];
 
-        //console.log(lastCurrentBudget);
-
         if(lastCurrentBudget.data != 'nada' && lastCurrentBudget.data.budgets.length > 0) {
             $scope.currentBudget = angular.copy(lastCurrentBudget.data.budgets[0]);
             $scope.pages = lastCurrentBudget.data.pageCount;
@@ -194,16 +192,17 @@ angular.module('frontend2App')
                 arr = [];
             } else {
                 $scope.selectedPage = index;
-                getCurrentBudget($scope.selectedPage + 1);
+                getCurrentBudget($scope.selectedPage);
                 arr = [];
             }
         };
 
         $scope.previousPage = function() {
             if($scope.selectedPage - 1 >= 0) {
-                $scope.selectedPage--;
-                getCurrentBudget($scope.selectedPage + 1);
-                arr = [];
+                $scope.pageSelected($scope.selectedPage - 1);
+                /*$scope.selectedPage--;
+                getCurrentBudget($scope.selectedPage);
+                arr = [];*/
             }
             else {
                 console.log('extremo izquierdo');
@@ -212,9 +211,10 @@ angular.module('frontend2App')
 
         $scope.nextPage = function() {
             if($scope.selectedPage + 1 < $scope.pages) {
-                $scope.selectedPage++;
-                getCurrentBudget($scope.selectedPage + 1);
-                arr = [];
+                $scope.pageSelected($scope.selectedPage + 1);
+                /*$scope.selectedPage++;
+                getCurrentBudget($scope.selectedPage);
+                arr = [];*/
             }
             else {
                 console.log('extremo derecho');
