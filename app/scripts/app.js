@@ -86,6 +86,11 @@ angular
 	    		templateUrl: 'views/userlist.html',
 	    		controller: 'UserlistCtrl'
 	    	})
+	    	.state('main.home.dbfiles', {
+	    		url: '/cargardatos',
+	    		templateUrl: 'views/loaddbfiles.html',
+	    		controller: 'LoaddbfilesCtrl'
+	    	})
 	    	.state('main.home.personlist', {
 	    		url: '/persona?identityCard&firstName&lastName&profileId&stateId',
 	    		templateUrl: 'views/personlist.html',

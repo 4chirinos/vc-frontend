@@ -72,6 +72,10 @@ angular.module('frontend2App')
               $state.go('main.home.personlist');
             };
 
+            $scope.loadDbFiles = function() {
+              $state.go('main.home.dbfiles');
+            };
+
           }
     	};
 

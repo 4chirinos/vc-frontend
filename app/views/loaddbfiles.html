@@ -1,0 +1,41 @@
+<a><strong><i class="glyphicon glyphicon-open"></i> Carga de Datos </strong></a>
+<hr>
+
+<div class="container-fluid">
+
+    <div class="row">
+        
+        <div class="col-sm-12">
+
+	        <center>
+	            <form name="form" class="form-horizontal" ng-submit="edited(form.$valid)">
+					<div class="form-group">
+						<label class="col-sm-4 control-label">Tipo de Entidad:</label>
+						<div class="col-sm-3">
+							<select class="form-control" ng-model="entity" ng-options="entity.entityId as entity.entity for entity in entities"></select>
+						</div>
+						<div class="col-sm-1">
+							<button type="button" class="btn btn-primary btn-sm" ng-click="fileUpload()"><span class="glyphicon glyphicon-plus-sign"></span> <strong>Seleccionar TXT</strong></button>
+						</div>
+						<label ng-if="file" class="col-sm-3 control-label text-danger pull-left">Archivo: {{file.name}}</label>
+					</div>
+				</form>
+			</center>
+            
+        </div>
+
+    </div>
+
+    <br><br><br>
+
+    <div class="row" ng-if="disabled()">
+        <center>
+            <button ng-disabled="loadable()" class="btn btn-md btn-info" ng-click="loadFile()">
+                <span class="glyphicon glyphicon-open"></span> Cargar
+            </button>
+        </center>
+    </div>
+
+</div>
+
+<input id="upload1" type="file" accept="text/plain" onchange="angular.element(this).scope().fileLoaded(this.files[0])" class="hide">
