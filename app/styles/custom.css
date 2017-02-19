@@ -1,4 +1,4 @@
-.myHidden{
+.myHidden{ /* PUESTO POR MI */
    visibility:hidden;
  }
 
@@ -39,7 +39,7 @@ footer {
 }
 
 
-/* CSS used here will be applied after bootstrap.css */
+/* CSS used here will be applied after bootstrap.css ESTO FUE PUESTO POR MI PARA COLOREAR LOS MODAL */
 .modal-header-success {
     color:#fff;
     padding:9px 15px;
@@ -99,4 +99,44 @@ footer {
     -moz-border-radius-topright: 5px;
      border-top-left-radius: 5px;
      border-top-right-radius: 5px;
+}
+
+
+/* PUESTO POR MI PARA EL ESTILO DEL LOGIN */
+
+.container1 {
+  padding: 25px;
+  position: center;
+  height: 100%;
+  background-repeat: no-repeat;
+  background: #F7FBFF; /*rgb(185,210,224);*/ /* Old browsers */
+  height:100vh;
+}
+
+.form-login {
+    /*background-color: #EDEDED;*/
+    background: rgb(185,210,224);
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+    border-color:#d2d2d2;
+    border-width: 5px;
+    box-shadow:0 1px 0 #cfcfcf;
+}
+
+h4 { 
+  border:0 solid #fff; 
+  border-bottom-width:1px;
+  padding-bottom:10px;
+  text-align: center;
+}
+
+.form-control {
+    border-radius: 10px;
+}
+
+.wrapper {
+    text-align: center;
 }

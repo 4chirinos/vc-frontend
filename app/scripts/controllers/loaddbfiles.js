@@ -14,9 +14,12 @@ angular.module('frontend2App')
 
     	$scope.entities = [
 	        {entity: '-- Seleccionar Entidad --', entityId: 1},
+            {entity: 'Clínica', entityId: 7},
 	        {entity: 'Persona', entityId: 2},
-	        {entity: 'Carta Aval', entityId: 3},
-	        {entity: 'Presupuesto', entityId: 4}
+	        {entity: 'Póliza', entityId: 6},
+	        {entity: 'Presupuesto', entityId: 4},
+	        {entity: 'Gastos de Presupuesto', entityId: 5},
+	        {entity: 'Carta Aval', entityId: 3}
 	    ];
 
 	    $scope.fileUpload = function(){
@@ -24,21 +27,21 @@ angular.module('frontend2App')
         };
 
         $scope.fileLoaded = function(file) {
-        	console.log(file);
             $scope.$apply(function() {
                 $scope.file = file;
             });
         };
 
         $scope.disabled = function() {
-        	return $scope.entity != 1 && angular.isDefined($scope.file);
+        	return $scope.entity != 1 && angular.isDefined($scope.file) && $scope.file != null;
         };
 
         $scope.loadFile = function() {
         	dbfiles.postFile($scope.entity, $scope.file).then(function(response) {
-        		console.log(response);
+        		$scope.file = null;
+        		toastr.success('Datos cargados con éxito.', 'Listo');
         	}, function(response) {
-        		console.log(response);
+        		toastr.error('Ocurrió un error en la carga. Intente de nuevo.', 'Error');
         	});
         };
 

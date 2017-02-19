@@ -1,4 +1,4 @@
-<center>
+<!--<center>
   <form name="form" class="form-inline" ng-submit="submit(form.$valid)">
     <div class="form-group">
       <label class="sr-only" for="exampleInputEmail3">Usuario</label>
@@ -10,4 +10,42 @@
     </div>
     <button class="btn btn-default" ng-click="submit()">Iniciar sesión</button>
   </form>
-</center>
+</center>-->
+
+<!--Pulling Awesome Font -->
+<!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
+
+<div class="container1">
+  <div class="row">
+    <div class="col-md-offset-5 col-md-3">
+      <form name="form" ng-submit="submit(form.$valid)">
+        <div class="form-login">
+          <h4>Iniciar Sesión</h4>
+
+          <div class="form-group has-feedback">
+            <input type="text" class="form-control" ng-model="login.identityCard" placeholder="Usuario" />
+            <i class="glyphicon glyphicon-user form-control-feedback"></i>
+          </div>
+
+          <div class="form-group has-feedback">
+            <input type="password" class="form-control" ng-model="login.password" placeholder="Contraseña" />
+            <i class="glyphicon glyphicon-lock form-control-feedback"></i>
+          </div>
+
+          <!--<input type="text" ng-model="login.identityCard" class="form-control input-md chat-input" placeholder="Usuario" required/>
+          </br>
+
+          <input type="password" ng-model="login.password" class="form-control input-md chat-input" placeholder="Contraseña" required/>
+          </br>-->
+
+          <div class="wrapper">
+            <span class="group-btn">     
+              <button class="btn btn-primary btn-md" ng-click="submit()">Entrar <i class="glyphicon glyphicon-log-in"></i></a>
+            </span>
+          </div>
+
+        </div>
+      </form>  
+    </div>
+  </div>
+</div>

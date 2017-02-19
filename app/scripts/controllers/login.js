@@ -16,6 +16,8 @@ angular.module('frontend2App')
 
 	  		if(valid) {
 
+	  			console.log("epa");
+
 		  		var data = {
 		  			userName: $scope.login.identityCard,
 		  			password: $scope.login.password
