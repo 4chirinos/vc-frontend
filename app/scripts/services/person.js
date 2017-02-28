@@ -20,6 +20,10 @@ angular.module('frontend2App')
       return vcrestangular.all('person').get('', obj, {token: localStorageService.get('token')});
     };
 
+    person.partialUpdate = function(obj) {
+      return vcrestangular.all('person/' + obj.id).patch(obj, {}, {token: localStorageService.get('token')});
+    };
+
     return person;
 
   });

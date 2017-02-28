@@ -1,0 +1,48 @@
+<div class="modal-header modal-header-primary">
+    <h3 class="modal-title">Editando Clínica</h3>
+</div>
+<div class="modal-body">
+    
+    <form name="form" class="form-horizontal" ng-submit="ok(form.$valid)">
+		<div class="form-group">
+			<label for="inputEmail3" class="col-sm-2 control-label">Nombre:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" ng-model="data.name" require>
+			</div>
+		</div>
+			
+		<div class="form-group">
+			<label for="inputPassword3" class="col-sm-2 control-label">RIF:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" ng-model="data.rif" required>
+			</div>
+		</div>
+			
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Dirección:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" ng-model="data.address" required>
+			</div>
+		</div>
+			
+		<div class="form-group">
+			<label for="inputPassword3" class="col-sm-2 control-label">Teléfonos:</label>
+			<div class="col-sm-10">
+			   	<input type="text" class="form-control" ng-model="data.newPhones" required>
+			</div>
+		</div>
+
+		<div class="form-group">
+		   	<label class="col-sm-2 control-label">Ubicación:</label>
+			<div class="col-sm-4">
+				<select class="selectpicker form-control" ng-model="state" ng-options="filter.stateId as filter.filter for filter in states"></select>
+			</div>
+		</div>
+			
+		<div class="text-right">
+			<button class="btn btn-primary" type="submit">OK</button>
+			<button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+		</div>
+	</form>
+
+</div>

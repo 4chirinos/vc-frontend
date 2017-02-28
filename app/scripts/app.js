@@ -281,6 +281,34 @@ angular
 			          	});
 	    			}
 	    		}
+	    	})
+	    	.state('main.home.affiliatedlist', {
+	    		url: '/clinicas',
+	    		templateUrl: 'views/affiliatedlist.html',
+	    		controller: 'AffiliatedlistCtrl',
+	    		resolve: {
+	    			response: function($stateParams, affiliated) {
+	    				return affiliated.getAll({}).then(function(response) {
+	    					return response;
+	    				}, function(response) {
+	    					return response;
+	    				});
+	    			}
+	    		}
+	    		
+	    	}).state('main.home.affiliateddetail', {
+	    		url: '/clinica/:id/detalles',
+	    		templateUrl: 'views/affiliateddetail.html',
+	    		controller: 'AffiliatedetailCtrl',
+	    		resolve: {
+	    			response: function($stateParams, affiliated) {
+	    				return affiliated.getById($stateParams.id).then(function(response) {
+	    					return response;
+			          	}, function(response) {
+			            	return response;
+			          	});
+	    			}
+	    		}
 	    	});
 
   	})

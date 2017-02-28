@@ -30,30 +30,42 @@
               <p class="form-control-static">{{person.firstName}} {{person.lastName}}</p>
             </div>
             <label class="col-sm-1 control-label">Cargo:</label>
-            <div class="col-sm-1">
+            <div class="col-sm-2">
               <p class="form-control-static">{{person.profile.profile.toUpperCase()}}</p>
             </div>
-            <div class="col-sm-3">
+            
+            <!--<div class="col-sm-3">
               <button ng-class="{'myHidden': person.user.id}" ng-click="createUser()" type="button" class="btn btn-info btn-md">Crear Usuario</button>
+            </div>-->
+
+            <div class="col-sm-2">
+              <div class="dropdown form-control-static">
+                <button class="btn btn-primary dropdown-toggle btn-xs" type="button" data-toggle="dropdown">Acciones
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li><a href="" ng-click="editPerson()"><i class="glyphicon glyphicon-ok-sign"></i> Editar</a></li>
+                  <li ng-class="{'disabled': person.user.id}"><a href="" ng-click="person.user.id == undefined && createUser()"><i class="glyphicon glyphicon-ban-circle"></i> Crear Usuario</a></li>
+                </ul>
+              </div> 
             </div>
             
             <label class="col-sm-1 control-label">Edad:</label>
             <div class="col-sm-1">
               <p class="form-control-static">{{age(person.birthDate)}}</p>
             </div>
+            <label class="col-sm-1 control-label">Género:</label>
+            <div class="col-sm-1">
+              <p class="form-control-static">{{gender(person.gender)}}</p>
+            </div>
             <label class="col-sm-1 control-label">Email:</label>
             <div class="col-sm-3">
               <p class="form-control-static">{{person.email}}</p>
             </div>
-            <label class="col-sm-1 control-label">Teléfono:</label>
-            <div class="col-sm-2">
-              <p class="form-control-static">{{person.phoneNumber}}</p>
+            <label class="col-sm-1 control-label">Teléfonos:</label>
+            <div class="col-sm-3">
+              <p class="form-control-static">{{phones(person.phones)}}</p>
             </div>
-            <label class="col-sm-1 control-label">Género:</label>
-            <div class="col-sm-2">
-              <p class="form-control-static">{{gender(person.gender)}}</p>
-            </div>
-
             <label class="col-sm-1 control-label">Dirección:</label>
             <div class="col-sm-11">
               <p class="form-control-static">{{person.address}}</p>
@@ -95,8 +107,8 @@
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-right">
-                  <li ng-class="{'disabled': person.user.available}"><a href="" ng-click="userEnabled()"><i class="glyphicon glyphicon-ok-sign"></i> Habilitar</a></li>
-                  <li ng-class="{'disabled': !person.user.available}"><a href="" ng-click="userDisabled()"><i class="glyphicon glyphicon-ban-circle"></i> Deshabilitar</a></li>
+                  <li ng-class="{'disabled': person.user.available}"><a href="" ng-click="!person.user.available && userEnabled()"><i class="glyphicon glyphicon-ok-sign"></i> Habilitar</a></li>
+                  <li ng-class="{'disabled': !person.user.available}"><a href="" ng-click="person.user.available && userDisabled()"><i class="glyphicon glyphicon-ban-circle"></i> Deshabilitar</a></li>
                   <li><a href="" ng-click="changeRole()"><i class="glyphicon glyphicon-transfer"></i> Cambiar Rol</a></li>
                 </ul>
               </div> 

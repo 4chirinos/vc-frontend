@@ -76,6 +76,10 @@ angular.module('frontend2App')
               $state.go('main.home.dbfiles');
             };
 
+            $scope.affiliatedList = function() {
+              $state.go('main.home.affiliatedlist');
+            };
+
           }
     	};
 

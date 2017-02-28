@@ -96,6 +96,17 @@ angular.module('frontend2App')
 
 	  	};
 
+        $scope.phones = function(data) {
+            var aux = "";
+            for(var i = 0; i < data.length; i++) {
+                aux += data[i].phoneNumber;
+                if(i != data.length - 1) {
+                    aux += " / ";
+                }
+            }
+            return aux;
+        };
+
 		$scope.gender = function(gender) {
 		   	if(gender == 'M') return 'Masculino';
 		    return 'Femenino';

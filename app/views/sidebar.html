@@ -87,6 +87,16 @@
 
                 <hr>
 
+                <ul class="nav nav-stacked">
+                    <li class="nav-header"> <a ng-click="liked2 = !liked2" href="" data-toggle="collapse" data-target="#dataMenu2">Clínicas <i ng-class="{'glyphicon glyphicon-chevron-right': liked2, 'glyphicon glyphicon-chevron-down': !liked2}"></i></a>
+                        <ul class="nav nav-stacked collapse in" id="dataMenu2">
+                            <li><a href="" ng-click="affiliatedList()"><i class="glyphicon glyphicon-open"></i> Todas <span class="badge badge-info"></span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <hr>
+
             </div>
 
             <!--<hr>

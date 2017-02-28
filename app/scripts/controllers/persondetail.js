@@ -8,7 +8,7 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('PersondetailCtrl', function ($scope, $stateParams, $state, toastr, session, user, $uibModal, response) {
+  	.controller('PersondetailCtrl', function ($scope, $stateParams, $state, toastr, session, user, person, $uibModal, response) {
     	
     	$scope.user = session.getCurrentUser();
 
@@ -36,6 +36,17 @@ angular.module('frontend2App')
 	    $scope.gender = function(gender) {
 	    	if(gender == 'M') return 'MASCULINO';
 	    	return 'FEMENINO';
+	    };
+
+	    $scope.phones = function(data) {
+	    	var aux = "";
+	    	for(var i = 0; i < data.length; i++) {
+	    		aux += data[i].phoneNumber;
+	    		if(i != data.length - 1) {
+	    			aux += " / ";
+	    		}
+	    	}
+	    	return aux;
 	    };
 
 	    $scope.createUser = function() {
@@ -86,6 +97,32 @@ angular.module('frontend2App')
 	    	} else {
 	    		return 'deshabilitado';
 	    	}
+	    };
+
+	    $scope.editPerson = function() {
+	    	$scope.modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/editperson.html',
+                controller: 'EditpersonCtrl',
+                size: 'lg',
+                scope: $scope
+            });
+
+            $scope.modalInstance.result.then(function(data) {
+            	
+            	person.partialUpdate(data).then(function(response2) {
+	                toastr.success('Cambios hechos con éxito.', 'Listo');
+	                $scope.person = response2.data;
+	            }, function(response2) {
+	                if(response2.status == 500) {
+	                    toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+	                }
+	            })
+
+
+			}, function() {
+			   	console.log('Modal dismissed at: ' + new Date());
+			});
 	    };
 
 	    $scope.userEnabled = function() {

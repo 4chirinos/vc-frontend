@@ -34,6 +34,17 @@ angular.module('frontend2App')
   			window.open(baseUrl + '/document/guaranteeLetter/' + $scope.guaranteeLetter.id);
   		};
 
+  		$scope.phones = function(data) {
+	    	var aux = "";
+	    	for(var i = 0; i < data.length; i++) {
+	    		aux += data[i].phoneNumber;
+	    		if(i != data.length - 1) {
+	    			aux += " / ";
+	    		}
+	    	}
+	    	return aux;
+	    };
+
     	$scope.statusText = function(status) {
         	if($scope.user.userProfile == 'analista') {
 	  			if(status == 'por asignar') return 'por asignar';
