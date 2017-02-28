@@ -61,7 +61,7 @@
                 </ul>
             </div>
 
-            <div ng-if="user.userProfile == 'administrador'">
+            <!--<div ng-if="user.userProfile == 'administrador'">
 
                 <ul class="nav nav-stacked">
                     <li class="nav-header"> <a ng-click="liked2 = !liked2" href="" data-toggle="collapse" data-target="#personsMenu">Personas <i ng-class="{'glyphicon glyphicon-chevron-right': liked2, 'glyphicon glyphicon-chevron-down': !liked2}"></i></a>
@@ -73,14 +73,14 @@
 
             </div>
 
-            <hr>
+            <hr>-->
 
             <div ng-if="user.userProfile == 'administrador'">
 
                 <ul class="nav nav-stacked">
-                    <li class="nav-header"> <a ng-click="liked = !liked" href="" data-toggle="collapse" data-target="#dataMenu">Datos <i ng-class="{'glyphicon glyphicon-chevron-right': liked, 'glyphicon glyphicon-chevron-down': !liked}"></i></a>
-                        <ul class="nav nav-stacked collapse in" id="dataMenu">
-                            <li><a href="" ng-click="loadDbFiles()"><i class="glyphicon glyphicon-open"></i> Cargar Datos <span class="badge badge-info"></span></a></li>
+                    <li class="nav-header"> <a ng-click="liked1 = !liked1" href="" data-toggle="collapse" data-target="#personsMenu">Personas <i ng-class="{'glyphicon glyphicon-chevron-right': liked1, 'glyphicon glyphicon-chevron-down': !liked1}"></i></a>
+                        <ul class="nav nav-stacked collapse in" id="personsMenu">
+                            <li><a href="" ng-click="searchPersons()"><i class="glyphicon glyphicon-user"></i> Todas <span class="badge badge-info"></span></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -91,6 +91,26 @@
                     <li class="nav-header"> <a ng-click="liked2 = !liked2" href="" data-toggle="collapse" data-target="#dataMenu2">Clínicas <i ng-class="{'glyphicon glyphicon-chevron-right': liked2, 'glyphicon glyphicon-chevron-down': !liked2}"></i></a>
                         <ul class="nav nav-stacked collapse in" id="dataMenu2">
                             <li><a href="" ng-click="affiliatedList()"><i class="glyphicon glyphicon-open"></i> Todas <span class="badge badge-info"></span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <hr>
+
+                <ul class="nav nav-stacked">
+                    <li class="nav-header"> <a ng-click="liked3 = !liked3" href="" data-toggle="collapse" data-target="#dataMenu3">Presupuestos <i ng-class="{'glyphicon glyphicon-chevron-right': liked3, 'glyphicon glyphicon-chevron-down': !liked3}"></i></a>
+                        <ul class="nav nav-stacked collapse in" id="dataMenu3">
+                            <li><a href="" ng-click="budgetList()"><i class="glyphicon glyphicon-open"></i> Todos <span class="badge badge-info"></span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <hr>
+
+                <ul class="nav nav-stacked">
+                    <li class="nav-header"> <a ng-click="liked = !liked" href="" data-toggle="collapse" data-target="#dataMenu">Datos <i ng-class="{'glyphicon glyphicon-chevron-right': liked, 'glyphicon glyphicon-chevron-down': !liked}"></i></a>
+                        <ul class="nav nav-stacked collapse in" id="dataMenu">
+                            <li><a href="" ng-click="loadDbFiles()"><i class="glyphicon glyphicon-open"></i> Cargar Datos <span class="badge badge-info"></span></a></li>
                         </ul>
                     </li>
                 </ul>

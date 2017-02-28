@@ -1,0 +1,19 @@
+<a><strong><i class="glyphicon glyphicon-dashboard"></i> Detalles del Presupuesto: # </strong></a>
+<hr>
+
+
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs">
+    <li ui-sref-active="active"><a ui-sref=".infobudget"><i class="glyphicon glyphicon-info-sign"></i> Información</a></li>
+    <li ng-class="{ active: shouldBeActive() }"><a ui-sref=".databudget"><i class="glyphicon glyphicon-list-alt"></i> Presupuesto</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+  	<br>
+    <div ui-view></div>
+  </div>
+
+</div>

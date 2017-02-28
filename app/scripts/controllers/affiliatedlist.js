@@ -8,7 +8,7 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('AffiliatedlistCtrl', function ($scope, $state, response, affiliated) {
+  	.controller('AffiliatedlistCtrl', function ($scope, $state, $uibModal, toastr, response, affiliated) {
 
   		var pageSize = 6;
 	    $scope.selectedPage = 0;
@@ -18,7 +18,6 @@ angular.module('frontend2App')
 		} else {
 			$scope.affiliateds = response.data.affiliateds;
 			$scope.pages = response.data.pageCount;
-			console.log($scope.affiliateds);
 		}
 
 		var getAffliated = function(page) {
@@ -69,6 +68,26 @@ angular.module('frontend2App')
 		    		id: id
 		    	}    
 		    );
+	    };
+
+	    $scope.filter = function() {
+	    	var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'views/filteraffiliated.html',
+				controller: 'FilteraffiliatedCtrl',
+				size: 'sm'
+			});
+
+			modalInstance.result.then(function(/*r*/) {
+				/*$scope.params = r.params;
+				$stateParams.filter = '';
+				$scope.selectedPage = 0;
+				$scope.requests = r.response.data.requests;
+		    	$scope.pages = r.response.data.pageCount;
+		    	$rootScope.statusGroups = r.response.data.statusGroups;*/
+			}, function() {
+				console.log('Modal dismissed at: ' + new Date());
+			});
 	    };
 
   	});

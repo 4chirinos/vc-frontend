@@ -80,6 +80,10 @@ angular.module('frontend2App')
               $state.go('main.home.affiliatedlist');
             };
 
+            $scope.budgetList = function() {
+              $state.go('main.home.budgetlist');
+            };
+
           }
     	};
 

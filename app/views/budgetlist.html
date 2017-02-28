@@ -1,0 +1,59 @@
+<a href="" ng-click="filter()"><strong><i class="glyphicon glyphicon-search"></i> Búsqueda de Presupuestos</strong></a>
+<hr>
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+	    <h2>Presupuestos</h2>
+	</div>
+
+	<div class="panel-body">
+	    <center>
+	        <nav>
+	            <ul class="pagination">
+	                <li>
+	                    <a ng-click="previousPage()" href="" aria-label="Previous">
+	                        <span aria-hidden="true">&laquo;</span>
+	                    </a>
+	                </li>
+	                <li ng-class="{'active': selectedPage == $index}" ng-repeat="i in [].constructor(pages) track by $index"><a ng-click="pageSelected($index)" href="">{{$index + 1}}</a></li>
+	                <li>
+	                    <a ng-click="nextPage()" href="" aria-label="Next">
+	                        <span aria-hidden="true">&raquo;</span>
+	                    </a>
+	                </li>
+	            </ul>
+	        </nav>
+	    </center>
+
+		<br>
+
+	        <div class="table-responsive">
+	            <table class="table table-hover table-condensed table-striped">
+
+	                <tr>
+	                	<th><center>No.</center></th>
+	                   	<th><center>Código Presupuesto</center></th>
+	                    <th><center>CI Beneficiario</center></th>
+	                    <th><center>RIF Clínica</center></th>
+	                    <th><center>Estado</center></th>
+	                    <th><center>Acción</center></th>
+	                </tr>
+
+	                    
+	               <tr ng-repeat="budget in budgets track by $index">
+	                	<td><center>{{($index + 1) + (selectedPage * pageSize)}}</center></td>
+	                   	<td><center>{{budget.id}}</center></td>
+	                   	<td><center>{{budget.guaranteeLetter.beneficiary.identityCard}}</center></td>
+	                   	<td><center>{{budget.affiliated.rif}}</center></td>
+	                   	<td><center>{{budget.affiliated.state.stateName}}</center></td>
+	                   <td>
+	                       	<center>
+	                        	<button ng-click="detail(budget.id)" type="button" class="btn btn-primary btn-xs">Ver</button>
+	                        </center>
+	                    </td>
+	                </tr>
+	              
+	            </table>
+	        </div>
+	</div>
+</div>

@@ -283,20 +283,29 @@ angular
 	    		}
 	    	})
 	    	.state('main.home.affiliatedlist', {
-	    		url: '/clinicas',
+	    		url: '/clinicas?name&rif&stateId',
 	    		templateUrl: 'views/affiliatedlist.html',
 	    		controller: 'AffiliatedlistCtrl',
 	    		resolve: {
 	    			response: function($stateParams, affiliated) {
-	    				return affiliated.getAll({}).then(function(response) {
+
+	    				var params = {
+				          name: $stateParams.name,
+				          rif: $stateParams.rif,
+				          stateId: $stateParams.stateId,
+				          page: 1,
+				          pageSize: 6
+				        };
+
+	    				return affiliated.getAll(params).then(function(response) {
 	    					return response;
 	    				}, function(response) {
 	    					return response;
 	    				});
 	    			}
 	    		}
-	    		
-	    	}).state('main.home.affiliateddetail', {
+	    	})
+	    	.state('main.home.affiliateddetail', {
 	    		url: '/clinica/:id/detalles',
 	    		templateUrl: 'views/affiliateddetail.html',
 	    		controller: 'AffiliatedetailCtrl',
@@ -309,6 +318,53 @@ angular
 			          	});
 	    			}
 	    		}
+	    	})
+	    	.state('main.home.budgetlist', {
+	    		url: '/presupuestos',
+	    		templateUrl: 'views/budgetlist.html',
+	    		controller: 'BudgetlistCtrl',
+	    		resolve: {
+	    			response: function($stateParams, budget) {
+
+	    				var params = {
+				         	page: 1,
+				          	pageSize: 6
+				        };
+
+	    				return budget.getAll(params).then(function(response) {
+	    					return response;
+	    				}, function(response) {
+	    					return response;
+	    				});
+
+	    			}
+	    		}
+	    	})
+	    	.state('main.home.admin', {
+	    		url: '/presupuesto/:id',
+	    		templateUrl: 'views/adminbudget.html',
+	    		controller: 'AdminbudgetCtrl',
+	    		abstract: true,
+	    		resolve: {
+	    			response: function($stateParams, budget) {
+	    				return budget.getById($stateParams.id)
+	    				.then(function(response) {
+	    					return response;
+	    				}, function(response) {
+	    					return response;
+	    				});
+	    			}
+	    		}
+	    	})
+	    	.state('main.home.admin.infobudget', {
+	    		url: '/detalles',
+	    		templateUrl: 'views/budgetdetail.html',
+	    		controller: 'BudgetdetailCtrl'
+	    	})
+	    	.state('main.home.admin.databudget', {
+	    		url: '/gastos',
+	    		templateUrl: 'views/adminbudgetdata.html',
+	    		controller: 'AdminbudgetCtrl'
 	    	});
 
   	})

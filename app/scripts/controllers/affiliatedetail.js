@@ -9,8 +9,6 @@
  */
 angular.module('frontend2App')
   	.controller('AffiliatedetailCtrl', function ($scope, $uibModal, toastr, affiliated, response) {
-    	
-    	console.log("hola");
 
   		if(response.status == 500) {
   			toastr.error('No se encontró persona asociada al código.', 'Error');

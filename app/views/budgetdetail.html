@@ -1,0 +1,83 @@
+<div class="container-fluid">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Datos de la institución prestadora de servicio</h3>
+      </div>
+      <br>
+      <div class="container-fluid">
+
+        <form class="form-horizontal">
+          <div class="form-group">
+           
+            <label class="col-sm-1 control-label">Nombre:</label>
+            <div class="col-sm-3">
+              <p class="form-control-static">{{data.affiliated.name}}</p>
+            </div>
+            <label class="col-sm-1 control-label">RIF:</label>
+            <div class="col-sm-3">
+              <p class="form-control-static">{{data.affiliated.rif}}</p>
+            </div>
+            <label class="col-sm-1 control-label">Estado:</label>
+            <div class="col-sm-3">
+              <p class="form-control-static">{{data.affiliated.state.stateName}}</p>
+            </div>
+            
+            <label class="col-sm-1 control-label">Dirección:</label>
+            <div class="col-sm-11">
+              <p class="form-control-static">{{data.affiliated.address}}</p>
+            </div>
+            <label class="col-sm-1 control-label">Teléfonos:</label>
+            <div class="col-sm-11">
+              <p class="form-control-static">{{phones(data.affiliated.phones)}}</p>
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Datos del paciente</h3>
+      </div>
+      <br>
+      <div class="container-fluid">
+
+        <form class="form-horizontal">
+          <div class="form-group">
+           
+            <label class="col-sm-1 control-label">Nombre:</label>
+            <div class="col-sm-3">
+              <p class="form-control-static">{{data.guaranteeLetter.beneficiary.firstName}} {{data.guaranteeLetter.beneficiary.lastName}}</p>
+            </div>
+            <label class="col-sm-1 control-label">Cédula:</label>
+            <div class="col-sm-2">
+              <p class="form-control-static">{{data.guaranteeLetter.beneficiary.identityCard}}</p>
+            </div>
+            <label class="col-sm-1 control-label">Género:</label>
+            <div class="col-sm-1">
+              <p class="form-control-static">{{gender(data.guaranteeLetter.beneficiary.gender)}}</p>
+            </div>
+            <label class="col-sm-1 control-label">Estado:</label>
+            <div class="col-sm-2">
+              <p class="form-control-static">{{data.guaranteeLetter.beneficiary.state.stateName}}</p>
+            </div>
+            
+            <label class="col-sm-1 control-label">Dirección:</label>
+            <div class="col-sm-11">
+              <p class="form-control-static">{{data.guaranteeLetter.beneficiary.address}}</p>
+            </div>
+            <label class="col-sm-1 control-label">Teléfonos:</label>
+            <div class="col-sm-11">
+              <p class="form-control-static">{{phones(data.guaranteeLetter.beneficiary.phones)}}</p>
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
