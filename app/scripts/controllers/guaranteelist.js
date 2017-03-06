@@ -134,25 +134,41 @@ angular.module('frontend2App')
 	    };
 
 	    $scope.statusColor = function(guarantee) {
-	    	var startDate = guarantee.startDate.split('T')[0].split('-'),
+
+	    	var d1 = new Date(guarantee.startDate), d2 = new Date(guarantee.endDate);
+	    	d1.setHours(0, 0, 0, 0);
+	    	d2.setHours(0, 0, 0, 0);
+
+	    	if(d1 > d2) return 'label-danger';
+	    	else return 'label-success';
+
+	    	/*var startDate = guarantee.startDate.split('T')[0].split('-'),
 	    		endDate = guarantee.endDate.split('T')[0].split('-');
 
 	    	if(startDate[0] > endDate[0]) return 'label-danger';
 	    	if(startDate[1] > endDate[1]) return 'label-danger';
 	    	if(startDate[2] > endDate[2] && startDate[0] == endDate[0]) return 'label-danger';
 
-	      	return 'label-success';
+	      	return 'label-success';*/
 	    };
 
 	    $scope.statusText = function(guarantee) {
-	    	var startDate = guarantee.startDate.split('T')[0].split('-'),
+
+	    	var d1 = new Date(guarantee.startDate), d2 = new Date(guarantee.endDate);
+	    	d1.setHours(0, 0, 0, 0);
+	    	d2.setHours(0, 0, 0, 0);
+
+	    	if(d1 > d2) return 'vencida';
+	    	else return guarantee.status.status;
+
+	    	/*var startDate = guarantee.startDate.split('T')[0].split('-'),
 	    		endDate = guarantee.endDate.split('T')[0].split('-');
 
 	    	if(startDate[0] > endDate[0]) return 'vencida';
 	    	if(startDate[1] > endDate[1]) return 'vencida';
 	    	if(startDate[2] > endDate[2] && startDate[0] == endDate[0]) return 'vencida';
 
-	      	return guarantee.status.status;
+	      	return guarantee.status.status;*/
 	    };
 
 		$scope.detail = function(id) {
@@ -165,7 +181,7 @@ angular.module('frontend2App')
 
 	    $scope.canRequest = function(guarantee) {
 	    	
-	    	var startDate = guarantee.startDate.split('T')[0].split('-'),
+	    	/*var startDate = guarantee.startDate.split('T')[0].split('-'),
 	    		endDate = guarantee.endDate.split('T')[0].split('-');
 
 	    	startDate[0] = parseInt(startDate[0]);
@@ -186,7 +202,13 @@ angular.module('frontend2App')
 
 	    	if(startDate[2] > endDate[2] && startDate[0] == endDate[0]) {
 	    		return false;
-	    	}
+	    	}*/
+
+	    	var d1 = new Date(guarantee.startDate), d2 = new Date(guarantee.endDate);
+	    	d1.setHours(0, 0, 0, 0);
+	    	d2.setHours(0, 0, 0, 0);
+
+	    	if(d1 > d2) return false;
 
 	    	for(var i = 0; i < guarantee.request.length; i++) {
 	    		if(guarantee.request[i].status.id != 6) return false;

@@ -102,25 +102,39 @@ angular.module('frontend2App')
 	  	};
 
 	  	$scope.statusText2 = function(guarantee) {
-	    	var startDate = guarantee.startDate.split('T')[0].split('-'),
+	    	/*var startDate = guarantee.startDate.split('T')[0].split('-'),
 	    		endDate = guarantee.endDate.split('T')[0].split('-');
 
 	    	if(startDate[0] > endDate[0]) return 'vencida';
 	    	if(startDate[1] > endDate[1]) return 'vencida';
 	    	if(startDate[2] > endDate[2] && startDate[0] == endDate[0]) return 'vencida';
 
-	      	return guarantee.status.status;
+	      	return guarantee.status.status;*/
+
+	      	var d1 = new Date(guarantee.startDate), d2 = new Date(guarantee.endDate);
+	    	d1.setHours(0, 0, 0, 0);
+	    	d2.setHours(0, 0, 0, 0);
+
+	    	if(d1 > d2) return 'vencida';
+	    	else return guarantee.status.status;
 	    };
 
 	    $scope.statusColor2 = function(guarantee) {
-	    	var startDate = guarantee.startDate.split('T')[0].split('-'),
+	    	/*var startDate = guarantee.startDate.split('T')[0].split('-'),
 	    		endDate = guarantee.endDate.split('T')[0].split('-');
 
 	    	if(startDate[0] > endDate[0]) return 'label-danger';
 	    	if(startDate[1] > endDate[1]) return 'label-danger';
 	    	if(startDate[2] > endDate[2] && startDate[0] == endDate[0]) return 'label-danger';
 
-	      	return 'label-success';
+	      	return 'label-success';*/
+
+	      	var d1 = new Date(guarantee.startDate), d2 = new Date(guarantee.endDate);
+	    	d1.setHours(0, 0, 0, 0);
+	    	d2.setHours(0, 0, 0, 0);
+
+	    	if(d1 > d2) return 'label-danger';
+	    	else return 'label-success';
 	    };
 
     	$scope.status = function(status) {
@@ -175,12 +189,19 @@ angular.module('frontend2App')
 
 	    $scope.canRequest = function() {
 	    	
-	    	var startDate = $scope.guaranteeLetter.startDate.split('T')[0].split('-'),
+	    	/*var startDate = $scope.guaranteeLetter.startDate.split('T')[0].split('-'),
 	    		endDate = $scope.guaranteeLetter.endDate.split('T')[0].split('-');
 
 	    	if(startDate[0] > endDate[0]) return false;
 	    	if(startDate[1] > endDate[1]) return false;
-	    	if(startDate[2] > endDate[2] && startDate[0] == endDate[0]) return false;
+	    	if(startDate[2] > endDate[2] && startDate[0] == endDate[0]) return false;*/
+
+	    	var d1 = new Date($scope.guaranteeLetter.startDate),
+	    		d2 = new Date($scope.guaranteeLetter.endDate);
+	    	d1.setHours(0, 0, 0, 0);
+	    	d2.setHours(0, 0, 0, 0);
+
+	    	if(d1 > d2) return false;
 
 	    	if(!$scope.history)
 	    		return true;

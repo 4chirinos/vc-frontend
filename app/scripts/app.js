@@ -169,7 +169,7 @@ angular
 	    		abstract: true,
 	    		resolve: {
 	    			budgetData: function($stateParams, budget) {
-	    				return budget.getByRequestId($stateParams.id)
+	    				return budget.getCurrentBudget($stateParams.id, {page: 1, pageSize: 1})
 	    				.then(function(response) {
 	    					return response;
 	    				}, function(response) {
@@ -177,12 +177,7 @@ angular
 	    				});
 	    			},
 	    			lastCurrentBudget: function($stateParams, budget) {
-
-	    				var obj = {
-	    					lastPage: true
-	    				};
-
-	    				return budget.getCurrentBudget($stateParams.id, obj)
+	    				return budget.getCurrentBudget($stateParams.id, {pageSize: 1, lastPage: true})
 	    				.then(function(response) {
 	    					return response;
 	    				}, function(response) {
