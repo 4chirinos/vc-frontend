@@ -69,6 +69,12 @@ angular.module('frontend2App')
 		    		id: id
 		    	}    
 		    );
+
+		    /*$state.go(
+		        'main.home.loaddata.budget.originalbudget', {
+		    		id: id
+		    	}    
+		    );*/
 	    };
 
   	});

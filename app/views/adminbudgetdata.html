@@ -35,7 +35,7 @@
 	</table>
 </div>
 
-<div class="row">
+<div ng-if="anyEdited() > 0" class="row">
     <center>
         <button class="btn btn-md btn-info" ng-click="loadBudget()">
             <span class="glyphicon glyphicon-open"></span> Cargar

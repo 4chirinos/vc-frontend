@@ -112,13 +112,11 @@ angular.module('frontend2App')
                 obj.items.push(aux);
             }
 
-            console.log(obj);
-
             budget.postBudget(obj).then(function(response) {
                 toastr.success('Cambios hechos con éxito.', 'Listo');
                 //budgetData.data.currentBudget = response.data;
                 //$scope.budget.currentBudget = response.data;
-                //$scope.currentBudget = response.data;
+                $scope.currentBudget = response.data;
                 
                 $scope.pages++;
                 $scope.selectedPage = $scope.pages - 1;
