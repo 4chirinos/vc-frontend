@@ -67,6 +67,7 @@
 									  	<ul class="dropdown-menu dropdown-menu-right">
 									    	<li><a href="" ng-click="detail(guarantee.id)"><i class="glyphicon glyphicon-eye-open"></i> Ver</a></li>
 									    	<li ng-if="canRequest(guarantee)"><a href="" ng-click="postRequest(guarantee.id)"><i class="glyphicon glyphicon-dashboard"></i> Solicitar Visita</a></li>
+									    	<li ng-if="canCancel(guarantee)"><a href="" ng-click="cancelRequest(guarantee)"><i class="glyphicon glyphicon-dashboard"></i> Cancelar Solicitud Visita</a></li>
 									  </ul>
 									</div> 
 								</center>

@@ -187,14 +187,37 @@ angular.module('frontend2App')
 		    );
 	    };
 
-	    $scope.canRequest = function() {
-	    	
-	    	/*var startDate = $scope.guaranteeLetter.startDate.split('T')[0].split('-'),
-	    		endDate = $scope.guaranteeLetter.endDate.split('T')[0].split('-');
+	    $scope.canCancel = function() {
+	    	if(!$scope.history)
+	    		return false;
+	    	for(var i = 0; i < $scope.history.length; i++) {
+	    		if($scope.history[i].status.id == 2 && $scope.history[i].analystId == $scope.user.userId) return true;
+	    	}
+	    	return false;
+	    };
 
-	    	if(startDate[0] > endDate[0]) return false;
-	    	if(startDate[1] > endDate[1]) return false;
-	    	if(startDate[2] > endDate[2] && startDate[0] == endDate[0]) return false;*/
+	    $scope.cancelRequest = function() {
+
+	    	var aux, auxi;
+
+	    	for(var i = 0; i < $scope.history.length; i++) {
+	    		if($scope.history[i].status.id == 2) {
+	    			auxi = i;
+	    			aux = $scope.history[i].id;
+	    			break;
+	    		};
+	    	}
+
+	    	request.delete(aux).then(function(response) {
+	    		toastr.success('Solicitud de visita cancelada con éxito.', 'Listo');
+	    		$state.go($state.current, {}, {reload: true});
+	    	}, function(response) {
+	    		toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+	    		//console.log(response);
+	    	});
+	    };
+
+	    $scope.canRequest = function() {
 
 	    	var d1 = new Date($scope.guaranteeLetter.startDate),
 	    		d2 = new Date($scope.guaranteeLetter.endDate);

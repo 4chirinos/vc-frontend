@@ -11,6 +11,7 @@
         <a ng-if="user.userProfile == 'coordinador' && canReview()" ng-click="review()" href="" class="alert-link"><strong>Revisar</strong></a>
         <a ng-if="user.userProfile == 'coordinador' && canReview()">|</a>
         <a ng-if="user.userProfile == 'coordinador' && canReview()" ng-click="authorize()" href="" class="alert-link"><strong>Autorizar</strong></a>
+        <a ng-if="user.userProfile == 'coordinador' && canReAssign()" ng-click="assign()" href="" class="alert-link"><strong>Cambiar Asignación</strong></a>
       </center>
     </div>
 

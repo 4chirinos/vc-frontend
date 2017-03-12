@@ -16,6 +16,7 @@ angular.module('frontend2App')
 	    $scope.params = null;
 
 	    $scope.user = session.getCurrentUser();
+	    $rootScope.statusGroups = response.data.statusGroups;
 
 		if(response.status == 500) {
 			toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
@@ -179,30 +180,17 @@ angular.module('frontend2App')
 		    );
 	    };
 
+
+	    $scope.canCancel = function(guarantee) {
+	    	for(var i = 0; i < guarantee.request.length; i++) {
+	    		if(guarantee.request[i].status.id == 2 && guarantee.request[i].analystId == $scope.user.userId) {
+	    			return true;
+	    		}
+	    	}
+	    	return false;
+	    };
+
 	    $scope.canRequest = function(guarantee) {
-	    	
-	    	/*var startDate = guarantee.startDate.split('T')[0].split('-'),
-	    		endDate = guarantee.endDate.split('T')[0].split('-');
-
-	    	startDate[0] = parseInt(startDate[0]);
-	    	startDate[1] = parseInt(startDate[1]);
-	    	startDate[2] = parseInt(startDate[2]);
-
-	    	endDate[0] = parseInt(endDate[0]);
-	    	endDate[1] = parseInt(endDate[1]);
-	    	endDate[2] = parseInt(endDate[2]);
-
-	    	if(startDate[0] > endDate[0]) {
-	    		return false;
-	    	}
-
-	    	if(startDate[1] > endDate[1]) {
-	    		return false;
-	    	}
-
-	    	if(startDate[2] > endDate[2] && startDate[0] == endDate[0]) {
-	    		return false;
-	    	}*/
 
 	    	var d1 = new Date(guarantee.startDate), d2 = new Date(guarantee.endDate);
 	    	d1.setHours(0, 0, 0, 0);
@@ -215,6 +203,26 @@ angular.module('frontend2App')
 	    	}
 
 	    	return true;
+	    };
+
+	    $scope.cancelRequest = function(guarantee) {
+
+	    	var aux, auxi;
+
+	    	for(var i = 0; i < guarantee.request.length; i++) {
+	    		if(guarantee.request[i].status.id == 2) {
+	    			aux = guarantee.request[i].id;
+	    			break;
+	    		};
+	    	}
+
+	    	request.delete(aux).then(function(response) {
+	    		toastr.success('Solicitud de visita cancelada con éxito.', 'Listo');
+	    		$state.go($state.current, {}, {reload: true});
+	    	}, function(response) {
+	    		toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+	    		//console.log(response);
+	    	});
 	    };
 
 	    $scope.postRequest = function(id) {

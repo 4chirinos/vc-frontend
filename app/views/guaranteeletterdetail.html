@@ -49,7 +49,10 @@
               </div>
             </div>-->
             <div ng-if="canRequest()" class="col-sm-offset-1 col-sm-2">
-              <button ng-click="postRequest()" type="button" class="btn btn-danger btn-md">Solicitar Visita</button>
+              <button ng-click="postRequest()" type="button" class="btn btn-primary btn-md">Solicitar Visita</button>
+            </div>
+            <div ng-if="canCancel()" class="col-sm-offset-1 col-sm-2">
+              <button ng-click="cancelRequest()" type="button" class="btn btn-danger btn-md">Cancelar Visita</button>
             </div>
           </div>
         <!--</form>-->

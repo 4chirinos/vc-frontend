@@ -38,6 +38,10 @@ angular.module('frontend2App')
       return vcrestangular.all('request').get(id, {}, {token: localStorageService.get('token')});
     };
 
+    request.delete = function(id) {
+      return vcrestangular.one('request/' + id).remove();
+    };
+
     request.postBudgetImage = function(id, files) {
 
       var fd = new FormData();

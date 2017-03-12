@@ -73,7 +73,9 @@ angular.module('frontend2App')
 		  			request.partialUpdate({id: $scope.request.id, visitorId: visitor.id, statusId: 3}).then(function(response) {
 		  				if(response.data.created) {
 		  					toastr.warning('Otro coordinador acaba de asignar esta visita.', 'Atención');
-		  				} else {
+		  				} else if(response.data.atendida) {
+                            toastr.warning('El visitador ya ha atendido esta solicitud.', 'Atención');
+                        } else {
 		  					toastr.success('Asignación hecha con éxito.', 'Listo');
 		  				}
 		  				$scope.request = response.data;
@@ -210,6 +212,10 @@ angular.module('frontend2App')
             if($scope.request.status.status == 'asignada' || $scope.request.status.status == 'en revision')
             	return true;
             return false;
+        };
+
+        $scope.canReAssign = function() {
+            if($scope.request.status.status == 'asignada' && $scope.request.coordinatorId == $scope.user.userId) return true;
         };
 
         $scope.canAssign = function() {
