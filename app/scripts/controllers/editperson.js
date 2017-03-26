@@ -14,6 +14,8 @@ angular.module('frontend2App')
 
   		$scope.data.newPhones = $scope.phones($scope.person.phones);
 
+  		$scope.data.email = $scope.emails($scope.person.emails);
+
   		$scope.dateOptions = {
 	        formatYear: 'yyyy',
 	        startingDay: 1

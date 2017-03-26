@@ -40,12 +40,21 @@ angular.module('frontend2App')
     };
 
     session.setCurrentUser = function(data) {
+
+      var aux = "";
+      for(var i = 0; i < data.user.person.emails.length; i++) {
+        aux += data.user.person.emails[i].email;
+        if(i != data.user.person.emails.length - 1) {
+          aux += " / ";
+        }
+      }
+
       var user = {
         userId: data.userId,
         firstName: data.user.person.firstName,
         lastName: data.user.person.lastName,
         identityCard: data.user.person.identityCard,
-        email: data.user.person.email,
+        email: aux,
         userProfile: data.user.profile.profile,
         state: data.user.person.state.stateName,
         userName: data.user.userName
@@ -54,6 +63,14 @@ angular.module('frontend2App')
     };
 
     session.setCurrentUser2 = function(data) {
+      var aux = "";
+      for(var i = 0; i < data.user.person.emails.length; i++) {
+        aux += data.user.person.emails[i].email;
+        if(i != data.user.person.emails.length - 1) {
+          aux += " / ";
+        }
+      }
+      data.email = aux;
       localStorageService.set('currentUser', data);
     };
 
