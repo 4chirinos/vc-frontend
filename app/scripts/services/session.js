@@ -12,6 +12,14 @@ angular.module('frontend2App')
 
     var session = {};
 
+    session.setLiked = function(liked) {
+      localStorageService.set('liked', liked);
+    };
+
+    session.getLiked = function() {
+      return localStorageService.get('liked');
+    };
+
     session.login = function(data) {
       return vcrestangular.all('session').post(data);
     };
@@ -19,6 +27,7 @@ angular.module('frontend2App')
     session.logout = function() {
       var token = localStorageService.get('token');
       localStorageService.remove('token');
+      localStorageService.remove('liked');
       return vcrestangular.all('session').remove({}, {token: token});
     };
 

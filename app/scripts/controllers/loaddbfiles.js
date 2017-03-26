@@ -14,8 +14,12 @@ angular.module('frontend2App')
 
     	$scope.entities = [
 	        {entity: '-- Seleccionar Entidad --', entityId: 1},
-            {entity: 'Clínica', entityId: 7},
 	        {entity: 'Persona', entityId: 2},
+            {entity: 'Teléfonos de Personas', entityId: 8},
+            {entity: 'Correos de Personas', entityId: 9},
+            {entity: 'Clínica', entityId: 7},
+            {entity: 'Teléfonos de Clínicas', entityId: 10},
+            {entity: 'Correos de Clínicas', entityId: 11},
 	        {entity: 'Póliza', entityId: 6},
 	        {entity: 'Presupuesto', entityId: 4},
 	        {entity: 'Gastos de Presupuesto', entityId: 5},

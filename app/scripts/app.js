@@ -367,6 +367,6 @@ angular
 	  	localStorageServiceProvider
 		.setPrefix('VCWebApp');
 	})
-	.run(function($state) {
+	.run(function($rootScope, $state, session) {
 	  	$state.go('login');
 	});

@@ -8,10 +8,6 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  	.controller('MainCtrl', function () { 		
+
+  	});

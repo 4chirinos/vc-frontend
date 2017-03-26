@@ -17,7 +17,12 @@
 						<div class="col-sm-2">
 							<button type="button" class="btn btn-primary btn-sm" ng-click="fileUpload()"><span class="glyphicon glyphicon-plus-sign"></span> <strong>Seleccionar TXT</strong></button>
 						</div>
-						<label ng-if="file" class="col-sm-4 control-label text-danger pull-left">Archivo seleccionado: {{file.name}}</label>
+						<div class="pull-left" ng-if="disabled()">
+							<button ng-disabled="loadable()" class="btn btn-md btn-info" ng-click="loadFile()">
+				                <span class="glyphicon glyphicon-open"></span> Cargar
+				            </button>
+			            </div>
+						<!--<label ng-if="file" class="col-sm-4 control-label text-danger pull-left">Archivo seleccionado: {{file.name}}</label>-->
 					</div>
 				</form>
 			</center>
@@ -26,13 +31,14 @@
 
     </div>
 
-    <br><br><br>
+    <br>
 
     <div class="row" ng-if="disabled()">
         <center>
-            <button ng-disabled="loadable()" class="btn btn-md btn-info" ng-click="loadFile()">
+            <!--<button ng-disabled="loadable()" class="btn btn-md btn-info" ng-click="loadFile()">
                 <span class="glyphicon glyphicon-open"></span> Cargar
-            </button>
+            </button>-->
+            <label ng-if="file" class="text-danger">Archivo seleccionado: {{file.name}}</label>
         </center>
     </div>
 

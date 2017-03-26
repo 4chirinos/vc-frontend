@@ -6,10 +6,10 @@
             <hr>
 
             <ul class="nav nav-stacked">
-                <li ng-if="user.userProfile == 'analista' || user.userProfile == 'coordinador' || user.userProfile == 'visitador'" class="nav-header"> <a ng-click="liked = !liked" href="" data-toggle="collapse" data-target="#userMenu">Solicitud de Visita <i ng-class="{'glyphicon glyphicon-chevron-right': liked, 'glyphicon glyphicon-chevron-down': !liked}"></i></a>
+                <li ng-if="user.userProfile == 'analista' || user.userProfile == 'coordinador' || user.userProfile == 'visitador'" class="nav-header"> <a ng-click="$root.liked[3] = !$root.liked[3]" href="" data-toggle="collapse" data-target="#userMenu">Solicitud de Visita <i ng-class="{'glyphicon glyphicon-chevron-right': $root.liked[3], 'glyphicon glyphicon-chevron-down': !$root.liked[3]}"></i></a>
 
                     <div ng-if="user.userProfile == 'analista'">
-                        <ul class="nav nav-stacked collapse in" id="userMenu">
+                        <ul class="nav nav-stacked collapse" ng-class="{'in': !$root.liked[3]}" id="userMenu">
                             <li><a href="" ng-click="refresh()"><i class="glyphicon glyphicon-refresh"></i> Resfrescar </a></li>
                             <li><a href="" ng-click="changeFilter('')"><i class="glyphicon glyphicon-envelope"></i> Todas <span class="badge badge-info"></span></a></li>
                             <li><a href="" ng-click="changeFilter('2')"><i class="glyphicon glyphicon-envelope"></i> No asignadas <span class="badge badge-info">{{porAsignarse}}</span></a></li>
@@ -20,7 +20,7 @@
                         </ul>
                     </div>
                     <div ng-if="user.userProfile == 'coordinador'">
-                        <ul class="nav nav-stacked collapse in" id="userMenu"> <!-- collapse in para que salga abierto -->
+                        <ul class="nav nav-stacked collapse" ng-class="{'in': !$root.liked[3]}" id="userMenu"> <!-- collapse in para que salga abierto -->
                             <li><a href="" ng-click="refresh()"><i class="glyphicon glyphicon-refresh"></i> Resfrescar </a></li>
                             <li><a href="" ng-click="changeFilter('')"><i class="glyphicon glyphicon-envelope"></i> Todas <span class="badge badge-info"></span></a></li>
                             <li><a href="" ng-click="changeFilter('2')"><i class="glyphicon glyphicon-envelope"></i> No asignadas <span class="badge badge-info">{{porAsignarse}}</span></a></li>
@@ -29,15 +29,17 @@
                             <li><a href="" ng-click="changeFilter('5')"><i class="glyphicon glyphicon-envelope"></i> En revisión <span class="badge badge-info">{{enRevision}}</span></a></li>
                             <li><a href="" ng-click="changeFilter('6')"><i class="glyphicon glyphicon-envelope"></i> Finalizadas <span class="badge badge-info">{{completadas}}</span></a></li>
                         </ul>
+                        <hr>
                     </div>
                     <div ng-if="user.userProfile == 'visitador'">
-                        <ul class="nav nav-stacked collapse in" id="userMenu"> <!-- collapse in para que salga abierto -->
+                        <ul class="nav nav-stacked collapse" ng-class="{'in': !$root.liked[3]}" id="userMenu"> <!-- collapse in para que salga abierto -->
                             <li><a href="" ng-click="refresh()"><i class="glyphicon glyphicon-refresh"></i> Resfrescar </a></li>
                             <li><a href="" ng-click="changeFilter('')"><i class="glyphicon glyphicon-envelope"></i> Todas <span class="badge badge-info"></span></a></li>
                             <li><a href="" ng-click="changeFilter('3')"><i class="glyphicon glyphicon-envelope"></i> Por atender <span class="badge badge-info">{{asignadas}}</span></a></li>
                             <li><a href="" ng-click="changeFilter('5')"><i class="glyphicon glyphicon-envelope"></i> En revisión <span class="badge badge-info">{{enRevision}}</span></a></li>
                             <li><a href="" ng-click="changeFilter('6')"><i class="glyphicon glyphicon-envelope"></i> Finalizadas <span class="badge badge-info">{{completadas}}</span></a></li>
                         </ul>
+                        <hr>
                     </div>
                 </li>
             </ul>
@@ -47,9 +49,9 @@
                 <hr>
 
                 <ul class="nav nav-stacked">
-                    <li class="nav-header"> <a ng-click="liked2 = !liked2" href="" data-toggle="collapse" data-target="#guaranteeMenu">Carta Aval <i ng-class="{'glyphicon glyphicon-chevron-right': liked2, 'glyphicon glyphicon-chevron-down': !liked2}"></i></a>
+                    <li class="nav-header"> <a ng-click="$root.liked[1] = !$root.liked[1]" href="" data-toggle="collapse" data-target="#guaranteeMenu">Carta Aval <i ng-class="{'glyphicon glyphicon-chevron-right': $root.liked[1], 'glyphicon glyphicon-chevron-down': !$root.liked[1]}"></i></a>
                         <div ng-if="user.userProfile == 'analista'">
-                            <ul class="nav nav-stacked collapse in" id="guaranteeMenu">
+                            <ul class="nav nav-stacked collapse" ng-class="{'in': !$root.liked[1]}" id="guaranteeMenu">
                                 <li><a href="" ng-click="guaranteeFilter('')"><i class="glyphicon glyphicon-envelope"></i> Todas <span class="badge badge-info"></span></a></li>
                                 <!--<li><a href=""><i class="glyphicon glyphicon-envelope"></i> No asignadas <span class="badge badge-info">{{porAsignarse}}</span></a></li>
                                 <li><a href=""><i class="glyphicon glyphicon-envelope"></i> Asignadas <span class="badge badge-info">{{asignadas}}</span></a></li>
@@ -59,6 +61,7 @@
                         </div>
                     </li>
                 </ul>
+                <hr>
             </div>
 
             <!--<div ng-if="user.userProfile == 'administrador'">
@@ -78,8 +81,8 @@
             <div ng-if="user.userProfile == 'administrador'">
 
                 <ul class="nav nav-stacked">
-                    <li class="nav-header"> <a ng-click="liked1 = !liked1" href="" data-toggle="collapse" data-target="#personsMenu">Personas <i ng-class="{'glyphicon glyphicon-chevron-right': liked1, 'glyphicon glyphicon-chevron-down': !liked1}"></i></a>
-                        <ul class="nav nav-stacked collapse in" id="personsMenu">
+                    <li class="nav-header"> <a ng-click="$root.liked[0] = !$root.liked[0]" href="" data-toggle="collapse" data-target="#personsMenu">Personas <i ng-class="{'glyphicon glyphicon-chevron-right': $root.liked[0], 'glyphicon glyphicon-chevron-down': !$root.liked[0]}"></i></a>
+                        <ul class="nav nav-stacked collapse" ng-class="{'in': !$root.liked[0]}" id="personsMenu">
                             <li><a href="" ng-click="searchPersons()"><i class="glyphicon glyphicon-user"></i> Todas <span class="badge badge-info"></span></a></li>
                         </ul>
                     </li>
@@ -88,8 +91,8 @@
                 <hr>
 
                 <ul class="nav nav-stacked">
-                    <li class="nav-header"> <a ng-click="liked2 = !liked2" href="" data-toggle="collapse" data-target="#dataMenu2">Clínicas <i ng-class="{'glyphicon glyphicon-chevron-right': liked2, 'glyphicon glyphicon-chevron-down': !liked2}"></i></a>
-                        <ul class="nav nav-stacked collapse in" id="dataMenu2">
+                    <li class="nav-header"> <a ng-click="$root.liked[1] = !$root.liked[1]" href="" data-toggle="collapse" data-target="#dataMenu2">Clínicas <i ng-class="{'glyphicon glyphicon-chevron-right': $root.liked[1], 'glyphicon glyphicon-chevron-down': !$root.liked[1]}"></i></a>
+                        <ul class="nav nav-stacked collapse" ng-class="{'in': !$root.liked[1]}" id="dataMenu2">
                             <li><a href="" ng-click="affiliatedList()"><i class="glyphicon glyphicon-open"></i> Todas <span class="badge badge-info"></span></a></li>
                         </ul>
                     </li>
@@ -98,8 +101,8 @@
                 <hr>
 
                 <ul class="nav nav-stacked">
-                    <li class="nav-header"> <a ng-click="liked3 = !liked3" href="" data-toggle="collapse" data-target="#dataMenu3">Presupuestos <i ng-class="{'glyphicon glyphicon-chevron-right': liked3, 'glyphicon glyphicon-chevron-down': !liked3}"></i></a>
-                        <ul class="nav nav-stacked collapse in" id="dataMenu3">
+                    <li class="nav-header"> <a ng-click="$root.liked[2] = !$root.liked[2]" href="" data-toggle="collapse" data-target="#dataMenu3">Presupuestos <i ng-class="{'glyphicon glyphicon-chevron-right': $root.liked[2], 'glyphicon glyphicon-chevron-down': !$root.liked[2]}"></i></a>
+                        <ul class="nav nav-stacked collapse" ng-class="{'in': !$root.liked[2]}" id="dataMenu3">
                             <li><a href="" ng-click="budgetList()"><i class="glyphicon glyphicon-open"></i> Todos <span class="badge badge-info"></span></a></li>
                         </ul>
                     </li>
@@ -108,8 +111,8 @@
                 <hr>
 
                 <ul class="nav nav-stacked">
-                    <li class="nav-header"> <a ng-click="liked = !liked" href="" data-toggle="collapse" data-target="#dataMenu">Datos <i ng-class="{'glyphicon glyphicon-chevron-right': liked, 'glyphicon glyphicon-chevron-down': !liked}"></i></a>
-                        <ul class="nav nav-stacked collapse in" id="dataMenu">
+                    <li class="nav-header"> <a ng-click="$root.liked[3] = !$root.liked[3]" href="" data-toggle="collapse" data-target="#dataMenu">Datos <i ng-class="{'glyphicon glyphicon-chevron-right': $root.liked[3], 'glyphicon glyphicon-chevron-down': !$root.liked[3]}"></i></a>
+                        <ul class="nav nav-stacked collapse" ng-class="{'in': !$root.liked[3]}" id="dataMenu">
                             <li><a href="" ng-click="loadDbFiles()"><i class="glyphicon glyphicon-open"></i> Cargar Datos <span class="badge badge-info"></span></a></li>
                         </ul>
                     </li>

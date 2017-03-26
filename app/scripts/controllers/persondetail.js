@@ -49,6 +49,17 @@ angular.module('frontend2App')
 	    	return aux;
 	    };
 
+	    $scope.emails = function(data) {
+	    	var aux = "";
+	    	for(var i = 0; i < data.length; i++) {
+	    		aux += data[i].email;
+	    		if(i != data.length - 1) {
+	    			aux += " / ";
+	    		}
+	    	}
+	    	return aux;
+	    };
+
 	    $scope.createUser = function() {
 	    	
 	    	/*var modalInstance = $uibModal.open({

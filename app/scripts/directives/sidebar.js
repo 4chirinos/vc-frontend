@@ -16,6 +16,18 @@ angular.module('frontend2App')
 
             $scope.user = session.getCurrentUser();
 
+            $rootScope.$watch('liked', function () {
+              session.setLiked($rootScope.liked);
+            }, true);
+
+            var aux = session.getLiked();
+
+            if(aux != null && aux.length > 0) {
+              $rootScope.liked = aux;
+            } else {
+              $rootScope.liked = [true, true, true, true];
+            }
+
             $rootScope.$watch('statusGroups', function () {
               if($rootScope.statusGroups) {
                 $scope.porAsignarse = $scope.asignadas = $scope.atendidas = $scope.enRevision = $scope.completadas = '';
