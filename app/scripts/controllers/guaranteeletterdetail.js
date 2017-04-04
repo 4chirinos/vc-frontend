@@ -34,6 +34,17 @@ angular.module('frontend2App')
   			window.open(baseUrl + '/document/guaranteeLetter/' + $scope.guaranteeLetter.id);
   		};
 
+  		$scope.emails = function(data) {
+	    	var aux = "";
+	    	for(var i = 0; i < data.length; i++) {
+	    		aux += data[i].email;
+	    		if(i != data.length - 1) {
+	    			aux += " / ";
+	    		}
+	    	}
+	    	return aux;
+	    };
+
   		$scope.phones = function(data) {
 	    	var aux = "";
 	    	for(var i = 0; i < data.length; i++) {
@@ -208,13 +219,32 @@ angular.module('frontend2App')
 	    		};
 	    	}
 
-	    	request.delete(aux).then(function(response) {
-	    		toastr.success('Solicitud de visita cancelada con éxito.', 'Listo');
-	    		$state.go($state.current, {}, {reload: true});
-	    	}, function(response) {
-	    		toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
-	    		//console.log(response);
-	    	});
+	    	var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/confirmation.html',
+                controller: 'ConfirmationCtrl',
+                size: 'md',
+                resolve: {
+                    data: function() {
+                        return {
+                            msg: '¿Está seguro de cancelar la solicitud de Visita Clínica #' + aux + '?'
+                        };
+                    }
+                }
+            });
+
+            modalInstance.result.then(function(flag) {
+                request.delete(aux).then(function(response) {
+		    		toastr.success('Solicitud de visita cancelada con éxito.', 'Listo');
+		    		$state.go($state.current, {}, {reload: true});
+		    	}, function(response) {
+		    		toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+		    		//console.log(response);
+		    	});
+            }, function(flag) {
+                console.log('Modal dismissed at: ' + new Date());
+            });
+
 	    };
 
 	    $scope.canRequest = function() {

@@ -30,6 +30,10 @@ angular.module('frontend2App')
         return vcrestangular.all('request').post(obj, {}, {token: localStorageService.get('token')});
     };
 
+    request.cancel = function(id) {
+        return vcrestangular.all('request/' + id + '/cancel').get('', {}, {token: localStorageService.get('token')});
+    };
+
     request.partialUpdate = function(obj) {
       return vcrestangular.all('request/' + obj.id).patch(obj, {}, {token: localStorageService.get('token')});
     };

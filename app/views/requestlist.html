@@ -16,6 +16,10 @@
 	        <div>
 
 		        <div class="panel-body">
+		        <div ng-if="requests.length == 0">
+		        	<center><h3><strong>No hay Visitas Clínicas registradas en su historial</strong></h3></center>
+		        </div>
+		        <div ng-if="requests.length > 0">
 		            <center>
 		                <nav>
 		                    <ul class="pagination">
@@ -65,8 +69,9 @@
 		                </table>
 		            </div>
 		        </div>
-
 		    </div>
 
-	    </div>
+		</div>
+
+	</div>
 	<!--</div>-->

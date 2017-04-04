@@ -8,7 +8,7 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('BudgetlistCtrl', function ($scope, $state, budget, response) {
+  	.controller('BudgetlistCtrl', function ($scope, $state, toastr, $uibModal, budget, response) {
     	
   		var pageSize = 6;
   		$scope.pageSize = 6;
@@ -76,5 +76,35 @@ angular.module('frontend2App')
 		    	}    
 		    );*/
 	    };
+
+	    $scope.filter = function() {
+
+		    var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'views/filterbudget.html',
+				controller: 'FilterbudgetCtrl',
+				size: 'md'
+			});
+
+			modalInstance.result.then(function(/*response*/) {
+				/*$scope.params = response;
+				$scope.params.page = 1;
+
+				guaranteeletter.getGuaranteeQS($scope.params).then(function(response) {
+		  			$scope.guarantees = response.data.guaranteeLetter;
+		  			$scope.pages = response.data.pageCount;
+		  			$scope.selectedPage = 0;
+		  			$rootScope.statusGroups = response.data.statusGroups;
+			  	}, function(response) {
+			  		if(response.status == 500) {
+			        	toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+			        }
+			  	});*/
+
+			}, function() {
+				console.log('Modal dismissed at: ' + new Date());
+			});
+
+		};
 
   	});

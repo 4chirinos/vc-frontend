@@ -29,8 +29,12 @@ angular.module('frontend2App')
 
 			        var user = session.getCurrentUser();
 
+			        console.log(user);
+
 		  			if(user.userProfile == 'administrador') {
 				    	$state.go('main.home.personlist');
+				    } else if(user.userProfile == 'analista') {
+				    	$state.go('main.home.guaranteeletterlist');
 				    } else {
 				    	$state.go('main.home.requestlist', {
 				  			filter: ''

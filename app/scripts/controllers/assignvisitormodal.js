@@ -20,6 +20,7 @@ angular.module('frontend2App')
 	  		user.getVisitors(page, pageSize).then(function(response) {
 	  			$scope.visitor = null;
 	    		$scope.visitors = response.data.users;
+	    		console.log($scope.visitors.length);
 	    		$scope.pages = response.data.pageCount;
 	    		$rootScope.statusGroups = response.data.statusGroups;
 		  	}, function(response) {

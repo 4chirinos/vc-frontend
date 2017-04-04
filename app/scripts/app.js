@@ -315,7 +315,7 @@ angular
 	    		}
 	    	})
 	    	.state('main.home.budgetlist', {
-	    		url: '/presupuestos',
+	    		url: '/presupuestos?code&firstName&lastName&identityCard',
 	    		templateUrl: 'views/budgetlist.html',
 	    		controller: 'BudgetlistCtrl',
 	    		resolve: {
@@ -323,7 +323,11 @@ angular
 
 	    				var params = {
 				         	page: 1,
-				          	pageSize: 6
+				          	pageSize: 6,
+				          	code: $stateParams.code,
+				          	firstName: $stateParams.firstName,
+				          	lastName: $stateParams.lastName,
+				          	identityCard: $stateParams.identityCard
 				        };
 
 	    				return budget.getAll(params).then(function(response) {

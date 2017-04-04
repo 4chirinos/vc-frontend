@@ -98,12 +98,27 @@ angular.module('frontend2App')
 
 	  	};
 
+        $scope.emails = function(data) {
+            var aux = "";
+            if(data) {
+                for(var i = 0; i < data.length; i++) {
+                    aux += data[i].email;
+                    if(i != data.length - 1) {
+                        aux += " / ";
+                    }
+                }
+            }
+            return aux;
+        };
+
         $scope.phones = function(data) {
             var aux = "";
-            for(var i = 0; i < data.length; i++) {
-                aux += data[i].phoneNumber;
-                if(i != data.length - 1) {
-                    aux += " / ";
+            if(data) {
+                for(var i = 0; i < data.length; i++) {
+                    aux += data[i].phoneNumber;
+                    if(i != data.length - 1) {
+                        aux += " / ";
+                    }
                 }
             }
             return aux;
@@ -220,6 +235,51 @@ angular.module('frontend2App')
 
         $scope.canAssign = function() {
         	if($scope.request.status.status == 'por asignar') return true;
+        };
+
+        $scope.cancel = function() {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/confirmation.html',
+                controller: 'ConfirmationCtrl',
+                size: 'md',
+                resolve: {
+                    data: function() {
+                        return {
+                            msg: '¿Está seguro de cancelar la solicitud de Visita Clínica #' + $scope.request.id + '?'
+                        };
+                    }
+                }
+            });
+
+            modalInstance.result.then(function(flag) {
+                request.cancel($scope.request.id).then(function(response1) {
+                    if(response1.data == 'ok') {
+                        toastr.success('Cancelación hecha con éxito.', 'Listo');
+                        $state.go('main.home.requestlist');
+                    } else {
+                        toastr.error('Esta Solicitud ya no puede eliminarse.', 'Error');
+                    }
+                }, function(response1) {
+                    toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+                    $state.go($state.current, {}, {reload: true});
+                });
+            }, function(flag) {
+                console.log('Modal dismissed at: ' + new Date());
+            });
+
+            /*request.cancel($scope.request.id).then(function(response1) {
+                if(response1.data == 'ok') {
+                    toastr.success('Cancelación hecha con éxito.', 'Listo');
+                    $state.go('main.home.requestlist');
+                } else {
+                    toastr.error('Esta Solicitud ya no puede eliminarse.', 'Error');
+                }
+            }, function(response1) {
+                toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+                $state.go($state.current, {}, {reload: true});
+            });*/
         };
 
         $scope.finish = function() {
