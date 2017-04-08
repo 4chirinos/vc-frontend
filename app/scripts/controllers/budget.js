@@ -13,7 +13,8 @@ angular.module('frontend2App')
     	$scope.budget = budgetData.data.budgets[0];
 
         $scope.currentBudget = lastCurrentBudget.data.budgets[0];
-        $scope.pages = lastCurrentBudget.data.pageCount;
+
+        $scope.pages = lastCurrentBudget.data.pageCount + 1;
         $scope.selectedPage = $scope.pages - 1;
 
         var arr = [];
@@ -108,7 +109,7 @@ angular.module('frontend2App')
             for(var i = 0; i < $scope.currentBudget.item.length; i++) {
                 var aux = $scope.currentBudget.item[i];
                 delete aux.id;
-                aux.version++;
+                aux.version = $scope.currentBudget.version + 1;
                 obj.items.push(aux);
             }
 
@@ -125,7 +126,7 @@ angular.module('frontend2App')
                 if(response.status == 500) {
                     toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
                 }
-            })
+            });
         };
 
         $scope.date = function(date) {
@@ -168,7 +169,7 @@ angular.module('frontend2App')
                 updateCurrentCost();
             } else {
                 $scope.selectedPage = index;
-                getCurrentBudget($scope.selectedPage);
+                getCurrentBudget($scope.selectedPage - 1);
                 arr = [];
             }
         };

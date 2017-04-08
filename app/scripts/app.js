@@ -169,7 +169,7 @@ angular
 	    		abstract: true,
 	    		resolve: {
 	    			budgetData: function($stateParams, budget) {
-	    				return budget.getCurrentBudget($stateParams.id, {page: 1, pageSize: 1})
+	    				return budget.getCurrentBudget($stateParams.id, {page: 1, pageSize: 1, firstPage: true})
 	    				.then(function(response) {
 	    					return response;
 	    				}, function(response) {
