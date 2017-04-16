@@ -8,9 +8,30 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('LoginCtrl', function ($scope, $log, $state, toastr, session) {
+  	.controller('LoginCtrl', function ($scope, $log, $state, $uibModal, toastr, session) {
 
 	  	$scope.login = {};
+
+	  	$scope.password = function() {
+	  		var modalInstance = $uibModal.open({
+			    animation: true,
+			    templateUrl: 'views/passwordforgotten.html',
+			    controller: 'PasswordforgottenCtrl',
+			    size: 'md'
+		    });
+		    
+		    modalInstance.result.then(function(data) {
+		    	if(data == 'ok') {
+		    		toastr.success('Recuperación de contraseña procesada.', 'Listo');
+		    	} else {
+		    		toastr.error('Ocurrió un error. Intente de nuevo.', 'Error');
+		    	}
+			}, function() {
+			    console.log('Modal dismissed at: ' + new Date());
+			});
+	  	};
+
+
 
 	  	$scope.submit = function(valid) {
 

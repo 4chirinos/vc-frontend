@@ -30,6 +30,10 @@ angular.module('frontend2App')
       return vcrestangular.all('verification/user/username').get('', obj, {token: localStorageService.get('token')});
     };
 
+    user.password = function(username) {
+      return vcrestangular.all('password/user/' + username).get('', {}, {token: localStorageService.get('token')});
+    };
+
     return user;
 
   });
