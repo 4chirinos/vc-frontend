@@ -37,6 +37,7 @@ module.exports = function(config) {
       'bower_components/hammerjs/hammer.js',
       'bower_components/ng-image-gallery/dist/ng-image-gallery.js',
       'bower_components/ngstorage/ngStorage.js',
+      'bower_components/ng-currency/dist/ng-currency.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

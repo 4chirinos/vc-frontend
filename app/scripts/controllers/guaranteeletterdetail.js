@@ -27,7 +27,10 @@ angular.module('frontend2App')
     	}
 
     	$scope.downloadBudget = function() {
-  			window.open(baseUrl + '/document/budget/' + $scope.guaranteeLetter.budget.id);
+    		var last = "";
+            if($scope.user.userProfile == "visitador") last = "/false";
+            else last = "/true";
+  			window.open(baseUrl + '/document/budget/' + $scope.guaranteeLetter.budget.id + '/1' + last);
   		};
 
   		$scope.downloadGuarantee = function() {

@@ -8,7 +8,7 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('SurveyCtrl', function ($scope, $stateParams, toastr, session, response, formData, survey, request) {
+  	.controller('SurveyCtrl', function ($scope, $stateParams, toastr, baseUrl, session, response, formData, survey, request) {
 
   		$scope.user = session.getCurrentUser();
 
@@ -18,11 +18,18 @@ angular.module('frontend2App')
 
       $scope.values = [];
 
+      var values_aux = "";
+
       for(var i = 0; i < $scope.form.question.length; i++) {
         if($scope.form.question[i].answer) {
           $scope.values[i] = $scope.form.question[i].answer.answer;
+          values_aux = $scope.values.toString();
         }
       }
+
+      $scope.downloadSurvey = function() {
+        window.open(baseUrl + '/document/form/answered/request/' + $stateParams.id);
+      };
 
       $scope.pages = formData.data.pageCount;
       $scope.selectedPage = $scope.pages - 1;
@@ -43,6 +50,7 @@ angular.module('frontend2App')
           for(var i = 0; i < $scope.form.question.length; i++) {
             if($scope.form.question[i].answer) {
               $scope.values[i] = $scope.form.question[i].answer.answer;
+              values_aux = $scope.values.toString();
             }
           }
 
@@ -66,6 +74,19 @@ angular.module('frontend2App')
   			}
 	    	return true;
   		};
+
+      $scope.canLoad = function() {
+        if($scope.values.length == 7 && values_aux != $scope.values.toString()) {
+          for(var i = 0; i < $scope.values.length; i++) {
+            if($scope.values[i] == null) {
+              return false;
+            }
+          }
+          return true;
+        } else {
+          return false;
+        }
+      };
 
       // COLOCAR QUERY QB para hacer WHERE segun el requestId
 

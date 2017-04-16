@@ -25,6 +25,9 @@
 			<i class="glyphicon glyphicon-dashboard"></i> Versión Original
 		</strong>
 	</a>
+	<button ng-if="selectedPage == pages - 1" class="btn btn-xs btn-info" ng-click="downloadBudget()">
+        <span class="glyphicon glyphicon-download-alt"></span> Descargar
+    </button>
 </center>
 
 <br>
@@ -58,8 +61,8 @@
 			<td></td>
 			<td></td>
 			<td></td>
-			<td></td>
-			<th><center>Total: {{currentCost}} </center></th>
+			<td><center><strong>Total: {{currentQuantity}}</strong></center></td>
+			<td><center><strong>Total: {{currentCost}}</strong></center></td>
 			<td ng-if="user.userProfile == 'visitador' && canEdit()"></td>
 		</tr>
 	                   

@@ -20,7 +20,8 @@ angular
 	    'ui.bootstrap',
 	    'LocalStorageModule',
 	    'file-model',
-	    'thatisuday.ng-image-gallery'
+	    'thatisuday.ng-image-gallery',
+	    'ng-currency'
   	])
   	.config(function($stateProvider, $urlRouterProvider) {
 

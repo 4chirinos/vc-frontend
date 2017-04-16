@@ -28,6 +28,9 @@
         <i class="glyphicon glyphicon-dashboard"></i> Fecha y Hora de Carga: {{date(formSubmitDate)}} {{hour(formSubmitDate)}}
       </strong>
     </a>
+    <button ng-if="selectedPage == pages - 1" class="btn btn-xs btn-info" ng-click="downloadSurvey()">
+        <span class="glyphicon glyphicon-download-alt"></span> Descargar
+    </button>
   </center>
 
   <br>
@@ -66,7 +69,7 @@
       </div>
 
 
-      <center ng-if="!disabled() && selectedPage + 1 == pages">
+      <center ng-if="!disabled() && selectedPage + 1 == pages && canLoad()">
         <button class="btn btn-md btn-info" ng-click="loadData()">
           <span class="glyphicon glyphicon-open"></span> Cargar
         </button>

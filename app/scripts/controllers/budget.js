@@ -8,9 +8,10 @@
  * Controller of the frontend2App
  */
 angular.module('frontend2App')
-  	.controller('BudgetCtrl', function ($rootScope, $stateParams, $scope, $uibModal, toastr, session, budget, response, budgetData, lastCurrentBudget) {
+  	.controller('BudgetCtrl', function ($rootScope, $stateParams, $scope, $uibModal, toastr, baseUrl, session, budget, response, budgetData, lastCurrentBudget) {
 
     	$scope.budget = budgetData.data.budgets[0];
+        $scope.user = session.getCurrentUser();
 
         $scope.currentBudget = lastCurrentBudget.data.budgets[0];
 
@@ -19,12 +20,21 @@ angular.module('frontend2App')
 
         var arr = [];
 
+        $scope.downloadBudget = function() {
+            var id = $scope.currentBudget.id, version = $scope.selectedPage + 1;
+            var last = "";
+            if($scope.user.userProfile == "visitador") last = "/false";
+            else last = "/true";
+            window.open(baseUrl + '/document/budget/' + id + '/' + version + last);
+        };
+
     	var updateCost = function() {
 
-    		var cost = 0;
+    		var cost = 0, quantity = 0;
 
     		for(var i = 0; i < $scope.budget.item.length; i++) {
     			cost += $scope.budget.item[i].cost * $scope.budget.item[i].quantity;
+                quantity += $scope.budget.item[i].quantity;
     		}
 
             cost = cost.toFixed(2);
@@ -32,6 +42,7 @@ angular.module('frontend2App')
             cost = cost.toLocaleString('de-DE');
 
             $scope.cost = cost;
+            $scope.quantity = quantity;
 
     	};
 
@@ -44,10 +55,11 @@ angular.module('frontend2App')
 
         var updateCurrentCost = function() {
 
-            var cost = 0;
+            var cost = 0, quantity = 0;
 
             for(var i = 0; i < $scope.currentBudget.item.length; i++) {
                 cost += $scope.currentBudget.item[i].cost * $scope.currentBudget.item[i].quantity;
+                quantity += $scope.currentBudget.item[i].quantity;
             }
 
             cost = cost.toFixed(2);
@@ -55,6 +67,7 @@ angular.module('frontend2App')
             cost = cost.toLocaleString('de-DE');
 
             $scope.currentCost = cost;
+            $scope.currentQuantity = quantity;
 
         };
 
